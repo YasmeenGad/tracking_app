@@ -1,6 +1,6 @@
-# tracking_app
+# Flowery Tracking App
 
-tracking_app
+Flowery Tracking App
 
 ## Getting Started
 
