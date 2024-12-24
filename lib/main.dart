@@ -3,7 +3,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:tracking_app/flowery_tracking.dart';
+import 'package:tracking_app/flowery_delivery.dart';
 import 'core/services/shared_preference/shared_preference_helper.dart';
 import 'core/utils/abb_bloc_observer.dart';
 import 'di/di.dart';
@@ -22,6 +22,6 @@ await  dotenv.load(fileName: '.env.firebase');
 
   // Pass all uncaught "fatal" errors from the framework to Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  runApp(FloweryTracking(),
+  runApp(FloweryDelivery(),
   );
 }
