@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tracking_app/core/localization/lang_keys.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/generated/assets.dart';
+import 'package:flowery_delivery/core/localization/lang_keys.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/generated/assets.dart';
 class NoNetworkScreen extends StatelessWidget {
   const NoNetworkScreen({super.key});
 

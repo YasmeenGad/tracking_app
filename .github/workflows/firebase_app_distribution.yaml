@@ -1,4 +1,4 @@
-name: Android Fastlane with Firebase App Distribution Workflow
+name: Android Firebase App Distribution Workflow
 
 # Trigger this workflow on push or pull requests to the 'development' branch
 on:
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.4'
+          channel: stable
         # This action installs Flutter and ensures the correct version is available for building.
 
       # Step 4: Create placeholder .env.firebase file
@@ -75,21 +75,16 @@ jobs:
         run: flutter clean
         # Ensures the build starts with a clean slate to avoid caching issues.
 
-      # Step 10: Generate localization files
-      - name: Generate localization files
-        run: flutter gen-l10n
-        # Generates files for internationalization/localization support in the app.
-
-      # Step 11: Build the release APK
+      # Step 10: Build the release APK
       - name: Build APK for Production
         run: flutter build apk --release
         # Builds the release APK for Android, which is ready for production use.
 
-      # Step 12: Distribute APK to Firebase
+      # Step 11: Distribute APK to Firebase
       - name: Distribute APK to Firebase
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID }} # The Firebase app ID
+          appId: ${{ secrets.ANDROID_APP_ID }} # The Firebase app ID
 #          token: ${{ secrets.FIREBASE_CLI_TOKEN }} # Firebase CLI authentication token " Will be Deprecated Soon "
           file: build/app/outputs/flutter-apk/app-release.apk # Path to the APK file
           groups: maintainers # Firebase tester group
@@ -99,7 +94,7 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         # This action uploads the built APK to Firebase App Distribution for testing.
 
-      # Step 13: Upload APK as an artifact
+      # Step 12: Upload APK as an artifact
       - name: Upload APK as Artifact
         uses: actions/upload-artifact@v3
         with:

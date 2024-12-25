@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tracking_app/core/services/shared_preference/shared_pref_keys.dart';
-import 'package:tracking_app/core/services/shared_preference/shared_preference_helper.dart';
+import 'package:flowery_delivery/core/services/shared_preference/shared_pref_keys.dart';
+import 'package:flowery_delivery/core/services/shared_preference/shared_preference_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'app_state.dart';
 

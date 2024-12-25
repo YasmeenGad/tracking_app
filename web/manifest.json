@@ -1,11 +1,11 @@
 {
-  "name": "tracking_app",
-  "short_name": "tracking_app",
+  "name": "flowery_delivery",
+  "short_name": "flowery_delivery",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",
   "theme_color": "#0175C2",
-  "description": "tracking_app",
+  "description": "flowery_delivery",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [
