@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tracking_app/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 
 class BaseView extends StatelessWidget {
   const BaseView({super.key, required this.child});

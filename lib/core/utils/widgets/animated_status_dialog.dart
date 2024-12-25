@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tracking_app/core/localization/lang_keys.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/localization/lang_keys.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import '../../../di/di.dart';
 import '../../styles/animated_image.dart';
 import '../../styles/colors/my_colors.dart';

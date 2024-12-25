@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tracking_app/core/localization/app_localizations.dart';
+import 'package:flowery_delivery/core/localization/app_localizations.dart';
 
 extension MediaQueryValues on BuildContext {
   double get width => MediaQuery.of(this).size.width;
