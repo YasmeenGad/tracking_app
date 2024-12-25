@@ -1,4 +1,4 @@
-name: Android Fastlane with Firebase App Distribution Workflow
+name: Android Firebase App Distribution Workflow
 
 # Trigger this workflow on push or pull requests to the 'development' branch
 on:
@@ -26,12 +26,14 @@ jobs:
           distribution: temurin # Use the Temurin JDK distribution
           java-version: 17
         # Required because Android builds need Java, and Flutter requires Java 17 for compatibility.
-
+      - name: Fix permissions
+        run: chmod +x $GITHUB_ACTION_PATH/setup.sh
       # Step 3: Set up Flutter environment
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ' 3.27.1'
+          channel: stable
         # This action installs Flutter and ensures the correct version is available for building.
 
       # Step 4: Create placeholder .env.firebase file
