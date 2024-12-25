@@ -26,8 +26,7 @@ jobs:
           distribution: temurin # Use the Temurin JDK distribution
           java-version: 17
         # Required because Android builds need Java, and Flutter requires Java 17 for compatibility.
-      - name: Fix permissions
-        run: chmod +x $GITHUB_ACTION_PATH/setup.sh
+
       # Step 3: Set up Flutter environment
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
