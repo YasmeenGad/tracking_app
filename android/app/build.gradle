@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.flowery_delivery"
+    namespace = "com.elevate.flowery_delivery"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

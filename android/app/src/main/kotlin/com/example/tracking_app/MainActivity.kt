@@ -1,4 +1,4 @@
-package com.example.flowery_delivery
+package com.elevate.flowery_delivery
 
 import io.flutter.embedding.android.FlutterActivity
 
