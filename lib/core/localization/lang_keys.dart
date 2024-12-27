@@ -225,4 +225,6 @@ class LangKeys {
   static const String errorGettingLocation = 'error_getting_location';
   static const String getLocation = 'get_location';
   static const String addressNotFound = 'address_not_found';
+  static const String changeToTheLanguage = 'change_to_the_language';
+  static const String ok = 'ok';
 }
