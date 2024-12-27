@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tracking_app/core/localization/lang_keys.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/localization/lang_keys.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 
 class LocationHelper {
   Future<void> saveLocation(String location) async {
