@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import '../../../../../core/localization/lang_keys.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/widgets/base/app_loader.dart';

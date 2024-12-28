@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tracking_app/features/profile/presentation/viewModel/profile_actions.dart';
+import 'package:flowery_delivery/features/profile/presentation/viewModel/profile_actions.dart';
 import '../../../../core/networking/common/api_result.dart';
 import '../../../../core/networking/error/error_handler.dart';
 import '../../../../core/networking/error/error_model.dart';

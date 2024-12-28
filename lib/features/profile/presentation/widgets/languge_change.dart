@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tracking_app/core/app_cubit/app_cubit.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
+import 'package:flowery_delivery/core/app_cubit/app_cubit.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 
 import '../../../../core/app_cubit/app_state.dart';
 import '../../../../core/localization/app_localizations.dart';

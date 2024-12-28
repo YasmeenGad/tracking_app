@@ -2,7 +2,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/utils/widgets/base/custom_app_bar.dart';
 import '../../../../generated/assets.dart';

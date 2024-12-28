@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 
 import '../../styles/fonts/my_fonts.dart';
 import 'buttons/carved_button.dart';
