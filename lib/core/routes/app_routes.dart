@@ -1,3 +1,5 @@
+import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
+import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
@@ -15,7 +17,8 @@ import '../../features/profile/presentation/views/reset_password_profile_view.da
 import 'base_routes.dart';
 
 class AppRoutes {
-  static const String login = '/';
+  static const String onBoarding = '/';
+  static const String login = 'login';
   static const String register = 'register';
   static const String forgetPassword = 'forgetPassword';
   static const String emailVerification = 'emailVerification';
@@ -28,7 +31,11 @@ class AppRoutes {
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
-      case AppRoutes.login:
+      case AppRoutes.onBoarding:
+        return BaseRoute(
+          page: const OnBoarding(),
+        );
+        case AppRoutes.login:
         return BaseRoute(
           page: const LoginView(),
         );
