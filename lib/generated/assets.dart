@@ -12,6 +12,7 @@ class Assets {
   static const String imagesCancel = 'assets/images/cancel.png';
   static const String imagesCategory = 'assets/images/category.png';
   static const String imagesDelete = 'assets/images/delete.png';
+  static const String imagesDeliveryAnimation = 'assets/images/delivery_animation.json';
   static const String imagesDribbleFlowers = 'assets/images/dribble_flowers.gif';
   static const String imagesDropDownArrow = 'assets/images/drop_down_arrow.png';
   static const String imagesEditAddress = 'assets/images/edit_address.png';

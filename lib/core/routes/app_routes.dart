@@ -28,6 +28,7 @@ class AppRoutes {
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
   static const String resetPasswordProfileView = 'resetPasswordProfileView';
+
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
@@ -35,7 +36,7 @@ class AppRoutes {
         return BaseRoute(
           page: const OnBoarding(),
         );
-        case AppRoutes.login:
+      case AppRoutes.login:
         return BaseRoute(
           page: const LoginView(),
         );

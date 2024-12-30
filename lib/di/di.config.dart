@@ -79,34 +79,34 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
-    gh.factory<_i301.ForgotPasswordUseCase>(
-        () => _i301.ForgotPasswordUseCase(gh<_i665.AuthRepository>()));
-    gh.factory<_i906.ResetPasswordUseCase>(
-        () => _i906.ResetPasswordUseCase(gh<_i665.AuthRepository>()));
-    gh.factory<_i642.VerifyResetCodeUseCase>(
-        () => _i642.VerifyResetCodeUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
     gh.factory<_i496.LoginUseCase>(
         () => _i496.LoginUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i853.SignUpUseCase>(
         () => _i853.SignUpUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i301.ForgotPasswordUseCase>(
+        () => _i301.ForgotPasswordUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i906.ResetPasswordUseCase>(
+        () => _i906.ResetPasswordUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i642.VerifyResetCodeUseCase>(
+        () => _i642.VerifyResetCodeUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i690.LoginViewModel>(
         () => _i690.LoginViewModel(gh<_i496.LoginUseCase>()));
-    gh.factory<_i508.SignUpViewModel>(
-        () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
     gh.factory<_i804.ProfileUseCase>(
         () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
+    gh.factory<_i907.ProfileViewModelCubit>(() => _i907.ProfileViewModelCubit(
+          gh<_i804.ProfileUseCase>(),
+          gh<_i345.OfflineDataSource>(),
+        ));
+    gh.factory<_i508.SignUpViewModel>(
+        () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
     gh.factory<_i60.ForgetPasswordViewModelCubit>(
         () => _i60.ForgetPasswordViewModelCubit(
               gh<_i301.ForgotPasswordUseCase>(),
               gh<_i642.VerifyResetCodeUseCase>(),
               gh<_i906.ResetPasswordUseCase>(),
             ));
-    gh.factory<_i907.ProfileViewModelCubit>(() => _i907.ProfileViewModelCubit(
-          gh<_i804.ProfileUseCase>(),
-          gh<_i345.OfflineDataSource>(),
-        ));
     return this;
   }
 }

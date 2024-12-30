@@ -1,13 +1,8 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flowery_delivery/core/utils/widgets/spacing.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flowery_delivery/core/localization/lang_keys.dart';
-import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
-import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
-import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
-import 'package:flowery_delivery/generated/assets.dart';
 
 class OnBoardingAnimation extends StatefulWidget {
   const OnBoardingAnimation({super.key});
@@ -22,20 +17,20 @@ class OnBoardingAnimationState extends State<OnBoardingAnimation> with SingleTic
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 10),
-    );
-
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        // Stop the animation at the last frame
-        _controller.stop();
-      }
-    });
-
-    // Start the animation
-    _controller.forward();
+    // _controller = AnimationController(
+    //   vsync: this,
+    //   duration: const Duration(seconds: 10),
+    // );
+    //
+    // _controller.addStatusListener((status) {
+    //   if (status == AnimationStatus.completed) {
+    //     // Stop the animation at the last frame
+    //     _controller.stop();
+    //   }
+    // });
+    //
+    // // Start the animation
+    // _controller.forward();
   }
 
   @override
@@ -48,29 +43,28 @@ class OnBoardingAnimationState extends State<OnBoardingAnimation> with SingleTic
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              controller: _controller,
-              Assets.imagesFloweryRider,
-              height: 307.h,
-              width: 343.w,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Lottie.asset(
+              // controller: _controller,
+              Assets.imagesDeliveryAnimation,
+              height: 400.spMax,
+
               alignment: Alignment.bottomCenter,
-              reverse: false,
-              repeat: false, // No repeat
+              repeat: true, // No repeat
               animate: true,
-              onLoaded: (composition) {
-                setState(() {
-                  _controller.duration = composition.duration;
-                });
-              },
-              fit: BoxFit.scaleDown,
+              // onLoaded: (composition) {
+              //   setState(() {
+              //     _controller.duration = composition.duration;
+              //   });
+              // },
+              fit: BoxFit.fill,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

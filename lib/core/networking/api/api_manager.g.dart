@@ -37,7 +37,7 @@ class _ApiManager implements ApiManager {
     )
         .compose(
           _dio.options,
-          'api/v1/auth/signin',
+          'api/v1/drivers/signin',
           queryParameters: queryParameters,
           data: _data,
         )
