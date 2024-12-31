@@ -1,8 +1,8 @@
+import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
-import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
+
 import '../../di/di.dart';
 import '../../features/auth/presentation/forget_password/ViewModel/forget_password_view_model_cubit.dart';
 import '../../features/auth/presentation/forget_password/view/email_verification.dart';
