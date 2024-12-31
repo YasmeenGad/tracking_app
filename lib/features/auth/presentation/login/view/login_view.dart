@@ -1,3 +1,7 @@
+import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/core/utils/widgets/buttons/carved_button.dart';
+import 'package:flowery_delivery/features/auth/domain/entities/request/login_request_entity.dart';
+import 'package:flowery_delivery/features/auth/presentation/login/viewModel/login_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
@@ -11,8 +15,6 @@ import '../../../../../core/utils/widgets/base/snack_bar.dart';
 import '../../../../../core/utils/widgets/custom_appbar.dart';
 import '../../../../../di/di.dart';
 import '../viewModel/login_view_model_cubit.dart';
-import '../widgets/footer_sign_up.dart';
-import '../widgets/login_buttons.dart';
 import '../widgets/login_form.dart';
 
 class LoginView extends StatefulWidget {
@@ -24,8 +26,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   late LoginViewModel viewModel;
-  dynamic emailController;
-  dynamic passwordController;
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
   final formKey = GlobalKey<FormState>();
   bool rememberMe = false;
 
@@ -80,16 +82,27 @@ class _LoginViewState extends State<LoginView> {
                     SliverToBoxAdapter(
                       child: verticalSpacing(70),
                     ),
-                    LoginButtons(
-                      emailController: emailController,
-                      passwordController: passwordController,
-                      formKey: formKey,
-                      rememberMe: rememberMe,
-                    ),
+
                     SliverToBoxAdapter(
-                      child: verticalSpacing(20),
+                      child:            CurvedButton(
+                        color: MyColors.baseColor,
+                        title: context.translate(LangKeys.labelContinue),
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            viewModel.doAction(LoginAction(
+                              LoginRequestEntity(
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                              ),
+                              rememberMe,
+                              context, // Pass the rememberMe value here
+                            ));
+                          }
+                        },
+                      ),
                     ),
-                    const FooterSignUp(),
+
+
                   ],
                 ),
               );
