@@ -24,4 +24,4 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: Marco-Nagy/flowery_app
+          slug: YasmeenGad/Flowery-Tracking-App
