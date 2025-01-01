@@ -55,11 +55,11 @@ jobs:
         # The key is stored in GitHub Secrets to securely authenticate with Firebase.
 
       # Step 7: Check and update app version
-      - name: flutter-version-number
-        id: read-version
-        uses: NiklasLehnfeld/flutter-version-number-action@v2
+      - name: Bump Version
+        uses: einaregilsson/version-bumper@v2
         with:
-          file-path: pubspec.yaml
+          file: pubspec.yaml
+          version-type: patch # Options: major, minor, patch
       - uses: nick-invision/assert-action@v1
         with:
           expected: 1.0.0+1
