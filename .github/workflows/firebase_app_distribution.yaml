@@ -1,6 +1,5 @@
 name: Android Firebase App Distribution Workflow
 
-# Trigger this workflow on push or pull requests to the 'development' branch
 on:
   pull_request:
     branches:
@@ -11,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
       # Step 1: Checkout the repository code
@@ -31,63 +30,50 @@ jobs:
         with:
           channel: stable
 
-      # Step 4: Create placeholder .env.firebase file
-      - name: Create placeholder .env.firebase
-        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > .env.firebase
-
-      # Step 5: Decode and place google-services.json
-      - name: Decode and place google-services.json
-        run: |
-          echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 --decode > android/app/google-services.json
-
-      # Step 6: Set up Firebase service account credentials
-      - name: Set up Firebase service account credentials
-        run: |
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" > $HOME/firebase-service-account.json
-          export GOOGLE_APPLICATION_CREDENTIALS="$HOME/firebase-service-account.json"
-
-      # Step 7: Bump version in pubspec.yaml
-      - name: Bump Version
+      # Step 4: Bump version in pubspec.yaml
+      - name: Bump Version in pubspec.yaml
         id: bump-version
-        uses: einaregilsson/version-bumper@v2
-        with:
-          file: pubspec.yaml
-          version-type: patch
+        run: |
+          # Extract the current version
+          VERSION=$(grep -oP 'version:\s*\K[0-9]+\.[0-9]+\.[0-9]+(?=\+)' pubspec.yaml)
+          BUILD=$(grep -oP 'version:\s*[0-9]+\.[0-9]+\.[0-9]+\+\K[0-9]+' pubspec.yaml)
 
-      # Optional: Verify version bump
-      - name: Verify Version Bump
-        uses: nick-invision/assert-action@v1
-        with:
-          expected: ${{ steps.bump-version.outputs.version-number }}
-          actual: ${{ steps.bump-version.outputs.version-number }}
+          # Increment the patch version
+          NEW_VERSION=$(echo $VERSION | awk -F. '{print $1 "." $2 "." $3+1}')
+          NEW_BUILD=$((BUILD+1))
 
-      # Step 8: Install project dependencies
+          # Update the pubspec.yaml file
+          sed -i "s/version: $VERSION+$BUILD/version: $NEW_VERSION+$NEW_BUILD/" pubspec.yaml
+
+          echo "New version: $NEW_VERSION+$NEW_BUILD"
+          echo "version=$NEW_VERSION+$NEW_BUILD" >> $GITHUB_ENV
+
+      # Step 5: Install project dependencies
       - name: Install Dependencies
         run: flutter pub get
 
-      # Step 9: Clear Flutter build cache
+      # Step 6: Clear Flutter build cache
       - name: Clear Flutter Build Cache
         run: flutter clean
 
-      # Step 10: Build the release APK
+      # Step 7: Build the release APK
       - name: Build APK for Production
         run: flutter build apk --release
 
-      # Step 11: Distribute APK to Firebase
+      # Step 8: Distribute APK to Firebase
       - name: Distribute APK to Firebase
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{ secrets.ANDROID_APP_ID }}
           file: build/app/outputs/flutter-apk/app-release.apk
           groups: maintainers
-          releaseNotes: "First GitHub Action Firebase Distribution"
+          releaseNotes: "Automated release with incremented version"
           debug: true
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
 
-      # Step 12: Upload APK as an artifact
+      # Step 9: Upload APK as an artifact
       - name: Upload APK as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-          debug: true
