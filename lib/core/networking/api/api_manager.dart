@@ -18,7 +18,8 @@ import '../../../features/auth/data/models/response/verify_reset_code_response.d
 import '../../../features/profile/data/models/request/change_password_request_dto.dart';
 import '../../../features/profile/data/models/response/change_password_response_dto.dart';
 import '../../../features/profile/data/models/response/edit_profile_response_dto.dart';
-import '../../../features/profile/data/models/response/get_logged_user_data_response_dto.dart';
+import '../../../features/profile/data/models/response/get_all_vehicles_dto.dart';
+import '../../../features/profile/data/models/response/get_logged_driver_data_response_dto.dart';
 import '../../../features/profile/data/models/response/upload_photo_response_dto.dart';
 import 'api_constants.dart';
 
@@ -49,19 +50,23 @@ abstract class ApiManager {
   Future<ResetPasswordResponseDto> resetPassword(
       @Body() ResetPasswordRequestDto resetPassword);
 
-  @GET(ApiConstants.getLoggedUserData)
-  Future<GetLoggedUserDataResponseDto> getLoggedUserData();
+  @GET(ApiConstants.getLoggedDriverData)
+  Future<GetLoggedDriverDataResponseDto> getLoggedDriverData();
 
   @PUT(ApiConstants.editProfile)
   Future<EditProfileResponseDto> editProfile(@Body() Map<String, dynamic> body);
 
-  @PATCH(ApiConstants.changePassword)
-  Future<ChangePasswordResponseDto> changePassword(
-      @Body() ChangePasswordRequestDto request);
 
   @PUT(ApiConstants.uploadPhoto)
   @MultiPart()
   Future<UploadPhotoResponseDto> uploadPhoto(
     @Part(name: "photo") File photo,
   );
+  @GET(ApiConstants.getAllVehicles)
+  Future<GetAllVehiclesDto> getAllVehicles();
+
+  @PATCH(ApiConstants.changePassword)
+  Future<ChangePasswordResponseDto> changePassword(
+      @Body() ChangePasswordRequestDto request);
+
 }

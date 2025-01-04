@@ -1,7 +1,7 @@
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
 import '../../../../../core/localization/lang_keys.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/styles/colors/my_colors.dart';
@@ -50,7 +50,7 @@ class LoginButtons extends StatelessWidget {
             color: MyColors.white,
             title: context.translate(LangKeys.guest),
             onTap: () {
-              context.pushReplacementNamed(AppRoutes.homeScreen);
+              context.pushReplacementNamed(AppRoutes.profileMainScreen);
             },
             colorBorderSide: MyColors.gray,
             textColor: MyColors.gray,

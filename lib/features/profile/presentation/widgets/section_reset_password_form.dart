@@ -1,16 +1,17 @@
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
+import 'package:flowery_delivery/features/profile/presentation/widgets/reset_password_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
-import 'package:tracking_app/features/profile/presentation/widgets/reset_password_form.dart';
+
 import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/widgets/base/snack_bar.dart';
 import '../../../../core/utils/widgets/buttons/carved_button.dart';
 import '../../../../di/di.dart';
 import '../../domain/entities/request/change_password_request_entity.dart';
-import '../viewModel/profile_actions.dart';
-import '../viewModel/profile_view_model_cubit.dart';
+import '../viewModel/edit_profile/edit_profile_action.dart';
+import '../viewModel/edit_profile/edit_profile_cubit.dart';
 
 class SectionResetPasswordForm extends StatefulWidget {
   const SectionResetPasswordForm({super.key});
@@ -21,7 +22,7 @@ class SectionResetPasswordForm extends StatefulWidget {
 }
 
 class _SectionResetPasswordFormState extends State<SectionResetPasswordForm> {
-  late final ProfileViewModelCubit profileViewModel;
+  late final EditProfileCubit profileViewModel;
   late final TextEditingController passwordController;
   late final TextEditingController newPasswordController;
   late final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -31,7 +32,7 @@ class _SectionResetPasswordFormState extends State<SectionResetPasswordForm> {
     super.initState();
     passwordController = TextEditingController();
     newPasswordController = TextEditingController();
-    profileViewModel = getIt.get<ProfileViewModelCubit>();
+    profileViewModel = getIt.get<EditProfileCubit>();
   }
 
   @override
@@ -43,9 +44,9 @@ class _SectionResetPasswordFormState extends State<SectionResetPasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProfileViewModelCubit>(
+    return BlocProvider<EditProfileCubit>(
         create: (context) => profileViewModel,
-        child: BlocConsumer<ProfileViewModelCubit, ProfileViewModelState>(
+        child: BlocConsumer<EditProfileCubit, EditProfileState>(
           builder: (context, state) {
             return Column(
               children: [
@@ -80,15 +81,16 @@ class _SectionResetPasswordFormState extends State<SectionResetPasswordForm> {
                 break;
               case ChangePasswordSuccess():
                 aweSnackBar(
-                    msg: context.translate(LangKeys.passwordChangedSuccessfully),
+                    msg:
+                        context.translate(LangKeys.passwordChangedSuccessfully),
                     context: context,
                     type: MessageTypeConst.success,
                     title: context.translate(LangKeys.success));
                 context.pushReplacementNamed(AppRoutes.profileView);
                 break;
               case ChangePasswordError():
-                state.error.error.toString() == 'incorrect email or password'
-                    ? aweSnackBar(
+                state.error.error.toString() == context.translate(LangKeys.incorrectEmailOrPassword)
+            ? aweSnackBar(
                         msg: context.translate(LangKeys.oldPasswordIncorrect),
                         context: context,
                         type: MessageTypeConst.failure,

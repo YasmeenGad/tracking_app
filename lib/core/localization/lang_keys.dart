@@ -227,4 +227,11 @@ class LangKeys {
   static const String addressNotFound = 'address_not_found';
   static const String changeToTheLanguage = 'change_to_the_language';
   static const String ok = 'ok';
+  static const String vehicleLicense = 'vehicle_license';
+  static const String vehicleType = 'vehicle_type';
+  static const String vehicleNumber = 'vehicle_number';
+  static const String readyForDelivery =   "ready_for_delivery";
+  static const  String vehicleInfo =   "vehicle_info";
+
+
 }

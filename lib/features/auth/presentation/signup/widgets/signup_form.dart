@@ -1,10 +1,9 @@
+import 'package:flowery_delivery/features/auth/presentation/signup/widgets/signup_bloc_listener.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
-import 'package:tracking_app/features/auth/presentation/signup/widgets/signup_bloc_listener.dart';
-
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import '../../../../../core/localization/lang_keys.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/widgets/buttons/carved_button.dart';

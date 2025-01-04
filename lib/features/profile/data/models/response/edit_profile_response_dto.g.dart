@@ -10,17 +10,17 @@ EditProfileResponseDto _$EditProfileResponseDtoFromJson(
         Map<String, dynamic> json) =>
     EditProfileResponseDto(
       json['message'] as String?,
-      json['user'] == null
+      json['driver'] == null
           ? null
           : EditProfileResponseDtoUser.fromJson(
-              json['user'] as Map<String, dynamic>),
+              json['driver'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$EditProfileResponseDtoToJson(
         EditProfileResponseDto instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'user': instance.user,
+      'driver': instance.driver,
     };
 
 EditProfileResponseDtoUser _$EditProfileResponseDtoUserFromJson(
@@ -36,6 +36,12 @@ EditProfileResponseDtoUser _$EditProfileResponseDtoUserFromJson(
       json['photo'] as String?,
       json['role'] as String?,
       json['createdAt'] as String?,
+      json['country'] as String?,
+      json['vehicleType'] as String?,
+      json['vehicleNumber'] as String?,
+      json['vehicleLicense'] as String?,
+      json['NID'] as String?,
+      json['NIDImg'] as String?,
     );
 
 Map<String, dynamic> _$EditProfileResponseDtoUserToJson(
@@ -51,4 +57,10 @@ Map<String, dynamic> _$EditProfileResponseDtoUserToJson(
       'photo': instance.photo,
       'role': instance.role,
       'createdAt': instance.createdAt,
+      'country': instance.country,
+      'vehicleType': instance.vehicleType,
+      'vehicleNumber': instance.vehicleNumber,
+      'vehicleLicense': instance.vehicleLicense,
+      'NID': instance.nID,
+      'NIDImg': instance.nIDImg,
     };

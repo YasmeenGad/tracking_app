@@ -1,11 +1,13 @@
 import 'dart:io';
+import 'package:flowery_delivery/features/profile/domain/entities/request/change_password_request_entity.dart';
+import 'package:flowery_delivery/features/profile/domain/entities/response/change_password_response_entity.dart';
+import 'package:flowery_delivery/features/profile/domain/entities/response/get_all_vehicles_entity.dart';
+
 import '../../../../../core/networking/api/api_manager.dart';
 import '../../../../../core/networking/api_execute.dart';
 import '../../../../../core/networking/common/api_result.dart';
-import '../../../domain/entities/request/change_password_request_entity.dart';
-import '../../../domain/entities/response/change_password_response_entity.dart';
 import '../../../domain/entities/response/edit_profile_response_entity.dart';
-import '../../../domain/entities/response/get_logged_user_data_response_entity.dart';
+import '../../../domain/entities/response/get_logged_user_driver_response_entity.dart';
 import '../../../domain/entities/response/upload_photo_response_entity.dart';
 import 'package:injectable/injectable.dart';
 import '../../mappers/profile_mappers.dart';
@@ -19,9 +21,9 @@ class ProfileOnlineDataSourceImpl implements ProfileOnlineDataSource {
   ProfileOnlineDataSourceImpl(this._apiManager);
 
   @override
-  Future<DataResult<GetLoggedUserDataResponseEntity>> getProfileData() {
+  Future<DataResult<GetLoggedDriverDataResponseEntity>> getProfileData() {
     return executeApi(() async {
-      var response = await _apiManager.getLoggedUserData();
+      var response = await _apiManager.getLoggedDriverData();
       return ProfileMapper.getLoggedResponseToEntity(response);
     });
   }
@@ -44,8 +46,16 @@ class ProfileOnlineDataSourceImpl implements ProfileOnlineDataSource {
   }
 
   @override
+  Future<DataResult<GetAllVehiclesEntity>> getAllVehicles() {
+    return executeApi(() async {
+      var response = await _apiManager.getAllVehicles();
+      return ProfileMapper.getAllVehiclesResponseToEntity(response);
+    });
+  }
+
+  @override
   Future<DataResult<ChangePasswordResponseEntity>> changePassword(
- ChangePasswordRequestEntity request) {
+      ChangePasswordRequestEntity request) {
     return executeApi(() async {
       var response = await _apiManager.changePassword(ProfileMapper.toPasswordRequestDto(request));
       return ProfileMapper.toPasswordResponseEntity(response);

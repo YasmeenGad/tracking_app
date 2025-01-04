@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tracking_app/core/utils/extension/media_query_values.dart';
-import 'package:tracking_app/core/utils/extension/navigation.dart';
-import 'package:tracking_app/core/utils/widgets/spacing.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import '../../../../../core/localization/lang_keys.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/widgets/base/app_loader.dart';
 import '../../../../../core/utils/widgets/base/base_view.dart';
 import '../../../../../core/utils/widgets/base/snack_bar.dart';
 import '../../../../../core/utils/widgets/custom_appbar.dart';
+import '../../../../../core/utils/widgets/spacing.dart';
 import '../../../../../di/di.dart';
 import '../viewModel/login_view_model_cubit.dart';
 import '../widgets/footer_sign_up.dart';
