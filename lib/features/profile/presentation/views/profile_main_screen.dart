@@ -54,18 +54,17 @@ class ProfileMainScreen extends StatelessWidget {
                       onTap: () {
                         context.pushNamed(AppRoutes.vehicleView);
                       },
-                       child:  BlocBuilder<VehiclesCubit, VehiclesState>(
-                          builder: (context, vehiclesState) {
-                            if (vehiclesState is GetVehiclesSuccess) {
-                              return CustomVehicleData(
-                                state: state,
-                                vehicles: vehiclesState.data.vehicles!,
-                              );
-                            }
-                            return const CircularProgressIndicator();
-                          },
-                        ),
-
+                      child: BlocBuilder<VehiclesCubit, VehiclesState>(
+                        builder: (context, vehiclesState  ) {
+                          if (vehiclesState is GetVehiclesSuccess) {
+                            return CustomVehicleData(
+                              state: state,
+                              vehicles: vehiclesState.data.vehicles!,
+                            );
+                          }
+                          return Container();
+                        },
+                      ),
                     ),
                     LanguageChange(),
                     LogoutWidget(),

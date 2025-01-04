@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/styles/colors/my_colors.dart';
-import '../../../../core/utils/widgets/base/snack_bar.dart';
 import '../../../../core/utils/widgets/buttons/carved_button.dart';
 import '../viewModel/edit_profile/edit_profile_action.dart';
 import '../viewModel/edit_profile/edit_profile_cubit.dart';
 import '../viewModel/profile_actions.dart';
 import '../viewModel/profile_view_model_cubit.dart';
 import 'custom_section_gender.dart';
+import 'edit_profile_listener.dart';
 
 class SectionProfileForm extends StatefulWidget {
   const SectionProfileForm({super.key});
@@ -71,28 +71,7 @@ class SectionProfileFormState extends State<SectionProfileForm> {
         }
 
         return BlocConsumer<EditProfileCubit, EditProfileState>(
-          listener: (context, state) {
-            switch (state) {
-              case EditProfileError():
-                aweSnackBar(
-                  msg: state.error.error.toString(),
-                  context: context,
-                  type: MessageTypeConst.failure,
-                  title: context.translate(LangKeys.error),
-                );
-                break;
-              case EditProfileSuccess():
-                aweSnackBar(
-                  msg: context.translate(LangKeys.profileUpdatedSuccessfully),
-                  context: context,
-                  type: MessageTypeConst.success,
-                  title: context.translate(LangKeys.success),
-                );
-                break;
-              default:
-                break;
-            }
-          },
+          listener: (context, state) => editProfileListener(context, state),
           builder: (context, editState) {
             return Column(
               children: [

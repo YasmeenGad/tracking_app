@@ -8,6 +8,7 @@ import '../../features/auth/presentation/forget_password/view/reset_password.dar
 import '../../features/auth/presentation/login/view/login_view.dart';
 import '../../features/auth/presentation/signup/view/signup_view.dart';
 import '../../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart';
+import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
 import '../../features/profile/presentation/viewModel/profile_view_model_cubit.dart';
 import '../../features/profile/presentation/viewModel/vehicles/vehicles_action.dart';
@@ -81,9 +82,18 @@ class AppRoutes {
         return BaseRoute(page: const ProfileView());
       case AppRoutes.vehicleView:
         return BaseRoute(
-            page: BlocProvider(
-                create: (context) =>
-                    getIt.get<VehiclesCubit>()..doAction(GetAllVehicles()),
+            page: MultiBlocProvider(
+                providers: [
+                  BlocProvider<ProfileViewModelCubit>(
+                    create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
+                  ),
+                  BlocProvider<VehiclesCubit>(
+                    create: (context) => getIt.get<VehiclesCubit>()..doAction(GetAllVehicles()),
+                  ),
+                  BlocProvider<EditProfileCubit>(
+                    create: (context) => getIt.get<EditProfileCubit>(),
+                  ),
+                ],
                 child: const VehicleView()));
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
