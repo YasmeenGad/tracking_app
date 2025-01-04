@@ -1,4 +1,5 @@
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/widgets/base/app_loader.dart';
 import 'package:flowery_delivery/features/profile/presentation/viewModel/profile_view_model_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,13 +90,12 @@ class VehicleForm extends StatelessWidget {
                 );
               }
 
-              return Container();
+              return AppLoader();
             },
           );
         }
 
-        return Container();
-
+        return AppLoader();
       },
     );
   }
