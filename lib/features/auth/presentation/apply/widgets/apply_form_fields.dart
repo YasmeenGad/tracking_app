@@ -19,7 +19,7 @@ class ApplyFormFields extends StatelessWidget {
   final TextEditingController confirmPasswordController;
 
   const ApplyFormFields({
-    Key? key,
+    super.key,
     required this.countryController,
     required this.firstLegalNameController,
     required this.secondLegalNameController,
@@ -32,7 +32,7 @@ class ApplyFormFields extends StatelessWidget {
     required this.idImageController,
     required this.passwordController,
     required this.confirmPasswordController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

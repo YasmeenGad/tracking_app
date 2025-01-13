@@ -3,11 +3,14 @@ import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
 
 class SwitchButtonWidget extends StatefulWidget {
-final  String text;
-late final ValueNotifier<bool> value;
+  final String text;
+  final ValueNotifier<bool> value;
 
-
-    SwitchButtonWidget({super.key, required this.text, required this.value,});
+  const SwitchButtonWidget({
+    super.key,
+    required this.text,
+    required this.value,
+  });
 
   @override
   _SwitchButtonWidgetState createState() => _SwitchButtonWidgetState();
