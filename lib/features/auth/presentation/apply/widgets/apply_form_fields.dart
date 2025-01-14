@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_delivery/core/utils/widgets/app_text_form_field.dart';
 import 'package:flowery_delivery/core/utils/widgets/spacing.dart';
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import '../viewModel/apply_form_view_model.dart';
 
-class ApplyFormFields extends StatelessWidget {
+class ApplyFormFields extends StatefulWidget {
   final TextEditingController countryController;
   final TextEditingController firstLegalNameController;
   final TextEditingController secondLegalNameController;
@@ -35,25 +37,70 @@ class ApplyFormFields extends StatelessWidget {
   });
 
   @override
+  State<ApplyFormFields> createState() => _ApplyFormFieldsState();
+}
+
+class _ApplyFormFieldsState extends State<ApplyFormFields> {
+  late ApplyFormViewModel _applyFormViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _applyFormViewModel = ApplyFormViewModel();
+    _loadCountries();
+  }
+
+  Future<void> _loadCountries() async {
+    await _applyFormViewModel.loadCountries();
+    setState(() {});
+  }
+
+  Future<void> _pickImageForLicense() async {
+    final imageName = await _applyFormViewModel.pickImage();
+    if (imageName != null) {
+      setState(() {
+        widget.vechicleLicenseController.text = imageName;
+      });
+    }
+  }
+
+  Future<void> _pickImageForId() async {
+    final imageName = await _applyFormViewModel.pickImage();
+    if (imageName != null) {
+      setState(() {
+        widget.idImageController.text = imageName;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Country Field
-        AppTextFormField(
-          controller: countryController,
-          hintText: 'Country',
-          labelText: 'Country',
-          suffixIcon: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: MyColors.gray,
-            size: 30.sp,
+        DropdownButtonFormField<String>(
+          decoration: InputDecoration(
+            labelText: 'Country',
+            border: OutlineInputBorder(),
           ),
+          value: _applyFormViewModel.selectedCountry,
+          items: _applyFormViewModel.countries.map((country) {
+            return DropdownMenuItem<String>(
+              value: country['name'],
+              child: Text('${country['flag']} ${country['name']}'),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _applyFormViewModel.selectedCountry = value;
+              widget.countryController.text = value!;
+            });
+          },
         ),
         verticalSpacing(20.h),
 
         // First Legal Name Field
         AppTextFormField(
-          controller: firstLegalNameController,
+          controller: widget.firstLegalNameController,
           hintText: 'Enter first legal name',
           labelText: 'First Legal Name',
         ),
@@ -61,7 +108,7 @@ class ApplyFormFields extends StatelessWidget {
 
         // Second Legal Name Field
         AppTextFormField(
-          controller: secondLegalNameController,
+          controller: widget.secondLegalNameController,
           hintText: 'Enter second legal name',
           labelText: 'Second Legal Name',
         ),
@@ -69,20 +116,15 @@ class ApplyFormFields extends StatelessWidget {
 
         // Vehicle Type Field
         AppTextFormField(
-          controller: vechicleTypeController,
+          controller: widget.vechicleTypeController,
           hintText: 'Enter vehicle type',
           labelText: 'Vehicle Type',
-          suffixIcon: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: MyColors.gray,
-            size: 30.sp,
-          ),
         ),
         verticalSpacing(20.h),
 
         // Vehicle Number Field
         AppTextFormField(
-          controller: vechicleNumberController,
+          controller: widget.vechicleNumberController,
           hintText: 'Enter vehicle number',
           labelText: 'Vehicle Number',
         ),
@@ -90,20 +132,23 @@ class ApplyFormFields extends StatelessWidget {
 
         // Vehicle License Field
         AppTextFormField(
-          controller: vechicleLicenseController,
+          controller: widget.vechicleLicenseController,
           hintText: 'Upload license photo',
           labelText: 'Vehicle License',
-          suffixIcon: Icon(
-            Icons.file_upload_outlined,
-            color: MyColors.gray,
-            size: 30.sp,
+          suffixIcon: GestureDetector(
+            onTap: _pickImageForLicense,
+            child: Icon(
+              Icons.file_upload_outlined,
+              color: MyColors.gray,
+              size: 30.sp,
+            ),
           ),
         ),
         verticalSpacing(20.h),
 
         // Email Field
         AppTextFormField(
-          controller: emailController,
+          controller: widget.emailController,
           hintText: 'Enter your email',
           labelText: 'Email',
         ),
@@ -111,7 +156,7 @@ class ApplyFormFields extends StatelessWidget {
 
         // Phone Number Field
         AppTextFormField(
-          controller: phoneNumberController,
+          controller: widget.phoneNumberController,
           hintText: 'Enter phone number',
           labelText: 'Phone Number',
         ),
@@ -119,7 +164,7 @@ class ApplyFormFields extends StatelessWidget {
 
         // ID Number Field
         AppTextFormField(
-          controller: idNumberController,
+          controller: widget.idNumberController,
           hintText: 'Enter national ID number',
           labelText: 'ID Number',
         ),
@@ -127,13 +172,16 @@ class ApplyFormFields extends StatelessWidget {
 
         // ID Image Field
         AppTextFormField(
-          controller: idImageController,
+          controller: widget.idImageController,
           hintText: 'Upload ID photo',
           labelText: 'ID Image',
-          suffixIcon: Icon(
-            Icons.file_upload_outlined,
-            color: MyColors.gray,
-            size: 30.sp,
+          suffixIcon: GestureDetector(
+            onTap: _pickImageForId,
+            child: Icon(
+              Icons.file_upload_outlined,
+              color: MyColors.gray,
+              size: 30.sp,
+            ),
           ),
         ),
         verticalSpacing(20.h),
@@ -143,7 +191,7 @@ class ApplyFormFields extends StatelessWidget {
           children: [
             Expanded(
               child: AppTextFormField(
-                controller: passwordController,
+                controller: widget.passwordController,
                 hintText: 'Enter password',
                 labelText: 'Password',
               ),
@@ -151,7 +199,7 @@ class ApplyFormFields extends StatelessWidget {
             horizontalSpacing(20.h),
             Expanded(
               child: AppTextFormField(
-                controller: confirmPasswordController,
+                controller: widget.confirmPasswordController,
                 hintText: 'Confirm password',
                 labelText: 'Confirm Password',
               ),
