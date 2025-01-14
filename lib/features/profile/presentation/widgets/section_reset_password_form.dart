@@ -3,9 +3,6 @@ import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import 'package:flowery_delivery/features/profile/presentation/widgets/reset_password_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
-import 'package:flowery_delivery/core/utils/extension/navigation.dart';
-import 'package:flowery_delivery/features/profile/presentation/widgets/reset_password_form.dart';
 
 import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/routes/app_routes.dart';

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flowery_delivery/features/auth/presentation/signup/view_model/signup_action.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flowery_delivery/features/auth/presentation/signup/view_model/signup_action.dart';
+
 import '../../../../../core/networking/common/api_result.dart';
 import '../../../../../core/networking/error/error_handler.dart';
 import '../../../../../core/networking/error/error_model.dart';

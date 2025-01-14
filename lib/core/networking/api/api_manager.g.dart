@@ -284,7 +284,7 @@ class _ApiManager implements ApiManager {
     )
         .compose(
           _dio.options,
-          'api/v1/auth/upload-photo',
+          'api/v1/drivers/upload-photo',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -318,7 +318,6 @@ class _ApiManager implements ApiManager {
         .compose(
           _dio.options,
           'api/v1/vehicles',
-          'api/v1/drivers/change-password',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -353,7 +352,7 @@ class _ApiManager implements ApiManager {
     )
         .compose(
           _dio.options,
-          'api/v1/auth/upload-photo',
+          'api/v1/drivers/change-password',
           queryParameters: queryParameters,
           data: _data,
         )

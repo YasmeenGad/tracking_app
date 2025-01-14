@@ -20,7 +20,6 @@ import '../../features/profile/presentation/views/profile_main_screen.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/profile/presentation/views/reset_password_profile_view.dart';
 import '../../features/profile/presentation/views/vehicle_view.dart';
-import '../utils/screens/under_build_screen.dart';
 import 'base_routes.dart';
 
 class AppRoutes {
