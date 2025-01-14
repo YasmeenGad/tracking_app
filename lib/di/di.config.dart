@@ -103,6 +103,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i804.ProfileUseCase>(),
           gh<_i345.OfflineDataSource>(),
         ));
+    gh.factory<_i804.ProfileUseCase>(
+        () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
+    gh.factory<_i907.ProfileViewModelCubit>(() => _i907.ProfileViewModelCubit(
+          gh<_i804.ProfileUseCase>(),
+          gh<_i345.OfflineDataSource>(),
+        ));
     gh.factory<_i508.SignUpViewModel>(
         () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
     gh.factory<_i338.VehiclesCubit>(

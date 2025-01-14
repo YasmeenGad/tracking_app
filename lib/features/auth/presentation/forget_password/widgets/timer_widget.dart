@@ -1,6 +1,7 @@
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import '../../../../../core/localization/lang_keys.dart';
 import '../../../../../core/styles/colors/my_colors.dart';
 import '../../../../../core/styles/fonts/my_fonts.dart';
