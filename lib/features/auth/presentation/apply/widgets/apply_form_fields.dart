@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_delivery/core/utils/widgets/app_text_form_field.dart';
@@ -98,7 +97,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // First Legal Name Field
         AppTextFormField(
           controller: widget.firstLegalNameController,
           hintText: 'Enter first legal name',
@@ -106,7 +104,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Second Legal Name Field
         AppTextFormField(
           controller: widget.secondLegalNameController,
           hintText: 'Enter second legal name',
@@ -114,7 +111,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Vehicle Type Field
         AppTextFormField(
           controller: widget.vechicleTypeController,
           hintText: 'Enter vehicle type',
@@ -122,7 +118,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Vehicle Number Field
         AppTextFormField(
           controller: widget.vechicleNumberController,
           hintText: 'Enter vehicle number',
@@ -130,7 +125,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Vehicle License Field
         AppTextFormField(
           controller: widget.vechicleLicenseController,
           hintText: 'Upload license photo',
@@ -146,7 +140,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Email Field
         AppTextFormField(
           controller: widget.emailController,
           hintText: 'Enter your email',
@@ -154,7 +147,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Phone Number Field
         AppTextFormField(
           controller: widget.phoneNumberController,
           hintText: 'Enter phone number',
@@ -162,7 +154,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // ID Number Field
         AppTextFormField(
           controller: widget.idNumberController,
           hintText: 'Enter national ID number',
@@ -170,7 +161,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // ID Image Field
         AppTextFormField(
           controller: widget.idImageController,
           hintText: 'Upload ID photo',
@@ -186,7 +176,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         ),
         verticalSpacing(20.h),
 
-        // Password and Confirm Password Fields
         Row(
           children: [
             Expanded(

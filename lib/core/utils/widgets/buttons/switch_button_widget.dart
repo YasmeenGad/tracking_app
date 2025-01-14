@@ -13,10 +13,10 @@ class SwitchButtonWidget extends StatefulWidget {
   });
 
   @override
-  _SwitchButtonWidgetState createState() => _SwitchButtonWidgetState();
+  SwitchButtonWidgetState createState() => SwitchButtonWidgetState();
 }
 
-class _SwitchButtonWidgetState extends State<SwitchButtonWidget> {
+class SwitchButtonWidgetState extends State<SwitchButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
