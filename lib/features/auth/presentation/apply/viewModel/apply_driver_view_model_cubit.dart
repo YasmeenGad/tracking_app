@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flowery_delivery/core/networking/common/api_result.dart';
 import 'package:flowery_delivery/core/networking/error/error_handler.dart';
+import 'package:flowery_delivery/features/auth/presentation/apply/viewModel/apply_driver_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/networking/error/error_model.dart';
@@ -19,7 +20,15 @@ class ApplyDriverViewModelCubit extends Cubit<ApplyDriverViewModelState> {
   ApplyDriverViewModelCubit(this._useCase)
       : super(ApplyDriverViewModelInitial());
 
-  Future<void> applyDriver(ApplyRequestEntity request) async {
+  void onAction(ApplyDriverActions action) {
+    switch (action) {
+      case ApplyDriverSubmit():
+        _applyDriver(action.request);
+        break;
+    }
+  }
+
+  Future<void> _applyDriver(ApplyRequestEntity request) async {
     emit(ApplyDriverViewModelLoading());
     final result = await _useCase.applyDriver(request);
 
