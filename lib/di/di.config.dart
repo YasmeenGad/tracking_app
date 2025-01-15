@@ -17,6 +17,10 @@ import '../core/app_cubit/app_cubit.dart' as _i693;
 import '../core/networking/api/api_manager.dart' as _i282;
 import '../core/networking/common/regestet_context_module.dart' as _i125;
 import '../core/networking/network_factory.dart' as _i377;
+import '../features/auth/data/data_sources/contracts/apply_driver_online_data_source.dart'
+    as _i832;
+import '../features/auth/data/data_sources/impl/apply_driver_online_data_source_impl.dart'
+    as _i603;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -38,6 +42,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => registerModule.navigatorKey);
     gh.lazySingleton<_i361.Dio>(() => networkFactory.provideDio());
     gh.singleton<_i282.ApiManager>(() => _i282.ApiManager(gh<_i361.Dio>()));
+    gh.factory<_i832.ApplyDriverOnlineDataSource>(
+        () => _i603.ApplyDriverOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     return this;
   }
 }

@@ -25,9 +25,9 @@ class ApplyResponseDtoDriver {
   final String? vehicleNumber;
   final String? vehicleLicense;
   @JsonKey(name: 'NID')
-  final String? NID;
+  final String? nID;
   @JsonKey(name: 'NIDImg')
-  final String? NIDImg;
+  final String? nIDImg;
   final String? email;
   final String? gender;
   final String? phone;
@@ -43,8 +43,8 @@ class ApplyResponseDtoDriver {
       this.vehicleType,
       this.vehicleNumber,
       this.vehicleLicense,
-      this.NID,
-      this.NIDImg,
+      this.nID,
+      this.nIDImg,
       this.email,
       this.gender,
       this.phone,
