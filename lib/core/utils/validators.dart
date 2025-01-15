@@ -105,27 +105,6 @@ class Validators {
     return null;
   }
 
-  static String? validateVehicleLicense(String? value, BuildContext context) {
-    if (_isEmpty(value)) {
-      return context.translate(LangKeys.vehicleLicenseIsRequired);
-    }
-    return null;
-  }
-
-  static String? validateNIDImg(String? value, BuildContext context) {
-    if (_isEmpty(value)) {
-      return context.translate(LangKeys.nidImgIsRequired);
-    }
-    return null;
-  }
-
-  static String? validateVehicleNumber(String? value, BuildContext context) {
-    if (_isEmpty(value)) {
-      return context.translate(LangKeys.vehicleNumberIsRequired);
-    }
-    return null;
-  }
-
   static String? validateVehicleType(String? value, BuildContext context) {
     if (_isEmpty(value)) {
       return context.translate(LangKeys.vehicleTypeIsRequired);

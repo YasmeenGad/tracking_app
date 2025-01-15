@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_delivery/core/utils/widgets/app_text_form_field.dart';
 import 'package:flowery_delivery/core/utils/widgets/spacing.dart';
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import '../../../../../core/utils/validators.dart';
 import '../viewModel/apply_form_view_model.dart';
 
 class ApplyFormFields extends StatefulWidget {
@@ -77,6 +78,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
     return Column(
       children: [
         DropdownButtonFormField<String>(
+          validator: (value) {
+            return Validators.validateNotEmpty(
+                title: 'Country', value: value, context: context);
+          },
           decoration: InputDecoration(
             labelText: 'Country',
             border: OutlineInputBorder(),
@@ -98,6 +103,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateNotEmpty(
+                title: 'First Legal Name', value: value, context: context);
+          },
           controller: widget.firstLegalNameController,
           hintText: 'Enter first legal name',
           labelText: 'First Legal Name',
@@ -105,6 +114,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateNotEmpty(
+                title: 'Second Legal Name', value: value, context: context);
+          },
           controller: widget.secondLegalNameController,
           hintText: 'Enter second legal name',
           labelText: 'Second Legal Name',
@@ -112,6 +125,9 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateVehicleType(value, context);
+          },
           controller: widget.vechicleTypeController,
           hintText: 'Enter vehicle type',
           labelText: 'Vehicle Type',
@@ -119,6 +135,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateNotEmpty(
+                title: 'Vehicle Number', value: value, context: context);
+          },
           controller: widget.vechicleNumberController,
           hintText: 'Enter vehicle number',
           labelText: 'Vehicle Number',
@@ -126,6 +146,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateNotEmpty(
+                title: 'Vehicle License', value: value, context: context);
+          },
           controller: widget.vechicleLicenseController,
           hintText: 'Upload license photo',
           labelText: 'Vehicle License',
@@ -141,6 +165,9 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateEmail(value, context);
+          },
           controller: widget.emailController,
           hintText: 'Enter your email',
           labelText: 'Email',
@@ -148,6 +175,9 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validatePhoneNumber(value, context);
+          },
           controller: widget.phoneNumberController,
           hintText: 'Enter phone number',
           labelText: 'Phone Number',
@@ -155,6 +185,9 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateNID(value, context);
+          },
           controller: widget.idNumberController,
           hintText: 'Enter national ID number',
           labelText: 'ID Number',
@@ -162,6 +195,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
         verticalSpacing(20.h),
 
         AppTextFormField(
+          validator: (value) {
+            return Validators.validateNotEmpty(
+                title: 'ID Image', value: value, context: context);
+          },
           controller: widget.idImageController,
           hintText: 'Upload ID photo',
           labelText: 'ID Image',
