@@ -225,4 +225,13 @@ class LangKeys {
   static const String errorGettingLocation = 'error_getting_location';
   static const String getLocation = 'get_location';
   static const String addressNotFound = 'address_not_found';
+  static const nidIsRequired = 'nid_is_required';
+  static const nidLengthError = 'nid_length_error';
+  static const vehicleLicenseIsRequired = 'vehicle_license_is_required';
+  static const nidImgIsRequired = 'nid_img_is_required';
+  static const vehicleNumberIsRequired = 'vehicle_number_is_required';
+  static const vehicleTypeIsRequired = 'vehicle_type_is_required';
+  static const vehicleTypeLengthError = 'vehicle_type_length_error';
+  static const genderIsRequired = 'gender_is_required';
+  static const invalidGender = 'invalid_gender';
 }

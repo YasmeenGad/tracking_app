@@ -94,4 +94,60 @@ class Validators {
   static bool hasMinLength(String password) {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
+
+  static String? validateNID(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(
+          LangKeys.nidIsRequired); // Update LangKeys with an appropriate key.
+    }
+    if (value!.length != 14) {
+      return context.translate(LangKeys
+          .nidLengthError); // Example: "NID must be 14 characters long."
+    }
+    return null;
+  }
+
+  static String? validateVehicleLicense(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.vehicleLicenseIsRequired);
+    }
+    return null;
+  }
+
+  static String? validateNIDImg(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(
+          LangKeys.nidImgIsRequired); // Example: "NID image is required."
+    }
+    return null;
+  }
+
+  static String? validateVehicleNumber(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.vehicleNumberIsRequired);
+    }
+    return null;
+  }
+
+  static String? validateVehicleType(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.vehicleTypeIsRequired);
+    }
+    if (value!.length != 24) {
+      return context.translate(LangKeys
+          .vehicleTypeLengthError); // Example: "Vehicle Type must be 24 characters long."
+    }
+    return null;
+  }
+
+  static String? validateGender(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.genderIsRequired);
+    }
+    if (value != 'male' && value != 'female') {
+      return context.translate(
+          LangKeys.invalidGender); // Example: "Gender must be male or female."
+    }
+    return null;
+  }
 }
