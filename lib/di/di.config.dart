@@ -21,6 +21,10 @@ import '../features/auth/data/data_sources/contracts/apply_driver_online_data_so
     as _i832;
 import '../features/auth/data/data_sources/impl/apply_driver_online_data_source_impl.dart'
     as _i603;
+import '../features/auth/data/repositories/apply_driver_repo_impl.dart'
+    as _i622;
+import '../features/auth/domain/contracts/apply_driver_repo.dart' as _i804;
+import '../features/auth/domain/use_cases/apply_driver_usecase.dart' as _i94;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -44,6 +48,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i282.ApiManager>(() => _i282.ApiManager(gh<_i361.Dio>()));
     gh.factory<_i832.ApplyDriverOnlineDataSource>(
         () => _i603.ApplyDriverOnlineDataSourceImpl(gh<_i282.ApiManager>()));
+    gh.factory<_i804.ApplyDriverRepo>(() =>
+        _i622.ApplyDriverRepoImpl(gh<_i832.ApplyDriverOnlineDataSource>()));
+    gh.factory<_i94.ApplyDriverUseCase>(
+        () => _i94.ApplyDriverUseCase(gh<_i804.ApplyDriverRepo>()));
     return this;
   }
 }
