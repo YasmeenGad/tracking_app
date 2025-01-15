@@ -97,12 +97,10 @@ class Validators {
 
   static String? validateNID(String? value, BuildContext context) {
     if (_isEmpty(value)) {
-      return context.translate(
-          LangKeys.nidIsRequired); // Update LangKeys with an appropriate key.
+      return context.translate(LangKeys.nidIsRequired);
     }
     if (value!.length != 14) {
-      return context.translate(LangKeys
-          .nidLengthError); // Example: "NID must be 14 characters long."
+      return context.translate(LangKeys.nidLengthError);
     }
     return null;
   }
@@ -116,8 +114,7 @@ class Validators {
 
   static String? validateNIDImg(String? value, BuildContext context) {
     if (_isEmpty(value)) {
-      return context.translate(
-          LangKeys.nidImgIsRequired); // Example: "NID image is required."
+      return context.translate(LangKeys.nidImgIsRequired);
     }
     return null;
   }
@@ -134,8 +131,7 @@ class Validators {
       return context.translate(LangKeys.vehicleTypeIsRequired);
     }
     if (value!.length != 24) {
-      return context.translate(LangKeys
-          .vehicleTypeLengthError); // Example: "Vehicle Type must be 24 characters long."
+      return context.translate(LangKeys.vehicleTypeLengthError);
     }
     return null;
   }
@@ -145,8 +141,7 @@ class Validators {
       return context.translate(LangKeys.genderIsRequired);
     }
     if (value != 'male' && value != 'female') {
-      return context.translate(
-          LangKeys.invalidGender); // Example: "Gender must be male or female."
+      return context.translate(LangKeys.invalidGender);
     }
     return null;
   }
