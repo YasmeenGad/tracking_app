@@ -4,24 +4,6 @@ import '../../domain/entities/response/apply_response_entity.dart';
 import '../models/response/apply_response_dto.dart';
 
 class ApplyDriverMapper {
-  static ApplyRequestDto toDto(ApplyRequestEntity entity) {
-    return ApplyRequestDto(
-      entity.country,
-      entity.firstName,
-      entity.lastName,
-      entity.vehicleType,
-      entity.vehicleNumber,
-      entity.nID,
-      entity.nIDImg,
-      entity.email,
-      entity.password,
-      entity.rePassword,
-      entity.gender,
-      entity.vehicleLicense,
-      entity.phone,
-    );
-  }
-
   static ApplyResponseEntity toEntity(ApplyResponseDto dto) {
     return ApplyResponseEntity(
       message: dto.message,

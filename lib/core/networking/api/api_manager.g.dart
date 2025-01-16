@@ -24,14 +24,84 @@ class _ApiManager implements ApiManager {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ApplyResponseDto> applyDriver(ApplyRequestDto applyRequestDto) async {
+  Future<ApplyResponseDto> applyDriver(
+    String country,
+    String firstName,
+    String lastName,
+    String vechicleType,
+    String vechicleNumber,
+    File vechicleLicense,
+    String nID,
+    File nIDImg,
+    String email,
+    String password,
+    String rePassword,
+    String gender,
+    String phone,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'applyRequestDto',
-      jsonEncode(applyRequestDto),
+      'country',
+      country,
+    ));
+    _data.fields.add(MapEntry(
+      'firstName',
+      firstName,
+    ));
+    _data.fields.add(MapEntry(
+      'lastName',
+      lastName,
+    ));
+    _data.fields.add(MapEntry(
+      'email',
+      vechicleType,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      vechicleNumber,
+    ));
+    _data.files.add(MapEntry(
+      'vehicleLicense',
+      MultipartFile.fromFileSync(
+        vechicleLicense.path,
+        filename: vechicleLicense.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'nID',
+      nID,
+    ));
+    _data.files.add(MapEntry(
+      'nIDImg',
+      MultipartFile.fromFileSync(
+        nIDImg.path,
+        filename: nIDImg.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'email',
+      email,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
+    _data.fields.add(MapEntry(
+      'rePassword',
+      rePassword,
+    ));
+    _data.fields.add(MapEntry(
+      'gender',
+      gender,
+    ));
+    _data.fields.add(MapEntry(
+      'phone',
+      phone,
     ));
     final _options = _setStreamType<ApplyResponseDto>(Options(
       method: 'POST',

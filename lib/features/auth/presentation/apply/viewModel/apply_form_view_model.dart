@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,9 +14,9 @@ class ApplyFormViewModel {
     countries = data;
   }
 
-  Future<String?> pickImage() async {
+  Future<File?> pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    return image?.name;
+    return image != null ? File(image.path) : null;
   }
 }

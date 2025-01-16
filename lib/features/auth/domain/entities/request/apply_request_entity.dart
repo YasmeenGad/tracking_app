@@ -1,20 +1,21 @@
+import 'dart:io';
+
 class ApplyRequestEntity {
   final String? country;
   final String? firstName;
   final String? lastName;
   final String? vehicleType;
   final String? vehicleNumber;
+  final File? vehicleLicense;
   final String? nID;
-  final String? nIDImg;
+  final File? nIDImg;
   final String? email;
   final String? password;
   final String? rePassword;
   final String? gender;
   final String? phone;
-  final String? vehicleLicense;
 
-  ApplyRequestEntity(
-      this.country,
+  ApplyRequestEntity({this.country,
       this.firstName,
       this.lastName,
       this.vehicleType,
@@ -26,5 +27,5 @@ class ApplyRequestEntity {
       this.password,
       this.rePassword,
       this.gender,
-      this.phone);
+      this.phone});
 }

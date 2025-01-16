@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GenderSelectionWidget extends StatefulWidget {
-  const GenderSelectionWidget({super.key});
+  final Function(String?)
+      selectedGenderCallback; // Callback to pass selected gender
+
+  const GenderSelectionWidget(
+      {super.key, required this.selectedGenderCallback});
 
   @override
   State<GenderSelectionWidget> createState() => _GenderSelectionWidgetState();
@@ -21,7 +25,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
       children: [
         Text('Gender',
             style: MyFonts.styleMedium500_18.copyWith(color: MyColors.gray)),
-        horizontalSpacing(20.w), // مسافة بين "Gender" والخيارات
+        horizontalSpacing(20.w),
         Row(
           children: [
             Radio<String>(
@@ -30,6 +34,8 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
               onChanged: (value) {
                 setState(() {
                   selectedGender = value;
+                  widget.selectedGenderCallback(
+                      selectedGender); // Pass selected gender back
                 });
               },
             ),
@@ -49,6 +55,8 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
               onChanged: (value) {
                 setState(() {
                   selectedGender = value;
+                  widget.selectedGenderCallback(
+                      selectedGender); // Pass selected gender back
                 });
               },
             ),

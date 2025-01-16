@@ -23,8 +23,20 @@ class ApplyDriverOnlineDataSourceImpl implements ApplyDriverOnlineDataSource {
   Future<DataResult<ApplyResponseEntity>> applyDriver(
       ApplyRequestEntity request) {
     return executeApi(() async {
-      var response =
-          await _apiManager.applyDriver(ApplyDriverMapper.toDto(request));
+      var response = await _apiManager.applyDriver(
+          request.country!,
+          request.firstName!,
+          request.lastName!,
+          request.vehicleType!,
+          request.vehicleNumber!,
+          request.vehicleLicense!,
+          request.nID!,
+          request.nIDImg!,
+          request.email!,
+          request.password!,
+          request.rePassword!,
+          request.gender!,
+          request.phone!);
       return ApplyDriverMapper.toEntity(response);
     });
   }

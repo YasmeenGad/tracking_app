@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_delivery/core/utils/widgets/app_text_form_field.dart';
@@ -42,6 +43,8 @@ class ApplyFormFields extends StatefulWidget {
 
 class _ApplyFormFieldsState extends State<ApplyFormFields> {
   late ApplyFormViewModel _applyFormViewModel;
+  File? _vehicleLicenseFile;
+  File? _idImageFile;
 
   @override
   void initState() {
@@ -56,20 +59,28 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
   }
 
   Future<void> _pickImageForLicense() async {
-    final imageName = await _applyFormViewModel.pickImage();
-    if (imageName != null) {
-      setState(() {
-        widget.vechicleLicenseController.text = imageName;
-      });
+    final pickedFile = await _applyFormViewModel.pickImage();
+    if (pickedFile?.path.split(".").last == "jpg" ||
+        pickedFile?.path.split(".").last == "jpeg") {
+      if (pickedFile != null) {
+        setState(() {
+          _vehicleLicenseFile = pickedFile;
+          widget.vechicleLicenseController.text = pickedFile.path;
+        });
+      }
     }
   }
 
   Future<void> _pickImageForId() async {
-    final imageName = await _applyFormViewModel.pickImage();
-    if (imageName != null) {
-      setState(() {
-        widget.idImageController.text = imageName;
-      });
+    final pickedFile = await _applyFormViewModel.pickImage();
+    if (pickedFile?.path.split(".").last == "jpg" ||
+        pickedFile?.path.split(".").last == "jpeg") {
+      if (pickedFile != null) {
+        setState(() {
+          _idImageFile = pickedFile;
+          widget.idImageController.text = pickedFile.path;
+        });
+      }
     }
   }
 
@@ -101,7 +112,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           },
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
             return Validators.validateNotEmpty(
@@ -112,7 +122,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           labelText: 'First Legal Name',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
             return Validators.validateNotEmpty(
@@ -123,7 +132,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           labelText: 'Second Legal Name',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
             return Validators.validateVehicleType(value, context);
@@ -133,7 +141,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           labelText: 'Vehicle Type',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
             return Validators.validateNotEmpty(
@@ -144,12 +151,7 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           labelText: 'Vehicle Number',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
-          validator: (value) {
-            return Validators.validateNotEmpty(
-                title: 'Vehicle License', value: value, context: context);
-          },
           controller: widget.vechicleLicenseController,
           hintText: 'Upload license photo',
           labelText: 'Vehicle License',
@@ -163,42 +165,35 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           ),
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
-            return Validators.validateEmail(value, context);
+            return Validators.validateNotEmpty(
+                title: 'Email', value: value, context: context);
           },
           controller: widget.emailController,
           hintText: 'Enter your email',
           labelText: 'Email',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
             return Validators.validatePhoneNumber(value, context);
           },
           controller: widget.phoneNumberController,
-          hintText: 'Enter phone number',
-          labelText: 'Phone Number',
+          hintText: 'Enter your phone number',
+          labelText: 'Phone',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
           validator: (value) {
             return Validators.validateNID(value, context);
           },
           controller: widget.idNumberController,
-          hintText: 'Enter national ID number',
+          hintText: 'Enter your NID',
           labelText: 'ID Number',
         ),
         verticalSpacing(20.h),
-
         AppTextFormField(
-          validator: (value) {
-            return Validators.validateNotEmpty(
-                title: 'ID Image', value: value, context: context);
-          },
           controller: widget.idImageController,
           hintText: 'Upload ID photo',
           labelText: 'ID Image',
@@ -212,7 +207,6 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
           ),
         ),
         verticalSpacing(20.h),
-
         Row(
           children: [
             Expanded(

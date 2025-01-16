@@ -11,12 +11,12 @@ final class ApplyDriverViewModelInitial extends ApplyDriverViewModelState {}
 final class ApplyDriverViewModelLoading extends ApplyDriverViewModelState {}
 
 final class ApplyDriverViewModelError extends ApplyDriverViewModelState {
-  final ErrorModel _error;
+  final ErrorModel error;
 
-  ApplyDriverViewModelError(this._error);
+  ApplyDriverViewModelError(this.error);
 
   @override
-  List<Object?> get props => [_error];
+  List<Object?> get props => [error];
 }
 
 final class ApplyDriverViewModelSuccess extends ApplyDriverViewModelState {
