@@ -9,7 +9,6 @@ class LoginButton extends StatelessWidget {
     return CurvedButton(
       title: 'Login',
       onTap: () {
-        // Add your login action here
       },
     );
   }
