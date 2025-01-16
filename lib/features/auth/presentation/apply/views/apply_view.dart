@@ -39,6 +39,8 @@ class _ApplyViewState extends State<ApplyView> {
   late final TextEditingController confirmPasswordController;
   String? selectedGender;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     countryController = TextEditingController();
@@ -130,19 +132,22 @@ class _ApplyViewState extends State<ApplyView> {
               ),
             ),
             SliverToBoxAdapter(
-              child: ApplyFormFields(
-                countryController: countryController,
-                firstLegalNameController: firstLegalNameController,
-                secondLegalNameController: secondLegalNameController,
-                vechicleTypeController: vechicleTypeController,
-                vechicleNumberController: vechicleNumberController,
-                vechicleLicenseController: vechicleLicenseController,
-                emailController: emailController,
-                phoneNumberController: phoneNumberController,
-                idNumberController: idNumberController,
-                idImageController: idImageController,
-                passwordController: passwordController,
-                confirmPasswordController: confirmPasswordController,
+              child: Form(
+                key: _formKey,
+                child: ApplyFormFields(
+                  countryController: countryController,
+                  firstLegalNameController: firstLegalNameController,
+                  secondLegalNameController: secondLegalNameController,
+                  vechicleTypeController: vechicleTypeController,
+                  vechicleNumberController: vechicleNumberController,
+                  vechicleLicenseController: vechicleLicenseController,
+                  emailController: emailController,
+                  phoneNumberController: phoneNumberController,
+                  idNumberController: idNumberController,
+                  idImageController: idImageController,
+                  passwordController: passwordController,
+                  confirmPasswordController: confirmPasswordController,
+                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -157,35 +162,37 @@ class _ApplyViewState extends State<ApplyView> {
             SliverToBoxAdapter(
               child: SubmitButtonWidget(
                 onTap: () {
-                  if (selectedGender == null) {
-                    return aweSnackBar(
-                        msg: 'Please select a gender',
-                        context: context,
-                        type: MessageTypeConst.help,
-                        title: 'Failure');
-                  }
-                  final applyData = ApplyRequestEntity(
-                    country: countryController.text,
-                    firstName: firstLegalNameController.text,
-                    lastName: secondLegalNameController.text,
-                    vehicleType: vechicleTypeController.text,
-                    vehicleNumber: vechicleNumberController.text,
-                    vehicleLicense: File(vechicleLicenseController.text),
-                    email: emailController.text,
-                    phone: phoneNumberController.text,
-                    nID: idNumberController.text,
-                    nIDImg: File(idImageController.text),
-                    // Assuming image path or base64
-                    password: passwordController.text,
-                    rePassword: confirmPasswordController.text,
-                    gender: selectedGender ?? '',
-                  );
-                  debugPrint(
-                      "-----------------------${File(vechicleLicenseController.text)}");
+                  if (_formKey.currentState!.validate()) {
+                    if (selectedGender == null) {
+                      return aweSnackBar(
+                          msg: 'Please select a gender',
+                          context: context,
+                          type: MessageTypeConst.help,
+                          title: 'Failure');
+                    }
+                    final applyData = ApplyRequestEntity(
+                      country: countryController.text,
+                      firstName: firstLegalNameController.text,
+                      lastName: secondLegalNameController.text,
+                      vehicleType: vechicleTypeController.text,
+                      vehicleNumber: vechicleNumberController.text,
+                      vehicleLicense: File(vechicleLicenseController.text),
+                      email: emailController.text,
+                      phone: phoneNumberController.text,
+                      nID: idNumberController.text,
+                      nIDImg: File(idImageController.text),
+                      // Assuming image path or base64
+                      password: passwordController.text,
+                      rePassword: confirmPasswordController.text,
+                      gender: selectedGender ?? '',
+                    );
+                    debugPrint(
+                        "-----------------------${File(vechicleLicenseController.text)}");
 
-                  context
-                      .read<ApplyDriverViewModelCubit>()
-                      .onAction(ApplyDriverSubmit(applyData));
+                    context
+                        .read<ApplyDriverViewModelCubit>()
+                        .onAction(ApplyDriverSubmit(applyData));
+                  }
                 },
               ),
             ),
