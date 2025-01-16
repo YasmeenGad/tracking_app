@@ -31,6 +31,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             Radio<String>(
               value: 'Female',
               groupValue: selectedGender,
+              activeColor: MyColors.baseColor,
               onChanged: (value) {
                 setState(() {
                   selectedGender = value;
@@ -52,6 +53,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
             Radio<String>(
               value: 'Male',
               groupValue: selectedGender,
+              activeColor: MyColors.baseColor,
               onChanged: (value) {
                 setState(() {
                   selectedGender = value;
