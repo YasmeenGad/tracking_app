@@ -2,17 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String
-
-  floweryTrackingApp.env
-
-  =
-
-  '
-
-  .env.firebase
-
-  ';
   static const String fontsOronteusFinaeus = 'assets/fonts/oronteus_finaeus.ttf';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String imagesAboutAppImage = 'assets/images/about_app_image.gif';
