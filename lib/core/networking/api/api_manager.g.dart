@@ -56,11 +56,11 @@ class _ApiManager implements ApiManager {
       lastName,
     ));
     _data.fields.add(MapEntry(
-      'email',
+      'vehicleType',
       vechicleType,
     ));
     _data.fields.add(MapEntry(
-      'password',
+      'vehicleNumber',
       vechicleNumber,
     ));
     _data.files.add(MapEntry(
@@ -68,19 +68,19 @@ class _ApiManager implements ApiManager {
       MultipartFile.fromFileSync(
         vechicleLicense.path,
         filename: vechicleLicense.path.split(Platform.pathSeparator).last,
-        contentType: MediaType.parse('image/jpg'),
+        contentType: MediaType.parse('image/jpeg'),
       ),
     ));
     _data.fields.add(MapEntry(
-      'nID',
+      'NID',
       nID,
     ));
     _data.files.add(MapEntry(
-      'nIDImg',
+      'NIDImg',
       MultipartFile.fromFileSync(
         nIDImg.path,
         filename: nIDImg.path.split(Platform.pathSeparator).last,
-        contentType: MediaType.parse('image/jpg'),
+        contentType: MediaType.parse('image/jpeg'),
       ),
     ));
     _data.fields.add(MapEntry(

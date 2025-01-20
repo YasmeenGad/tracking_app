@@ -188,6 +188,7 @@ class _ApplyViewState extends State<ApplyView> {
                     );
                     debugPrint(
                         "-----------------------${File(vechicleLicenseController.text)}");
+                    debugPrint("-----------------------$selectedGender");
 
                     context
                         .read<ApplyDriverViewModelCubit>()

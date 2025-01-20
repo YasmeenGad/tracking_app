@@ -24,12 +24,12 @@ abstract class ApiManager {
       @Part(name: 'country') String country,
       @Part(name: 'firstName') String firstName,
       @Part(name: 'lastName') String lastName,
-      @Part(name: 'email') String vechicleType,
-      @Part(name: 'password') String vechicleNumber,
-      @Part(name: 'vehicleLicense', contentType: 'image/jpg')
+      @Part(name: 'vehicleType') String vechicleType,
+      @Part(name: 'vehicleNumber') String vechicleNumber,
+      @Part(name: 'vehicleLicense', contentType: 'image/jpeg')
       File vechicleLicense,
-      @Part(name: 'nID') String nID,
-      @Part(name: 'nIDImg', contentType: 'image/jpg') File nIDImg,
+      @Part(name: 'NID') String nID,
+      @Part(name: 'NIDImg', contentType: 'image/jpeg') File nIDImg,
       @Part(name: 'email') String email,
       @Part(name: 'password') String password,
       @Part(name: 'rePassword') String rePassword,

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flowery_delivery/core/utils/widgets/app_text_form_field.dart';
@@ -43,8 +42,6 @@ class ApplyFormFields extends StatefulWidget {
 
 class _ApplyFormFieldsState extends State<ApplyFormFields> {
   late ApplyFormViewModel _applyFormViewModel;
-  File? _vehicleLicenseFile;
-  File? _idImageFile;
 
   @override
   void initState() {
@@ -60,11 +57,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
 
   Future<void> _pickImageForLicense() async {
     final pickedFile = await _applyFormViewModel.pickImage();
-    if (pickedFile?.path.split(".").last == "jpg" ||
+    if (pickedFile?.path.split(".").last == "png" ||
         pickedFile?.path.split(".").last == "jpeg") {
       if (pickedFile != null) {
         setState(() {
-          _vehicleLicenseFile = pickedFile;
           widget.vechicleLicenseController.text = pickedFile.path;
         });
       }
@@ -73,11 +69,10 @@ class _ApplyFormFieldsState extends State<ApplyFormFields> {
 
   Future<void> _pickImageForId() async {
     final pickedFile = await _applyFormViewModel.pickImage();
-    if (pickedFile?.path.split(".").last == "jpg" ||
+    if (pickedFile?.path.split(".").last == "png" ||
         pickedFile?.path.split(".").last == "jpeg") {
       if (pickedFile != null) {
         setState(() {
-          _idImageFile = pickedFile;
           widget.idImageController.text = pickedFile.path;
         });
       }

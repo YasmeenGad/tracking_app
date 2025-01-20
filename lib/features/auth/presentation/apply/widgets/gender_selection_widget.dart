@@ -29,7 +29,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
         Row(
           children: [
             Radio<String>(
-              value: 'Female',
+              value: 'female',
               groupValue: selectedGender,
               activeColor: MyColors.baseColor,
               onChanged: (value) {
@@ -41,7 +41,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
               },
             ),
             Text(
-              'Female',
+              'female',
               style: MyFonts.styleRegular400_16
                   .copyWith(color: MyColors.blackBase),
             ),
@@ -51,7 +51,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
         Row(
           children: [
             Radio<String>(
-              value: 'Male',
+              value: 'male',
               groupValue: selectedGender,
               activeColor: MyColors.baseColor,
               onChanged: (value) {
@@ -63,7 +63,7 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
               },
             ),
             Text(
-              'Male',
+              'male',
               style: MyFonts.styleRegular400_16
                   .copyWith(color: MyColors.blackBase),
             ),
