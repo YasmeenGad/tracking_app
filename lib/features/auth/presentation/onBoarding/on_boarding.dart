@@ -7,7 +7,6 @@ import 'package:flowery_delivery/core/utils/widgets/base/base_view.dart';
 import 'package:flowery_delivery/core/utils/widgets/buttons/carved_button.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding_animation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
