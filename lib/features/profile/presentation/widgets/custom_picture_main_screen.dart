@@ -25,8 +25,7 @@ class _CustomPictureMainScreenState extends State<CustomPictureMainScreen> {
       child: BlocBuilder<ProfileViewModelCubit, ProfileViewModelState>(
         builder: (context, state) {
           if (state is GetLoggedUserDataSuccess) {
-            return Container(
-              margin: EdgeInsets.only(top: 40.h, right: 25.w),
+            return SizedBox(
               height: 115.h,
               width: 115.w,
               child: Stack(
@@ -43,10 +42,9 @@ class _CustomPictureMainScreenState extends State<CustomPictureMainScreen> {
               ),
             );
           }
-          return Container(
-            margin: EdgeInsets.only(top: 40.h, right: 25.w),
-            height: 115.h,
-            width: 115.w,
+          return SizedBox(
+            height: 50.h,
+            width: 50.w,
             child: Stack(
               fit: StackFit.expand,
               clipBehavior: Clip.none,

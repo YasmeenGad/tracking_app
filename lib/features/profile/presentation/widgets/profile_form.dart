@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flutter/material.dart';
 import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/utils/widgets/spacing.dart';
@@ -67,7 +67,7 @@ class ProfileForm extends StatelessWidget {
             controller: passwordController,
             hintText: '******',
             labelText: context.translate(LangKeys.password),
-            validator: (value) => Validators.validatePassword(value, context),
+         //   validator: (value) => Validators.validatePassword(value, context),
           ),
           verticalSpacing(20),
           CustomTextFormField(

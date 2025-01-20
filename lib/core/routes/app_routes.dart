@@ -11,9 +11,15 @@ import '../../features/auth/presentation/forget_password/view/reset_password.dar
 import '../../features/auth/presentation/login/view/login_view.dart';
 import '../../features/auth/presentation/signup/view/signup_view.dart';
 import '../../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart';
+import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
+import '../../features/profile/presentation/viewModel/profile_actions.dart';
+import '../../features/profile/presentation/viewModel/profile_view_model_cubit.dart';
+import '../../features/profile/presentation/viewModel/vehicles/vehicles_action.dart';
+import '../../features/profile/presentation/viewModel/vehicles/vehicles_cubit.dart';
 import '../../features/profile/presentation/views/profile_main_screen.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/profile/presentation/views/reset_password_profile_view.dart';
+import '../../features/profile/presentation/views/vehicle_view.dart';
 import 'base_routes.dart';
 
 class AppRoutes {
@@ -27,8 +33,8 @@ class AppRoutes {
   static const String homeScreen = 'homeScreen';
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
-  static const String resetPasswordProfileView = 'resetPasswordProfileView';
-
+  static const String vehicleView = "vehicleView";
+  static const String resetPasswordProfileView = "resetPasswordProfileView";
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
@@ -55,9 +61,9 @@ class AppRoutes {
       case AppRoutes.emailVerification:
         return BaseRoute(
             page: BlocProvider(
-              create: (context) => getIt.get<ForgetPasswordViewModelCubit>(),
-              child: EmailVerification(args as String),
-            ));
+          create: (context) => getIt.get<ForgetPasswordViewModelCubit>(),
+          child: EmailVerification(args as String),
+        ));
 
       case AppRoutes.resetPassWord:
         return BaseRoute(
@@ -66,9 +72,35 @@ class AppRoutes {
               child: ResetPassword()),
         );
       case AppRoutes.profileMainScreen:
-        return BaseRoute(page: const ProfileMainScreen());
+        return BaseRoute(
+            page: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                    create: (context) => getIt.get<ProfileViewModelCubit>()
+                      ..doAction(GetLoggedUserData())),
+                BlocProvider(
+                    create: (context) => getIt.get<VehiclesCubit>()
+                      ..doAction(GetAllVehicles())),
+              ],
+                  child: ProfileMainScreen()),
+        );
       case AppRoutes.profileView:
         return BaseRoute(page: const ProfileView());
+      case AppRoutes.vehicleView:
+        return BaseRoute(
+            page: MultiBlocProvider(
+                providers: [
+                  BlocProvider<ProfileViewModelCubit>(
+                    create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
+                  ),
+                  BlocProvider<VehiclesCubit>(
+                    create: (context) => getIt.get<VehiclesCubit>()..doAction(GetAllVehicles()),
+                  ),
+                  BlocProvider<EditProfileCubit>(
+                    create: (context) => getIt.get<EditProfileCubit>(),
+                  ),
+                ],
+                child: const VehicleView()));
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
       default:

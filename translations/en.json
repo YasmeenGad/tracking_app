@@ -229,6 +229,13 @@
     "address_not_found": "Address not found",
     "change_to_the_language": "Change to the language",
     "ok": "Ok",
+    "vehicle_license": "Vehicle License",
+    "vehicle_type": "Vehicle Type",
+    "vehicle_number": "Vehicle Number",
+    "ready_for_delivery": "Ready for delivery",
+    "vehicle_info": "Vehicle Info"
+
+    "ok": "Ok",
     "apply_now": "Apply Now"
 
 }

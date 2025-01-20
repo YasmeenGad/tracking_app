@@ -1,18 +1,17 @@
 import 'dart:io';
+
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/styles/colors/my_colors.dart';
 import '../../../../core/utils/widgets/base/snack_bar.dart';
 import '../../../../di/di.dart';
 import '../../../../generated/assets.dart';
-import '../viewModel/profile_actions.dart';
-
-import '../viewModel/profile_view_model_cubit.dart';
-
+import '../viewModel/edit_profile/edit_profile_action.dart';
+import '../viewModel/edit_profile/edit_profile_cubit.dart';
 
 class ProfilePic extends StatefulWidget {
   const ProfilePic({super.key});
@@ -24,12 +23,12 @@ class ProfilePic extends StatefulWidget {
 class _ProfilePicState extends State<ProfilePic> {
   File? _image;
   final ImagePicker _picker = ImagePicker();
-  late final ProfileViewModelCubit profileViewModel;
+  late final EditProfileCubit profileViewModel;
 
   @override
- void initState() {
+  void initState() {
     super.initState();
-    profileViewModel = getIt.get<ProfileViewModelCubit>();
+    profileViewModel = getIt.get<EditProfileCubit>();
   }
 
   Future<void> _pickImage(ImageSource imageSource) async {
@@ -72,7 +71,7 @@ class _ProfilePicState extends State<ProfilePic> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-            context.translate(LangKeys.selectAPhoto),
+                  context.translate(LangKeys.selectAPhoto),
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
@@ -82,7 +81,8 @@ class _ProfilePicState extends State<ProfilePic> {
                 SizedBox(height: 10.h),
                 Divider(thickness: 1, color: Colors.grey[300]),
                 ListTile(
-                  leading: const Icon(Icons.camera_alt_outlined, color: Colors.green),
+                  leading: const Icon(Icons.camera_alt_outlined,
+                      color: Colors.green),
                   title: Text(
                     context.translate(LangKeys.takeAPhoto),
                     style: TextStyle(color: Colors.black, fontSize: 16.sp),
@@ -127,6 +127,7 @@ class _ProfilePicState extends State<ProfilePic> {
       },
     );
   }
+
   // void _setImage(File? image) {
   //   setState(() {
   //     _image = image;
@@ -135,76 +136,73 @@ class _ProfilePicState extends State<ProfilePic> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProfileViewModelCubit>(
-      create: (context) => profileViewModel,
-      child: BlocListener<ProfileViewModelCubit, ProfileViewModelState>(
-        listener: (context, state) {
-          switch (state) {
-            case UploadPhotoLoading():
-              aweSnackBar(
-                  msg: 'Loading...',
-                  context: context,
-                  type: MessageTypeConst.help,
-                  title: 'Loading');
-              break;
-            case UploadPhotoSuccess():
-              aweSnackBar(
-                  msg: state.data.message.toString(),
-                  context: context,
-                  type: MessageTypeConst.success,
-                  title: 'Success');
-              break;
-            case UploadPhotoError():
-              aweSnackBar(
-                  msg: state.error.error.toString(),
-                  context: context,
-                  type: MessageTypeConst.failure,
-                  title: 'Error');
-              break;
-            default:
-          }
-        },
-        child: SizedBox(
-          height: 115.h,
-          width: 115.w,
-          child: Stack(
-            fit: StackFit.expand,
-            clipBehavior: Clip.none,
-            children: [
-              _image == null
-                  ? const CircleAvatar(
-                      backgroundImage: AssetImage(Assets.imagesProfile),
-                    )
-                  : CircleAvatar(
-                      backgroundImage: FileImage(_image!) as ImageProvider),
-              Positioned(
-                right: -18.w,
-                bottom: 2.h,
-                child: SizedBox(
-                  height: 46.h,
-                  width: 46.w,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: MyColors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                        side: const BorderSide(color: MyColors.white),
-                      ),
-                      backgroundColor: MyColors.lightPink,
+    return BlocListener<EditProfileCubit, EditProfileState>(
+      listener: (context, state) {
+        switch (state) {
+          case UploadPhotoLoading():
+            aweSnackBar(
+                msg: 'Loading...',
+                context: context,
+                type: MessageTypeConst.help,
+                title: 'Loading');
+            break;
+          case UploadPhotoSuccess():
+            aweSnackBar(
+                msg: state.data.message.toString(),
+                context: context,
+                type: MessageTypeConst.success,
+                title: 'Success');
+            break;
+          case UploadPhotoError():
+            aweSnackBar(
+                msg: state.error.error.toString(),
+                context: context,
+                type: MessageTypeConst.failure,
+                title: 'Error');
+            break;
+          default:
+        }
+      },
+      child: SizedBox(
+        height: 115.h,
+        width: 115.w,
+        child: Stack(
+          fit: StackFit.expand,
+          clipBehavior: Clip.none,
+          children: [
+            _image == null
+                ? const CircleAvatar(
+                    backgroundImage: AssetImage(Assets.imagesProfile),
+                  )
+                : CircleAvatar(
+                    backgroundImage: FileImage(_image!) as ImageProvider),
+            Positioned(
+              right: -18.w,
+              bottom: 2.h,
+              child: SizedBox(
+                height: 46.h,
+                width: 46.w,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: MyColors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      side: const BorderSide(color: MyColors.white),
                     ),
-                    onPressed: () {
-                      _showCustomBottomSheet(context);
-                    },
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      color: MyColors.gray,
-                      size: 22.sp,
-                    ),
+                    backgroundColor: MyColors.lightPink,
+                  ),
+                  onPressed: () {
+                    _showCustomBottomSheet(context);
+                  },
+                  child: Icon(
+                    Icons.camera_alt_outlined,
+                    color: MyColors.gray,
+                    size: 22.sp,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

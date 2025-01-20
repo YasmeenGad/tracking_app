@@ -11,7 +11,8 @@ class CustomTextFormField extends StatefulWidget {
       this.labelText,
       this.controller,
       this.suffix,
-      this.validator});
+      this.validator
+      ,this.keyboardType});
 
   final String? hintText;
   final String? labelText;
@@ -19,6 +20,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool? isPassword;
   final Widget? suffix;
   final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -30,6 +32,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       obscureText: widget.isPassword ?? false,
       controller: widget.controller,
+      keyboardType:  widget.keyboardType ?? TextInputType.text,
       decoration: InputDecoration(
         suffix: widget.suffix ?? const SizedBox(),
         floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -48,8 +48,12 @@ import '../features/profile/data/data_sources/impl/profile_online_data_source_im
 import '../features/profile/data/repositories/profile_repo_impl.dart' as _i933;
 import '../features/profile/domain/repositories/profile_repo.dart' as _i49;
 import '../features/profile/domain/use_cases/profile_use_case.dart' as _i804;
+import '../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart'
+    as _i638;
 import '../features/profile/presentation/viewModel/profile_view_model_cubit.dart'
     as _i907;
+import '../features/profile/presentation/viewModel/vehicles/vehicles_cubit.dart'
+    as _i338;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -95,18 +99,24 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i690.LoginViewModel(gh<_i496.LoginUseCase>()));
     gh.factory<_i804.ProfileUseCase>(
         () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
-    gh.factory<_i907.ProfileViewModelCubit>(() => _i907.ProfileViewModelCubit(
+    gh.factory<_i638.EditProfileCubit>(() => _i638.EditProfileCubit(
           gh<_i804.ProfileUseCase>(),
           gh<_i345.OfflineDataSource>(),
         ));
     gh.factory<_i508.SignUpViewModel>(
         () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
+    gh.factory<_i338.VehiclesCubit>(
+        () => _i338.VehiclesCubit(gh<_i804.ProfileUseCase>()));
     gh.factory<_i60.ForgetPasswordViewModelCubit>(
         () => _i60.ForgetPasswordViewModelCubit(
               gh<_i301.ForgotPasswordUseCase>(),
               gh<_i642.VerifyResetCodeUseCase>(),
               gh<_i906.ResetPasswordUseCase>(),
             ));
+    gh.factory<_i907.ProfileViewModelCubit>(() => _i907.ProfileViewModelCubit(
+          gh<_i804.ProfileUseCase>(),
+          gh<_i338.VehiclesCubit>(),
+        ));
     return this;
   }
 }

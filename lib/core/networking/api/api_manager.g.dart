@@ -197,12 +197,12 @@ class _ApiManager implements ApiManager {
   }
 
   @override
-  Future<GetLoggedUserDataResponseDto> getLoggedUserData() async {
+  Future<GetLoggedDriverDataResponseDto> getLoggedDriverData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GetLoggedUserDataResponseDto>(Options(
+    final _options = _setStreamType<GetLoggedDriverDataResponseDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -219,9 +219,9 @@ class _ApiManager implements ApiManager {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GetLoggedUserDataResponseDto _value;
+    late GetLoggedDriverDataResponseDto _value;
     try {
-      _value = GetLoggedUserDataResponseDto.fromJson(_result.data!);
+      _value = GetLoggedDriverDataResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -264,41 +264,6 @@ class _ApiManager implements ApiManager {
   }
 
   @override
-  Future<ChangePasswordResponseDto> changePassword(
-      ChangePasswordRequestDto request) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _options = _setStreamType<ChangePasswordResponseDto>(Options(
-      method: 'PATCH',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'api/v1/drivers/change-password',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ChangePasswordResponseDto _value;
-    try {
-      _value = ChangePasswordResponseDto.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
   Future<UploadPhotoResponseDto> uploadPhoto(File photo) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -332,6 +297,74 @@ class _ApiManager implements ApiManager {
     late UploadPhotoResponseDto _value;
     try {
       _value = UploadPhotoResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetAllVehiclesDto> getAllVehicles() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GetAllVehiclesDto>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/vehicles',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAllVehiclesDto _value;
+    try {
+      _value = GetAllVehiclesDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ChangePasswordResponseDto> changePassword(
+      ChangePasswordRequestDto request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _options = _setStreamType<ChangePasswordResponseDto>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/drivers/change-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ChangePasswordResponseDto _value;
+    try {
+      _value = ChangePasswordResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
