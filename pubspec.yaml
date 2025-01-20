@@ -90,7 +90,7 @@ dev_dependencies:
   dartz: ^0.10.1
   test: ^1.25.8
   mockito: ^5.4.5
-  flutter_native_splash: ^2.4.3
+  flutter_native_splash: ^2.4.4
   icons_launcher: ^3.0.0
   rename: ^3.0.2
 
