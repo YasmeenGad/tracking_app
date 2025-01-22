@@ -41,6 +41,10 @@ import '../features/auth/presentation/login/viewModel/login_view_model_cubit.dar
     as _i690;
 import '../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart'
     as _i508;
+import '../features/home/data/data_sources/contracts/online_data_source/pending_orders_online_data_source.dart'
+    as _i969;
+import '../features/home/data/data_sources/impl/pending_orders_online_data_source_impl.dart'
+    as _i352;
 import '../features/profile/data/data_sources/contracts/profile_online_data_source.dart'
     as _i46;
 import '../features/profile/data/data_sources/impl/profile_online_data_source_impl.dart'
@@ -79,6 +83,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i282.ApiManager>(() => _i282.ApiManager(gh<_i361.Dio>()));
     gh.factory<_i46.ProfileOnlineDataSource>(
         () => _i74.ProfileOnlineDataSourceImpl(gh<_i282.ApiManager>()));
+    gh.factory<_i969.PendingOrdersOnlineDataSource>(
+        () => _i352.PendingOrdersOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i901.AuthOnlineDataSource>(
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
