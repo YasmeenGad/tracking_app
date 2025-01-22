@@ -68,5 +68,4 @@ abstract class ApiManager {
   @PATCH(ApiConstants.changePassword)
   Future<ChangePasswordResponseDto> changePassword(
       @Body() ChangePasswordRequestDto request);
-
 }
