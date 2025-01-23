@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_card_user_details.dart';
+import 'package:flowery_delivery/features/home/presentation/widgets/custom_status_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +18,7 @@ class CustomCardOrderDetails extends StatelessWidget {
       color: MyColors.white,
       elevation: 4,
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,6 +45,22 @@ class CustomCardOrderDetails extends StatelessWidget {
                 title: 'Nour mohamed',
                 subtitle: '20th st, Sheikh Zayed, Giza',
                 image: Assets.imagesImageProfile),
+            verticalSpacing(16.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AutoSizeText('EGP 3000',
+                    style: MyFonts.styleSemiBold600_14
+                        .copyWith(color: MyColors.blackBase)),
+                CustomStatusButton(statusTxt: 'Reject'),
+                CustomStatusButton(
+                  statusTxt: 'Accept',
+                  borderClr: Colors.transparent,
+                  textColor: MyColors.white,
+                  containerClr: MyColors.baseColor,
+                ),
+              ],
+            )
           ],
         ),
       ),

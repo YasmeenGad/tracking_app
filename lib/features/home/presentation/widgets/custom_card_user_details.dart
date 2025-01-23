@@ -16,11 +16,11 @@ class CustomCardUserDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: MyColors.white,
-        elevation: 2,
+    return Card(
+      color: MyColors.white,
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             Image.asset(image, width: 44.w, height: 44.h),
