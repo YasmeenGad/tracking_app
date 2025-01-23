@@ -45,6 +45,12 @@ import '../features/home/data/data_sources/contracts/online_data_source/pending_
     as _i969;
 import '../features/home/data/data_sources/impl/pending_orders_online_data_source_impl.dart'
     as _i352;
+import '../features/home/data/repositories/pending_orders_repo_impl.dart'
+    as _i454;
+import '../features/home/domain/contracts/pending_orders_repo.dart' as _i43;
+import '../features/home/domain/use_cases/pending_orders_usecase.dart' as _i15;
+import '../features/home/presentation/viewModel/pending_order_view_model_cubit.dart'
+    as _i317;
 import '../features/profile/data/data_sources/contracts/profile_online_data_source.dart'
     as _i46;
 import '../features/profile/data/data_sources/impl/profile_online_data_source_impl.dart'
@@ -95,12 +101,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i496.LoginUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i853.SignUpUseCase>(
         () => _i853.SignUpUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i43.PendingOrdersRepo>(() =>
+        _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(
         () => _i301.ForgotPasswordUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i906.ResetPasswordUseCase>(
         () => _i906.ResetPasswordUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i642.VerifyResetCodeUseCase>(
         () => _i642.VerifyResetCodeUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i15.PendingOrderUseCase>(
+        () => _i15.PendingOrderUseCase(gh<_i43.PendingOrdersRepo>()));
     gh.factory<_i690.LoginViewModel>(
         () => _i690.LoginViewModel(gh<_i496.LoginUseCase>()));
     gh.factory<_i804.ProfileUseCase>(
@@ -111,6 +121,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i508.SignUpViewModel>(
         () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
+    gh.factory<_i317.PendingOrderViewModelCubit>(
+        () => _i317.PendingOrderViewModelCubit(gh<_i15.PendingOrderUseCase>()));
     gh.factory<_i338.VehiclesCubit>(
         () => _i338.VehiclesCubit(gh<_i804.ProfileUseCase>()));
     gh.factory<_i60.ForgetPasswordViewModelCubit>(

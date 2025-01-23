@@ -11,6 +11,7 @@ import '../../features/auth/presentation/forget_password/view/reset_password.dar
 import '../../features/auth/presentation/login/view/login_view.dart';
 import '../../features/auth/presentation/signup/view/signup_view.dart';
 import '../../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart';
+import '../../features/home/presentation/views/pending_orders_view.dart';
 import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
 import '../../features/profile/presentation/viewModel/profile_view_model_cubit.dart';
@@ -34,6 +35,7 @@ class AppRoutes {
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
   static const String vehicleView = "vehicleView";
+  static const String pendingOrdersView = "pendingOrdersView";
   static const String resetPasswordProfileView = "resetPasswordProfileView";
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -103,6 +105,8 @@ class AppRoutes {
                 child: const VehicleView()));
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
+      case AppRoutes.pendingOrdersView:
+        return BaseRoute(page: const PendingOrdersView());
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
     }

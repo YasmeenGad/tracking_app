@@ -46,6 +46,7 @@ dependencies:
   connectivity_plus: ^6.1.1
   cached_network_image: ^3.4.1
   flutter_localization: ^0.3.0
+  google_fonts: ^6.2.1
   intl_utils: ^2.8.7
   country_state_city: ^0.1.6
   url_launcher: ^6.3.1
