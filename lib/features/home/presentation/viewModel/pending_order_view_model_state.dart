@@ -1,6 +1,5 @@
 part of 'pending_order_view_model_cubit.dart';
 
-@immutable
 sealed class PendingOrderViewModelState extends Equatable {
   @override
   List<Object?> get props => [];
