@@ -15,6 +15,7 @@ import '../../../features/auth/data/models/response/login_response_dto.dart';
 import '../../../features/auth/data/models/response/reset_password_response_dto.dart';
 import '../../../features/auth/data/models/response/signup_response_dto.dart';
 import '../../../features/auth/data/models/response/verify_reset_code_response.dart';
+import '../../../features/home/data/models/response/pending_order_response_dto.dart';
 import '../../../features/profile/data/models/request/change_password_request_dto.dart';
 import '../../../features/profile/data/models/response/change_password_response_dto.dart';
 import '../../../features/profile/data/models/response/edit_profile_response_dto.dart';
@@ -69,4 +70,6 @@ abstract class ApiManager {
   Future<ChangePasswordResponseDto> changePassword(
       @Body() ChangePasswordRequestDto request);
 
+  @GET(ApiConstants.getPendingOrders)
+  Future<PendingOrderResponseDto> getPendingOrders();
 }

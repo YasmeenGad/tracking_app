@@ -85,7 +85,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
 
                     SliverToBoxAdapter(
-                      child:            CurvedButton(
+                      child: CurvedButton(
                         color: MyColors.baseColor,
                         title: context.translate(LangKeys.labelContinue),
                         onTap: () {

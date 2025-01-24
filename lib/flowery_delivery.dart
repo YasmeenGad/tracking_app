@@ -1,3 +1,4 @@
+import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,8 @@ class FloweryDelivery extends StatelessWidget {
                         debugShowCheckedModeBanner: false,
                         builder: (context, child) {
                           return Scaffold(
-                            body: Builder(
+                        backgroundColor: MyColors.white,
+                        body: Builder(
                               builder: (context) {
                                 ConnectivityController.instance.init();
                                 return child!;
@@ -83,6 +85,6 @@ String _getInitialRoute() {
   return SharedPrefHelper().getString(key: SharedPrefKeys.tokenKey) != null
       // ? AppRoutes.homeScreen
       // : AppRoutes.onBoarding;
-      ? AppRoutes.profileMainScreen
+      ? AppRoutes.pendingOrdersView
       : AppRoutes.login;
 }
