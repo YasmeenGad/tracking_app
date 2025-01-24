@@ -59,7 +59,7 @@ class LoginViewModel extends Cubit<LoginViewModelState> {
           }
           emit(LoginViewModelSuccess(result.data));
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.pushReplacementNamed(AppRoutes.homeScreen);
+            context.pushReplacementNamed(AppRoutes.pendingOrdersView);
           });
 
         }

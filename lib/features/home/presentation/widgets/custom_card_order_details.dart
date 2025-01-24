@@ -7,10 +7,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/styles/colors/my_colors.dart';
 import '../../../../core/styles/fonts/my_fonts.dart';
 import '../../../../core/utils/widgets/spacing.dart';
-import '../../../../generated/assets.dart';
+import '../../domain/entities/response/pending_order_response_entity.dart';
 
 class CustomCardOrderDetails extends StatelessWidget {
-  const CustomCardOrderDetails({super.key});
+  const CustomCardOrderDetails({
+    super.key,
+    required this.order,
+  });
+
+  final PendingOrderResponseEntityOrders order;
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +38,24 @@ class CustomCardOrderDetails extends StatelessWidget {
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
             CustomCardUserDetails(
-                title: 'Flowery Store',
-                subtitle: '20th st, Sheikh Zayed, Giza',
-                image: Assets.imagesFloweryLogo),
+                title: order.store?.name ?? '',
+                subtitle: order.store?.address ?? '',
+                image: order.store?.image ?? ''),
             verticalSpacing(16.h),
             AutoSizeText(
               "Delivery Address",
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
             CustomCardUserDetails(
-                title: 'Nour mohamed',
-                subtitle: '20th st, Sheikh Zayed, Giza',
-                image: Assets.imagesImageProfile),
+                title:
+                    '${order.user?.firstName ?? ''} ${order.user?.lastName ?? ''}',
+                subtitle: order.user?.email ?? '',
+                image: order.user?.photo ?? ''),
             verticalSpacing(16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AutoSizeText('EGP 3000',
+                AutoSizeText("EGP ${order.totalPrice.toString()}",
                     style: MyFonts.styleSemiBold600_14
                         .copyWith(color: MyColors.blackBase)),
                 CustomStatusButton(statusTxt: 'Reject'),

@@ -85,6 +85,6 @@ String _getInitialRoute() {
   return SharedPrefHelper().getString(key: SharedPrefKeys.tokenKey) != null
       // ? AppRoutes.homeScreen
       // : AppRoutes.onBoarding;
-      ? AppRoutes.profileMainScreen
-      : AppRoutes.pendingOrdersView;
+      ? AppRoutes.pendingOrdersView
+      : AppRoutes.login;
 }
