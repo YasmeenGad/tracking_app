@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_card_user_details.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_status_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/localization/lang_keys.dart';
 import '../../../../core/styles/colors/my_colors.dart';
 import '../../../../core/styles/fonts/my_fonts.dart';
 import '../../../../core/utils/widgets/spacing.dart';
@@ -28,13 +30,13 @@ class CustomCardOrderDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(
-              "Flower Order",
+              context.translate(LangKeys.flowerOrder),
               style:
                   MyFonts.styleMedium500_14.copyWith(color: MyColors.blackBase),
             ),
             verticalSpacing(16.h),
             AutoSizeText(
-              "Pickup Address",
+              context.translate(LangKeys.pickupAddress),
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
             CustomCardUserDetails(
@@ -43,7 +45,7 @@ class CustomCardOrderDetails extends StatelessWidget {
                 image: order.store?.image ?? ''),
             verticalSpacing(16.h),
             AutoSizeText(
-              "Delivery Address",
+              context.translate(LangKeys.deliveryAddress),
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
             CustomCardUserDetails(
@@ -58,9 +60,10 @@ class CustomCardOrderDetails extends StatelessWidget {
                 AutoSizeText("EGP ${order.totalPrice.toString()}",
                     style: MyFonts.styleSemiBold600_14
                         .copyWith(color: MyColors.blackBase)),
-                CustomStatusButton(statusTxt: 'Reject'),
                 CustomStatusButton(
-                  statusTxt: 'Accept',
+                    statusTxt: context.translate(LangKeys.reject)),
+                CustomStatusButton(
+                  statusTxt: context.translate(LangKeys.accept),
                   borderClr: Colors.transparent,
                   textColor: MyColors.white,
                   containerClr: MyColors.baseColor,
