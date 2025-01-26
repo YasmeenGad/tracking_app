@@ -8,8 +8,6 @@ import 'package:flowery_delivery/features/order_details/domain/use_cases/add_ord
 import 'package:flowery_delivery/features/order_details/domain/use_cases/get_order_by_order_id_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/update_order_status.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
-
 import 'order_details_actions.dart';
 
 part 'order_details_view_model_state.dart';
