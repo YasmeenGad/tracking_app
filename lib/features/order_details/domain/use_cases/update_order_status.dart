@@ -4,10 +4,10 @@ import 'package:flowery_delivery/features/order_details/domain/repositories/cont
 import 'package:injectable/injectable.dart';
 
 @injectable
-class UpdateOrderStatus {
+class UpdateOrderStatusCase {
   final OrderDetailsRepo _repository;
 
-  UpdateOrderStatus(this._repository);
+  UpdateOrderStatusCase(this._repository);
 
   Future<DataResult<OrderDetailsEntity>> call({
     required String userId,

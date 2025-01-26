@@ -1,3 +1,4 @@
+import 'package:flowery_delivery/features/profile/domain/entities/response/get_logged_user_driver_response_entity.dart';
 import 'package:geocoding/geocoding.dart';
 
 class OrderDetailsEntity {
@@ -115,37 +116,3 @@ class Store {
       {this.name, this.image, this.address, this.phoneNumber, this.latLong});
 }
 
-class DriverEntity {
-  DriverEntity({
-    this.id,
-    this.country,
-    this.firstName,
-    this.lastName,
-    this.vehicleType,
-    this.vehicleNumber,
-    this.vehicleLicense,
-    this.nid,
-    this.nIDImg,
-    this.email,
-    this.gender,
-    this.phone,
-    this.photo,
-    this.createdAt,});
-
-  String? id;
-  String? country;
-  String? firstName;
-  String? lastName;
-  String? vehicleType;
-  String? vehicleNumber;
-  String? vehicleLicense;
-  String? nid;
-  String? nIDImg;
-  String? email;
-  String? gender;
-  String? phone;
-  String? photo;
-  String? createdAt;
-
-
-}

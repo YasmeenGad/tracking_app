@@ -1,6 +1,7 @@
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
+import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -109,9 +110,19 @@ class AppRoutes {
         return BaseRoute(page: const ResetPasswordProfileView());
       case AppRoutes.pendingOrdersView:
         return BaseRoute(
-            page: BlocProvider<PendingOrderViewModelCubit>(
-          create: (context) => getIt.get<PendingOrderViewModelCubit>()
-            ..onAction(GetPendingOrders()),
+            page: MultiBlocProvider(
+          providers: [
+            BlocProvider<PendingOrderViewModelCubit>(
+              create: (context) => getIt.get<PendingOrderViewModelCubit>()
+                ..onAction(GetPendingOrders()),
+            ),
+            BlocProvider<OrderDetailsViewModelCubit>(
+              create: (context) => getIt.get<OrderDetailsViewModelCubit>(),
+            ),
+            BlocProvider<ProfileViewModelCubit>(
+              create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
+            ),
+          ],
           child: const PendingOrdersView(),
         ));
       default:

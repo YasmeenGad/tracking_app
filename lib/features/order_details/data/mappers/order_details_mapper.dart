@@ -1,5 +1,7 @@
+import 'package:flowery_delivery/features/home/domain/entities/response/pending_order_response_entity.dart';
 import 'package:flowery_delivery/features/order_details/data/models/order_details_model.dart';
 import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
+import 'package:flowery_delivery/features/profile/domain/entities/response/get_logged_user_driver_response_entity.dart';
 import 'package:geocoding/geocoding.dart';
 
 class OrderDetailsMapper {
@@ -81,7 +83,62 @@ class OrderDetailsMapper {
       ),
     );
   }
-
+  static OrderData toOrderData(PendingOrderResponseEntityOrders orders) {
+    return  OrderData(
+      id: orders.id,
+      user: UserData(
+        id: orders.user?.id,
+        firstName: orders.user?.firstName,
+        lastName: orders.user?.lastName,
+        email: orders.user?.email,
+        gender: orders.user?.gender,
+        phone: orders.user?.phone,
+      ),
+      orderItems: orders.orderItems?.map((item) {
+        return OrderItems(
+          product: item?.product != null
+              ? Product(
+            id: item!.product!.id,
+            title: item.product!.title,
+            slug: item.product!.slug,
+            description: item.product!.description,
+            imgCover: item.product!.imgCover,
+            images: item.product!.images,
+            price: item.product!.price,
+            priceAfterDiscount: item.product!.priceAfterDiscount,
+            quantity: item.product!.quantity,
+            category: item.product!.category,
+            occasion: item.product!.occasion,
+            createdAt: item.product!.createdAt,
+            updatedAt: item.product!.updatedAt,
+            discount: item.product!.discount,
+            sold: item.product!.sold,
+          )
+              : null,
+          price: item?.price,
+          quantity: item?.quantity,
+          id: item?.id,
+        );
+      }).toList(),
+      totalPrice: orders.totalPrice,
+      paymentType: orders.paymentType,
+      isPaid: orders.isPaid,
+      isDelivered: orders.isDelivered,
+      state: orders.state,
+      createdAt: orders.createdAt,
+      updatedAt: orders.updatedAt,
+      orderNumber: orders.orderNumber,
+      store: orders.store != null
+          ? Store(
+        name: orders.store!.name,
+        image: orders.store!.image,
+        address: orders.store!.address,
+        phoneNumber: orders.store!.phoneNumber,
+        latLong: orders.store!.latLong,
+      )
+          : null,
+    );
+  }
   static OrderDetailsModel toOrderDetailsModel(OrderDetailsEntity entity) {
     return OrderDetailsModel(
       driver: DriverDto(

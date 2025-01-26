@@ -9,7 +9,7 @@ class AddOrderDetailsCase {
 
   AddOrderDetailsCase(this.repository);
 
-  Future<DataResult<void>> call(OrderDetailsEntity orderDetails) async {
+  Future<DataResult<void>> call({required OrderDetailsEntity orderDetails}) async {
     return await repository.addOrderDetails(orderDetails: orderDetails);
   }
 }
