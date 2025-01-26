@@ -45,4 +45,3 @@ firebase.json
 android/app/google-services.json
 android/app/google-services.json.base64
 .env.firebase
-/lib/core/services/firebase_notification/firebase_server_token.dart

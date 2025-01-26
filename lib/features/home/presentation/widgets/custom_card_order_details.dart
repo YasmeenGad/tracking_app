@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flowery_delivery/core/services/firebase_notification/notification_helper.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_card_user_details.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_status_button.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,20 @@ import '../../../../core/styles/fonts/my_fonts.dart';
 import '../../../../core/utils/widgets/spacing.dart';
 import '../../domain/entities/response/pending_order_response_entity.dart';
 
-class CustomCardOrderDetails extends StatelessWidget {
+class CustomCardOrderDetails extends StatefulWidget {
   const CustomCardOrderDetails({
     super.key,
-    required this.order,
+    required this.order, required this.onRejectPressed,
   });
 
   final PendingOrderResponseEntityOrders order;
+  final VoidCallback onRejectPressed;
 
+  @override
+  State<CustomCardOrderDetails> createState() => _CustomCardOrderDetailsState();
+}
+
+class _CustomCardOrderDetailsState extends State<CustomCardOrderDetails> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -38,9 +45,9 @@ class CustomCardOrderDetails extends StatelessWidget {
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
             CustomCardUserDetails(
-                title: order.store?.name ?? '',
-                subtitle: order.store?.address ?? '',
-                image: order.store?.image ?? ''),
+                title: widget.order.store?.name ?? '',
+                subtitle: widget.order.store?.address ?? '',
+                image: widget.order.store?.image ?? ''),
             verticalSpacing(16.h),
             AutoSizeText(
               "Delivery Address",
@@ -48,22 +55,28 @@ class CustomCardOrderDetails extends StatelessWidget {
             ),
             CustomCardUserDetails(
                 title:
-                    '${order.user?.firstName ?? ''} ${order.user?.lastName ?? ''}',
-                subtitle: order.user?.email ?? '',
-                image: order.user?.photo ?? ''),
+                    '${widget.order.user?.firstName ?? ''} ${widget.order.user?.lastName ?? ''}',
+                subtitle: widget.order.user?.email ?? '',
+                image: widget.order.user?.photo ?? ''),
             verticalSpacing(16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AutoSizeText("EGP ${order.totalPrice.toString()}",
+                AutoSizeText("EGP ${widget.order.totalPrice.toString()}",
                     style: MyFonts.styleSemiBold600_14
                         .copyWith(color: MyColors.blackBase)),
-                CustomStatusButton(statusTxt: 'Reject'),
+                CustomStatusButton(statusTxt: 'Reject',  onPressed:() => widget.onRejectPressed,),
                 CustomStatusButton(
                   statusTxt: 'Accept',
                   borderClr: Colors.transparent,
                   textColor: MyColors.white,
-                  containerClr: MyColors.baseColor,
+                  containerClr: MyColors.baseColor,onPressed: () {
+                    NotificationHelper().sendTopicNotification(
+                      title: 'Order Accepted',
+                      body: 'Your order has been accepted by the store',
+                      topic: widget.order.id,
+                    );
+                },
                 ),
               ],
             )

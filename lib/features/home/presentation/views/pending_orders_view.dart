@@ -43,9 +43,12 @@ class PendingOrdersView extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.response.orders!.length ,
+                    itemCount: state.response.orders!.length,
                     itemBuilder: (context, index) {
-                      if (index == context.read<PendingOrderViewModelCubit>().totalItems &&
+                      if (index ==
+                              context
+                                  .read<PendingOrderViewModelCubit>()
+                                  .totalItems &&
                           state is PendingOrderViewModelLoading) {
                         return Center(
                           child: SizedBox(height: 130.h, child: AppLoader()),
@@ -54,12 +57,15 @@ class PendingOrdersView extends StatelessWidget {
                       return FadeInUp(
                         duration: const Duration(milliseconds: 1000),
                         child: CustomCardOrderDetails(
-                            order: state.response.orders![index]!),
+                          order: state.response.orders![index]!,
+                          onRejectPressed: () {
+                            state.response.orders!.removeAt(index);
+                          },
+                        ),
                       );
                     },
                   ),
                 ),
-
               ],
             );
           } else if (state is PendingOrderViewModelError) {
