@@ -72,4 +72,9 @@ abstract class ApiManager {
 
   @GET(ApiConstants.getPendingOrders)
   Future<PendingOrderResponseDto> getPendingOrders(@Query("limit") int limit);
+
+  @PUT("${ApiConstants.startOrder}{id}")
+  Future<void> startOrder(
+      @Path("id") String id);
+
 }

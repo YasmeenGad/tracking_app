@@ -7,8 +7,8 @@ import 'package:flowery_delivery/features/order_details/domain/entities/order_de
 import 'package:flowery_delivery/features/order_details/domain/use_cases/add_order_details_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/get_order_by_order_id_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/update_order_status.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
+
 import 'order_details_actions.dart';
 
 part 'order_details_view_model_state.dart';
@@ -28,8 +28,7 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     switch (action) {
       case AddOrderDetails():
         _addOrderDetails(action);
-      case AcceptOrder():
-        throw UnimplementedError();
+
       case GetOrderDetails():
         _getOrderDetails(action);
       case UpdateOrderStatus():

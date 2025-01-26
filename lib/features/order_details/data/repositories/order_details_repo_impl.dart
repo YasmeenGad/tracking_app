@@ -25,4 +25,9 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   Future<DataResult<OrderDetailsEntity>> updateOrderStatus({required String userId ,required String orderId, required String status}) {
     return _dataSource.updateOrderStatus(userId: userId, orderId: orderId, status: status);
   }
+
+  @override
+  Future<DataResult<void>> statOrder({required String orderId}) {
+    return _dataSource.statOrder(orderId: orderId);
+  }
 }

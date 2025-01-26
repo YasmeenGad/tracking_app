@@ -17,4 +17,5 @@ class ApiConstants {
   static const String getLoggedUserData = "api/v1/drivers/profile-data";
   static const String uploadPhoto = "api/v1/drivers/upload-photo";
   static const String getPendingOrders = "api/v1/orders/pending-orders/";
+  static const String startOrder = "api/v1/orders/start/";
 }

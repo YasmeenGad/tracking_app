@@ -60,6 +60,14 @@ import '../features/order_details/data/repositories/order_details_repo_impl.dart
     as _i962;
 import '../features/order_details/domain/repositories/contract/order_details_repo.dart'
     as _i439;
+import '../features/order_details/domain/use_cases/add_order_details_case.dart'
+    as _i811;
+import '../features/order_details/domain/use_cases/get_order_by_order_id_case.dart'
+    as _i341;
+import '../features/order_details/domain/use_cases/update_order_status.dart'
+    as _i182;
+import '../features/order_details/presentation/viewModel/order_details_view_model_cubit.dart'
+    as _i42;
 import '../features/profile/data/data_sources/contracts/profile_online_data_source.dart'
     as _i46;
 import '../features/profile/data/data_sources/impl/profile_online_data_source_impl.dart'
@@ -96,6 +104,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i345.OfflineDataSource>(
         () => _i1036.OfflineDataSourceImplementation());
     gh.singleton<_i282.ApiManager>(() => _i282.ApiManager(gh<_i361.Dio>()));
+    gh.factory<_i722.OrderDetailsOnlineDataSource>(
+        () => _i266.OrderDetailsOnlineDataSourceImpl(
+              gh<_i357.FireStoreService>(),
+              gh<_i282.ApiManager>(),
+            ));
     gh.factory<_i46.ProfileOnlineDataSource>(
         () => _i74.ProfileOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i969.PendingOrdersOnlineDataSource>(
@@ -104,8 +117,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
-    gh.factory<_i722.OrderDetailsOnlineDataSource>(() =>
-        _i266.OrderDetailsOnlineDataSourceImpl(gh<_i357.FireStoreService>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
     gh.factory<_i439.OrderDetailsRepo>(() =>
@@ -114,6 +125,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i496.LoginUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i853.SignUpUseCase>(
         () => _i853.SignUpUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i341.GetOrderByOrderIdCase>(
+        () => _i341.GetOrderByOrderIdCase(gh<_i439.OrderDetailsRepo>()));
+    gh.factory<_i182.UpdateOrderStatusCase>(
+        () => _i182.UpdateOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i43.PendingOrdersRepo>(() =>
         _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(
@@ -128,6 +143,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i690.LoginViewModel(gh<_i496.LoginUseCase>()));
     gh.factory<_i804.ProfileUseCase>(
         () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
+    gh.factory<_i811.AddOrderDetailsCase>(
+        () => _i811.AddOrderDetailsCase(gh<_i439.OrderDetailsRepo>()));
+    gh.factory<_i42.OrderDetailsViewModelCubit>(
+        () => _i42.OrderDetailsViewModelCubit(
+              gh<_i811.AddOrderDetailsCase>(),
+              gh<_i341.GetOrderByOrderIdCase>(),
+              gh<_i182.UpdateOrderStatusCase>(),
+            ));
     gh.factory<_i638.EditProfileCubit>(() => _i638.EditProfileCubit(
           gh<_i804.ProfileUseCase>(),
           gh<_i345.OfflineDataSource>(),

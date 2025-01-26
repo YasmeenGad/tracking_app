@@ -376,4 +376,14 @@ class MockApiManager extends _i1.Mock implements _i13.ApiManager {
           ),
         )),
       ) as _i14.Future<_i12.PendingOrderResponseDto>);
+
+  @override
+  _i14.Future<void> startOrder(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #startOrder,
+          [id],
+        ),
+        returnValue: _i14.Future<void>.value(),
+        returnValueForMissingStub: _i14.Future<void>.value(),
+      ) as _i14.Future<void>);
 }

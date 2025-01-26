@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flowery_delivery/core/networking/api/api_manager.dart';
 import 'package:flowery_delivery/core/networking/api_execute.dart';
 import 'package:flowery_delivery/core/networking/common/api_result.dart';
 import 'package:flowery_delivery/core/services/firebase_helper/fire_store_helper.dart';
@@ -12,9 +13,10 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: OrderDetailsOnlineDataSource)
 class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   final FireStoreService  _fireService;
+  final ApiManager _apiManager;
 
   @factoryMethod
-  OrderDetailsOnlineDataSourceImpl(this._fireService);
+  OrderDetailsOnlineDataSourceImpl(this._fireService, this._apiManager);
 
   @override
   Future<DataResult<void>> addOrderDetails(
@@ -74,6 +76,13 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
           orders: OrderData(state: status),
         );
       });
+    });
+  }
+
+  @override
+  Future<DataResult<void>> statOrder({required String orderId}) {
+    return executeApi(() async {
+      return await _apiManager.startOrder(orderId);
     });
   }
 }
