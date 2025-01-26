@@ -71,5 +71,5 @@ abstract class ApiManager {
       @Body() ChangePasswordRequestDto request);
 
   @GET(ApiConstants.getPendingOrders)
-  Future<PendingOrderResponseDto> getPendingOrders();
+  Future<PendingOrderResponseDto> getPendingOrders(@Query("limit") int limit);
 }

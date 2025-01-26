@@ -19,49 +19,73 @@ class PendingOrdersView extends StatelessWidget {
       child:
           BlocBuilder<PendingOrderViewModelCubit, PendingOrderViewModelState>(
         builder: (context, state) {
-          switch (state) {
-            case PendingOrderViewModelLoading():
-              return AppLoader();
-            case PendingOrderViewModelLoaded():
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: FadeInDown(
-                      duration: const Duration(milliseconds: 500),
-                      child: const CustomTextHeader(),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: FadeIn(
-                      duration: const Duration(milliseconds: 400),
-                      child: verticalSpacing(29.h),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Column(
-                      spacing: 24.h,
-                      children: state.response.orders!
-                          .map((order) => FadeInUp(
-                                duration: const Duration(milliseconds: 1000),
-                                child: CustomCardOrderDetails(order: order!),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                ],
-              );
-            case PendingOrderViewModelError():
-              return Center(
-                child: FadeIn(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
-                    state.errorMessage.error.toString(),
-                    style: TextStyle(color: Colors.red),
+          if (state is PendingOrderViewModelLoading &&
+              context.read<PendingOrderViewModelCubit>().limit == 10) {
+            return AppLoader();
+          } else if (state is PendingOrderViewModelLoaded) {
+            return CustomScrollView(
+              controller:
+                  context.read<PendingOrderViewModelCubit>().scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: FadeInDown(
+                    duration: const Duration(milliseconds: 500),
+                    child: const CustomTextHeader(),
                   ),
                 ),
-              );
-            default:
-              return Container();
+                SliverToBoxAdapter(
+                  child: FadeIn(
+                    duration: const Duration(milliseconds: 400),
+                    child: verticalSpacing(29.h),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.response.orders!.length ,
+                    itemBuilder: (context, index) {
+                      if (index == context.read<PendingOrderViewModelCubit>().totalItems &&
+                          state is PendingOrderViewModelLoading) {
+                        return Center(
+                          child: SizedBox(height: 130.h, child: AppLoader()),
+                        );
+                      }
+                      return FadeInUp(
+                        duration: const Duration(milliseconds: 1000),
+                        child: CustomCardOrderDetails(
+                            order: state.response.orders![index]!),
+                      );
+                    },
+                  ),
+                ),
+
+              ],
+            );
+          } else if (state is PendingOrderViewModelError) {
+            return Center(
+              child: FadeIn(
+                duration: const Duration(milliseconds: 300),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        state.errorMessage.error.toString(),
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<PendingOrderViewModelCubit>().loadMore();
+                        },
+                        child: Text('Retry'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return const SizedBox();
           }
         },
       ),

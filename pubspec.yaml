@@ -80,6 +80,11 @@ dependencies:
   firebase_core: ^3.9.0
   firebase_crashlytics: ^4.2.0
   firebase_analytics: ^11.3.6
+  cloud_firestore: ^5.6.2
+  googleapis: ^13.2.0
+  googleapis_auth: ^1.6.0
+  firebase_messaging:
+  flutter_local_notifications:
 
 dev_dependencies:
   flutter_test:

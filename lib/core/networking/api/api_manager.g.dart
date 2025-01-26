@@ -373,9 +373,9 @@ class _ApiManager implements ApiManager {
   }
 
   @override
-  Future<PendingOrderResponseDto> getPendingOrders() async {
+  Future<PendingOrderResponseDto> getPendingOrders(int limit) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'limit': limit};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<PendingOrderResponseDto>(Options(
@@ -385,7 +385,7 @@ class _ApiManager implements ApiManager {
     )
         .compose(
           _dio.options,
-          'api/v1/orders/pending-orders',
+          'api/v1/orders/pending-orders/',
           queryParameters: queryParameters,
           data: _data,
         )

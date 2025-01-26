@@ -17,9 +17,9 @@ class PendingOrdersOnlineDataSourceImpl
   PendingOrdersOnlineDataSourceImpl(this._apiManager);
 
   @override
-  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders() {
+  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders(  {required int limit }) {
     return executeApi(() async {
-      var response = await _apiManager.getPendingOrders();
+      var response = await _apiManager.getPendingOrders(limit );
       return PendingOrdersMapper.toPendingOrderResponseEntity(response);
     });
   }

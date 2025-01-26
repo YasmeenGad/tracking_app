@@ -3,5 +3,5 @@ import 'package:flowery_delivery/features/home/domain/entities/response/pending_
 import '../../../../../../core/networking/common/api_result.dart';
 
 abstract class PendingOrdersOnlineDataSource {
-  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders();
+  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders( {required int limit });
 }

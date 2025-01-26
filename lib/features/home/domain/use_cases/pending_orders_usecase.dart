@@ -11,6 +11,6 @@ class PendingOrderUseCase {
   @factoryMethod
   PendingOrderUseCase(this._repo);
 
-  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders() async =>
-      await _repo.getPendingOrders();
+  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders( {required int limit }) async =>
+      await _repo.getPendingOrders(limit: limit);
 }

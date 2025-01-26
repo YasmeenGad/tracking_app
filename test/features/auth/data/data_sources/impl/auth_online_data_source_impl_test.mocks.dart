@@ -361,18 +361,18 @@ class MockApiManager extends _i1.Mock implements _i13.ApiManager {
       ) as _i14.Future<_i11.ChangePasswordResponseDto>);
 
   @override
-  _i14.Future<_i12.PendingOrderResponseDto> getPendingOrders() =>
+  _i14.Future<_i12.PendingOrderResponseDto> getPendingOrders(int? limit) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPendingOrders,
-          [],
+          [limit],
         ),
         returnValue: _i14.Future<_i12.PendingOrderResponseDto>.value(
             _FakePendingOrderResponseDto_10(
           this,
           Invocation.method(
             #getPendingOrders,
-            [],
+            [limit],
           ),
         )),
       ) as _i14.Future<_i12.PendingOrderResponseDto>);

@@ -17,6 +17,7 @@ import '../core/app_cubit/app_cubit.dart' as _i693;
 import '../core/networking/api/api_manager.dart' as _i282;
 import '../core/networking/common/regestet_context_module.dart' as _i125;
 import '../core/networking/network_factory.dart' as _i377;
+import '../core/services/firebase_helper/fire_store_helper.dart' as _i357;
 import '../features/auth/data/data_sources/contracts/auth_online_data_source.dart'
     as _i901;
 import '../features/auth/data/data_sources/contracts/offline_data_source.dart'
@@ -51,6 +52,14 @@ import '../features/home/domain/contracts/pending_orders_repo.dart' as _i43;
 import '../features/home/domain/use_cases/pending_orders_usecase.dart' as _i15;
 import '../features/home/presentation/viewModel/pending_order_view_model_cubit.dart'
     as _i317;
+import '../features/order_details/data/data_sources/contracts/order_details_online_data_source.dart'
+    as _i722;
+import '../features/order_details/data/data_sources/impl/order_details_online_data_source_impl.dart'
+    as _i266;
+import '../features/order_details/data/repositories/order_details_repo_impl.dart'
+    as _i962;
+import '../features/order_details/domain/repositories/contract/order_details_repo.dart'
+    as _i439;
 import '../features/profile/data/data_sources/contracts/profile_online_data_source.dart'
     as _i46;
 import '../features/profile/data/data_sources/impl/profile_online_data_source_impl.dart'
@@ -95,8 +104,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
+    gh.factory<_i722.OrderDetailsOnlineDataSource>(() =>
+        _i266.OrderDetailsOnlineDataSourceImpl(gh<_i357.FireStoreService>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
+    gh.factory<_i439.OrderDetailsRepo>(() =>
+        _i962.OrderDetailsRepoImpl(gh<_i722.OrderDetailsOnlineDataSource>()));
     gh.factory<_i496.LoginUseCase>(
         () => _i496.LoginUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i853.SignUpUseCase>(
