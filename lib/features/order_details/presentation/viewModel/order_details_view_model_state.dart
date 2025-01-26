@@ -1,6 +1,5 @@
 part of 'order_details_view_model_cubit.dart';
 
-@immutable
 sealed class OrderDetailsViewModelState {}
 
 final class OrderDetailsViewModelInitial extends OrderDetailsViewModelState {}
