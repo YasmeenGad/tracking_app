@@ -9,7 +9,7 @@ class OrderDetailsEntity extends Equatable {
   const OrderDetailsEntity({this.driver, this.orders});
 
   @override
-  // TODO: implement props
+  
   List<Object?> get props => [driver, orders];
 }
 
@@ -42,7 +42,7 @@ class OrderData extends Equatable {
       this.store});
 
   @override
-  // TODO: implement props
+  
   List<Object?> get props => [
         id,
         user,
@@ -78,7 +78,7 @@ class UserData extends Equatable {
       this.location});
 
   @override
-  // TODO: implement props
+  
   List<Object?> get props =>
       [id, firstName, lastName, email, gender, phone, location];
 }
@@ -92,7 +92,7 @@ class OrderItems extends Equatable {
   const OrderItems({this.product, this.price, this.quantity, this.id});
 
   @override
-  // TODO: implement props
+  
   List<Object?> get props => [product, price, quantity, id];
 }
 
@@ -131,7 +131,7 @@ class Product extends Equatable {
       this.sold});
 
   @override
-  // TODO: implement props
+  
   List<Object?> get props => [
         id,
         title,
@@ -161,6 +161,6 @@ class Store extends Equatable {
   const Store({this.name, this.image, this.address, this.phoneNumber, this.latLong});
 
   @override
-  // TODO: implement props
+  
   List<Object?> get props => [name, image, address, phoneNumber, latLong];
 }
