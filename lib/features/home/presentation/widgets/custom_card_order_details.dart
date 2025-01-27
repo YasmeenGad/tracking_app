@@ -66,11 +66,6 @@ class CustomCardOrderDetails extends StatelessWidget {
                 AutoSizeText("EGP ${order.totalPrice.toString()}",
                     style: MyFonts.styleSemiBold600_14
                         .copyWith(color: MyColors.blackBase)),
-                CustomStatusButton(statusTxt: 'Reject',
-                  onPressed: () {
-
-                  },),
-
                 CustomStatusButton(
                     statusTxt: context.translate(LangKeys.reject), onPressed: () {  },),
                 CustomStatusButton(
