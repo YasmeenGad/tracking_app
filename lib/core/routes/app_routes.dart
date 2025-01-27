@@ -1,7 +1,9 @@
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
+import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
+import 'package:flowery_delivery/features/order_details/presentation/views/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,6 +42,7 @@ class AppRoutes {
   static const String vehicleView = "vehicleView";
   static const String pendingOrdersView = "pendingOrdersView";
   static const String resetPasswordProfileView = "resetPasswordProfileView";
+  static const String orderDetailsView = "orderDetailsView";
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
@@ -125,6 +128,8 @@ class AppRoutes {
           ],
           child:  PendingOrdersView(),
         ));
+        case AppRoutes.orderDetailsView:
+        return BaseRoute(page: OrderDetailsScreen(order: args as OrderDetailsEntity));
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
     }

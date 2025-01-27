@@ -14,6 +14,7 @@ import '../../../../core/styles/colors/my_colors.dart';
 import '../../../../core/styles/fonts/my_fonts.dart';
 import '../../../../core/utils/widgets/spacing.dart';
 import '../../domain/entities/response/pending_order_response_entity.dart';
+import 'home_bloc_listener.dart';
 
 class CustomCardOrderDetails extends StatelessWidget {
   const CustomCardOrderDetails({
@@ -79,18 +80,13 @@ class CustomCardOrderDetails extends StatelessWidget {
                           order: order,
                           driver: driver,
                         ),
-                      ).whenComplete(() {
-                        getIt.get<OrderDetailsViewModelCubit>().doAction(
-                            GetOrderDetails(
-                              orderId: order.id!,
-                              userId: order.user!.id!,
-                            ));
-                      },);
+                      );
 
                     }
 
     ,
                 ),
+                HomeBlocListener(order: order),
               ],
             )
           ],

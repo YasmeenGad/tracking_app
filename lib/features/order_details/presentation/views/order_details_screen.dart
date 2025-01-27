@@ -1,3 +1,4 @@
+import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/address_section.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/bottom_action_button.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/order_details_list.dart';
@@ -6,7 +7,8 @@ import 'package:flowery_delivery/features/order_details/presentation/widgets/ord
 import 'package:flutter/material.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key});
+  final OrderDetailsEntity order;
+  const OrderDetailsScreen({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class OrderDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            OrderStatusCard(status: 'Accepted', orderId: '#123456', date: 'Wed, 03 Sep 2024, 11:00 AM'),
+            OrderStatusCard(status: order.orders!.state!, orderId: order.orders!.orderNumber!, date: 'Wed, 03 Sep 2024, 11:00 AM'),
             SizedBox(height: 20),
             AddressSection(title: 'Pickup address', name: 'Flowery store', address: '20th st, Sheikh Zayed, Giza', image: 'https://via.placeholder.com/50'),
             SizedBox(height: 16),

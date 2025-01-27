@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class OrderStatusCard extends StatelessWidget {
   final String status, orderId, date;
-  const OrderStatusCard({super.key, required this.status, required this.orderId, required this.date});
+  const    OrderStatusCard({super.key, required this.status, required this.orderId, required this.date});
 
   @override
   Widget build(BuildContext context) {
