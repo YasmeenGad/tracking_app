@@ -8,39 +8,38 @@ class OrderDetailsMapper {
   static OrderDetailsEntity toOrderDetailsEntity(OrderDetailsModel model) {
     return OrderDetailsEntity(
       driver: DriverEntity(
-        id: model.driver?.id,
-        country: model.driver?.country,
-        firstName: model.driver?.firstName,
-        lastName: model.driver?.lastName,
-        vehicleType: model.driver?.vehicleType,
-        vehicleNumber: model.driver?.vehicleNumber,
-        vehicleLicense: model.driver?.vehicleLicense,
-        nid: model.driver?.nID,
-        nIDImg: model.driver?.nIDImg,
-        email: model.driver?.email,
-        gender: model.driver?.gender,
-        phone: model.driver?.phone,
-        photo: model.driver?.photo,
-        createdAt: model.driver?.createdAt,
+        id: model.driver!.id,
+        country: model.driver!.country,
+        firstName: model.driver!.firstName,
+        lastName: model.driver!.lastName,
+        vehicleType: model.driver!.vehicleType,
+        vehicleNumber: model.driver!.vehicleNumber,
+        vehicleLicense: model.driver!.vehicleLicense,
+        nid: model.driver!.nID,
+        nIDImg: model.driver!.nIDImg,
+        email: model.driver!.email,
+        gender: model.driver!.gender,
+        phone: model.driver!.phone,
+        photo: model.driver!.photo,
+        createdAt: model.driver!.createdAt,
       ),
       orders: OrderData(
-        id: model.orders?.id,
+        id: model.orders!.id,
         user: UserData(
-          id: model.orders?.user?.id,
-          firstName: model.orders?.user?.firstName,
-          lastName: model.orders?.user?.lastName,
-          email: model.orders?.user?.email,
-          gender: model.orders?.user?.gender,
-          phone: model.orders?.user?.phone,
+          id: model.orders!.user!.id,
+          firstName: model.orders!.user!.firstName,
+          lastName: model.orders!.user!.lastName,
+          email: model.orders!.user!.email,
+          gender: model.orders!.user!.gender,
+          phone: model.orders!.user!.phone,
           location: Location(
-              latitude: model.orders?.user!.location!.latitude ?? 0.0,
-              longitude: model.orders?.user!.location!.longitude ?? 0.0,
+              latitude: model.orders!.user!.location!.latitude ?? 0.0,
+              longitude: model.orders!.user!.location!.longitude ?? 0.0,
               timestamp: DateTime.now()),
         ),
-        orderItems: model.orders?.orderItems?.map((item) {
+        orderItems: model.orders!.orderItems!.map((item) {
           return OrderItems(
-            product: item?.product != null
-                ? Product(
+            product:  Product(
                     id: item!.product!.id,
                     title: item.product!.title,
                     slug: item.product!.slug,
@@ -57,29 +56,27 @@ class OrderDetailsMapper {
                     discount: item.product!.discount,
                     sold: item.product!.sold,
                   )
-                : null,
-            price: item?.price,
-            quantity: item?.quantity,
-            id: item?.id,
+                ,
+            price: item.price,
+            quantity: item.quantity,
+            id: item.id,
           );
         }).toList(),
-        totalPrice: model.orders?.totalPrice,
-        paymentType: model.orders?.paymentType,
-        isPaid: model.orders?.isPaid,
-        isDelivered: model.orders?.isDelivered,
-        state: model.orders?.state,
-        createdAt: model.orders?.createdAt,
-        updatedAt: model.orders?.updatedAt,
-        orderNumber: model.orders?.orderNumber,
-        store: model.orders?.store != null
-            ? Store(
-                name: model.orders?.store!.name,
-                image: model.orders?.store!.image,
-                address: model.orders?.store!.address,
-                phoneNumber: model.orders?.store!.phoneNumber,
-                latLong: model.orders?.store!.latLong,
-              )
-            : null,
+        totalPrice: model.orders!.totalPrice,
+        paymentType: model.orders!.paymentType,
+        isPaid: model.orders!.isPaid,
+        isDelivered: model.orders!.isDelivered,
+        state: model.orders!.state,
+        createdAt: model.orders!.createdAt,
+        updatedAt: model.orders!.updatedAt,
+        orderNumber: model.orders!.orderNumber,
+        store:  Store(
+                name: model.orders!.store!.name,
+                image: model.orders!.store!.image,
+                address: model.orders!.store!.address,
+                phoneNumber: model.orders!.store!.phoneNumber,
+                latLong: model.orders!.store!.latLong,
+              ),
       ),
     );
   }
@@ -87,17 +84,16 @@ class OrderDetailsMapper {
     return  OrderData(
       id: orders.id,
       user: UserData(
-        id: orders.user?.id,
-        firstName: orders.user?.firstName,
-        lastName: orders.user?.lastName,
-        email: orders.user?.email,
-        gender: orders.user?.gender,
-        phone: orders.user?.phone,
+        id: orders.user!.id,
+        firstName: orders.user!.firstName,
+        lastName: orders.user!.lastName,
+        email: orders.user!.email,
+        gender: orders.user!.gender,
+        phone: orders.user!.phone,
       ),
-      orderItems: orders.orderItems?.map((item) {
+      orderItems: orders.orderItems!.map((item) {
         return OrderItems(
-          product: item?.product != null
-              ? Product(
+          product: Product(
             id: item!.product!.id,
             title: item.product!.title,
             slug: item.product!.slug,
@@ -114,10 +110,10 @@ class OrderDetailsMapper {
             discount: item.product!.discount,
             sold: item.product!.sold,
           )
-              : null,
-          price: item?.price,
-          quantity: item?.quantity,
-          id: item?.id,
+             ,
+          price: item.price,
+          quantity: item.quantity,
+          id: item.id,
         );
       }).toList(),
       totalPrice: orders.totalPrice,
@@ -128,57 +124,53 @@ class OrderDetailsMapper {
       createdAt: orders.createdAt,
       updatedAt: orders.updatedAt,
       orderNumber: orders.orderNumber,
-      store: orders.store != null
-          ? Store(
+      store:  Store(
         name: orders.store!.name,
         image: orders.store!.image,
         address: orders.store!.address,
         phoneNumber: orders.store!.phoneNumber,
         latLong: orders.store!.latLong,
-      )
-          : null,
+      ),
     );
   }
   static OrderDetailsModel toOrderDetailsModel(OrderDetailsEntity entity) {
     return OrderDetailsModel(
       driver: DriverDto(
-        id: entity.driver?.id,
-        country: entity.driver?.country,
-        firstName: entity.driver?.firstName,
-        lastName: entity.driver?.lastName,
-        vehicleType: entity.driver?.vehicleType,
-        vehicleNumber: entity.driver?.vehicleNumber,
-        vehicleLicense: entity.driver?.vehicleLicense,
-        nID: entity.driver?.nid,
-        nIDImg: entity.driver?.nIDImg,
-        email: entity.driver?.email,
-        gender: entity.driver?.gender,
-        phone: entity.driver?.phone,
-        photo: entity.driver?.photo,
-        createdAt: entity.driver?.createdAt,
+        id: entity.driver!.id,
+        country: entity.driver!.country,
+        firstName: entity.driver!.firstName,
+        lastName: entity.driver!.lastName,
+        vehicleType: entity.driver!.vehicleType,
+        vehicleNumber: entity.driver!.vehicleNumber,
+        vehicleLicense: entity.driver!.vehicleLicense,
+        nID: entity.driver!.nid,
+        nIDImg: entity.driver!.nIDImg,
+        email: entity.driver!.email,
+        gender: entity.driver!.gender,
+        phone: entity.driver!.phone,
+        photo: entity.driver!.photo,
+        createdAt: entity.driver!.createdAt,
       ),
       orders: OrderDataModel(
-        id: entity.orders?.id,
-        user: entity.orders?.user != null
-            ? UserDataModel(
-                id: entity.orders?.user!.id,
-                firstName: entity.orders?.user!.firstName,
-                lastName: entity.orders?.user!.lastName,
-                email: entity.orders?.user!.email,
-                gender: entity.orders?.user!.gender,
-                phone: entity.orders?.user!.phone,
-                location: entity.orders?.user!.location != null
-                    ? LocationModel(
-                        latitude: entity.orders?.user!.location!.latitude,
-                        longitude: entity.orders?.user!.location!.longitude,
-                      )
-                    : null,
-              )
-            : null,
-        orderItems: entity.orders?.orderItems?.map((item) {
+        id: entity.orders!.id,
+        user: UserDataModel(
+                id: entity.orders!.user!.id,
+                firstName: entity.orders!.user!.firstName,
+                lastName: entity.orders!.user!.lastName,
+                email: entity.orders!.user!.email,
+                gender: entity.orders!.user!.gender,
+                phone: entity.orders!.user!.phone,
+                location: entity.orders!.user!.location !=null? LocationModel(
+                        latitude: entity.orders!.user!.location!.latitude,
+                        longitude: entity.orders!.user!.location!.longitude,
+                      ) : LocationModel(
+                        latitude: 0.0,
+                        longitude: 0.0,
+                ),
+              ),
+        orderItems: entity.orders!.orderItems!.map((item) {
           return OrderItemsModel(
-            product: item?.product != null
-                ? ProductModel(
+            product:  ProductModel(
                     id: item!.product!.id,
                     title: item.product!.title,
                     slug: item.product!.slug,
@@ -194,30 +186,28 @@ class OrderDetailsMapper {
                     updatedAt: item.product!.updatedAt,
                     discount: item.product!.discount,
                     sold: item.product!.sold,
-                  )
-                : null,
-            price: item?.price,
-            quantity: item?.quantity,
-            id: item?.id,
+                  ),
+            price: item.price,
+            quantity: item.quantity,
+            id: item.id,
           );
         }).toList(),
-        totalPrice: entity.orders?.totalPrice,
-        paymentType: entity.orders?.paymentType,
-        isPaid: entity.orders?.isPaid,
-        isDelivered: entity.orders?.isDelivered,
-        state: entity.orders?.state,
-        createdAt: entity.orders?.createdAt,
-        updatedAt: entity.orders?.updatedAt,
-        orderNumber: entity.orders?.orderNumber,
-        store: entity.orders?.store != null
-            ? StoreModel(
-                name: entity.orders?.store!.name,
-                image: entity.orders?.store!.image,
-                address: entity.orders?.store!.address,
-                phoneNumber: entity.orders?.store!.phoneNumber,
-                latLong: entity.orders?.store!.latLong,
+        totalPrice: entity.orders!.totalPrice,
+        paymentType: entity.orders!.paymentType,
+        isPaid: entity.orders!.isPaid,
+        isDelivered: entity.orders!.isDelivered,
+        state: entity.orders!.state,
+        createdAt: entity.orders!.createdAt,
+        updatedAt: entity.orders!.updatedAt,
+        orderNumber: entity.orders!.orderNumber,
+        store: StoreModel(
+                name: entity.orders!.store!.name,
+                image: entity.orders!.store!.image,
+                address: entity.orders!.store!.address,
+                phoneNumber: entity.orders!.store!.phoneNumber,
+                latLong: entity.orders!.store!.latLong,
               )
-            : null,
+           
       ),
     );
   }

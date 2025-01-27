@@ -12,13 +12,14 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
   await SharedPrefHelper().instantiatePreferences();
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
 
 await  dotenv.load(fileName: '.env.firebase');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  configureDependencies();
+
 
   // Pass all uncaught "fatal" errors from the framework to Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

@@ -172,15 +172,15 @@ Map<String, dynamic> _$LocationModelToJson(LocationModel instance) =>
     };
 
 DriverDto _$DriverDtoFromJson(Map<String, dynamic> json) => DriverDto(
-      id: json['_id'] as String?,
+      id: json['id'] as String?,
       country: json['country'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       vehicleType: json['vehicleType'] as String?,
       vehicleNumber: json['vehicleNumber'] as String?,
       vehicleLicense: json['vehicleLicense'] as String?,
-      nID: json['NID'] as String?,
-      nIDImg: json['NIDImg'] as String?,
+      nID: json['nID'] as String?,
+      nIDImg: json['nIDImg'] as String?,
       email: json['email'] as String?,
       gender: json['gender'] as String?,
       phone: json['phone'] as String?,
@@ -189,15 +189,15 @@ DriverDto _$DriverDtoFromJson(Map<String, dynamic> json) => DriverDto(
     );
 
 Map<String, dynamic> _$DriverDtoToJson(DriverDto instance) => <String, dynamic>{
-      '_id': instance.id,
+      'id': instance.id,
       'country': instance.country,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'vehicleType': instance.vehicleType,
       'vehicleNumber': instance.vehicleNumber,
       'vehicleLicense': instance.vehicleLicense,
-      'NID': instance.nID,
-      'NIDImg': instance.nIDImg,
+      'nID': instance.nID,
+      'nIDImg': instance.nIDImg,
       'email': instance.email,
       'gender': instance.gender,
       'phone': instance.phone,

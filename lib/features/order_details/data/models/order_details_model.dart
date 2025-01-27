@@ -149,33 +149,33 @@ class LocationModel {
 
 @JsonSerializable()
 class DriverDto {
-  @JsonKey(name: "_id")
+  // @JsonKey(name: "_id")
   final String? id;
-  @JsonKey(name: "country")
+  // @JsonKey(name: "country")
   final String? country;
-  @JsonKey(name: "firstName")
+  // @JsonKey(name: "firstName")
   final String? firstName;
-  @JsonKey(name: "lastName")
+  // @JsonKey(name: "lastName")
   final String? lastName;
-  @JsonKey(name: "vehicleType")
+  // @JsonKey(name: "vehicleType")
   final String? vehicleType;
-  @JsonKey(name: "vehicleNumber")
+  // @JsonKey(name: "vehicleNumber")
   final String? vehicleNumber;
-  @JsonKey(name: "vehicleLicense")
+  // @JsonKey(name: "vehicleLicense")
   final String? vehicleLicense;
-  @JsonKey(name: "NID")
+  // @JsonKey(name: "NID")
   final String? nID;
-  @JsonKey(name: "NIDImg")
+  // @JsonKey(name: "NIDImg")
   final String? nIDImg;
-  @JsonKey(name: "email")
+  // @JsonKey(name: "email")
   final String? email;
-  @JsonKey(name: "gender")
+  // @JsonKey(name: "gender")
   final String? gender;
-  @JsonKey(name: "phone")
+  // @JsonKey(name: "phone")
   final String? phone;
-  @JsonKey(name: "photo")
+  // @JsonKey(name: "photo")
   final String? photo;
-  @JsonKey(name: "createdAt")
+  // @JsonKey(name: "createdAt")
   final String? createdAt;
 
   DriverDto ({

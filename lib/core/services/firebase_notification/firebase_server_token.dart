@@ -3,7 +3,7 @@ import 'package:googleapis_auth/auth_io.dart';
 class FirebaseServerToken {
   static String firebaseMessagingScope =
       "https://www.googleapis.com/auth/firebase.messaging";
-
+static String accessToken = '';
   //? copy paste from downloaded file from
   //? https://console.firebase.google.com/project/shoply-6e93b/settings/serviceaccounts/adminsdk
   Future<String> getAccessToken() async {
@@ -26,7 +26,7 @@ class FirebaseServerToken {
     );
 
     // * Extract the access token from the credentials
-    final accessToken = client.credentials.accessToken.data;
+     accessToken = client.credentials.accessToken.data;
     return accessToken;
   }
 

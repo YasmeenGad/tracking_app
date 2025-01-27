@@ -13,6 +13,8 @@ import 'core/services/shared_preference/shared_pref_keys.dart';
 import 'core/services/shared_preference/shared_preference_helper.dart';
 import 'core/utils/screens/no_network_screen.dart';
 import 'di/di.dart';
+import 'features/profile/presentation/viewModel/profile_actions.dart';
+import 'features/profile/presentation/viewModel/profile_view_model_cubit.dart';
 
 class FloweryDelivery extends StatelessWidget {
   FloweryDelivery({super.key});
@@ -26,10 +28,17 @@ class FloweryDelivery extends StatelessWidget {
       valueListenable: ConnectivityController.instance.isConnected,
       builder: (context, value, child) {
         if (value) {
-          return BlocProvider(
-            create: (context) =>
-            getIt<AppCubit>()
-              ..getSavedLanguage(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                getIt<AppCubit>()
+                  ..getSavedLanguage(),
+              ),
+              BlocProvider<ProfileViewModelCubit>(
+                create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
+              ),
+            ],
             child: ScreenUtilInit(
                 child: ScreenUtilInit(
                   designSize: kIsWeb
@@ -54,8 +63,8 @@ class FloweryDelivery extends StatelessWidget {
                         debugShowCheckedModeBanner: false,
                         builder: (context, child) {
                           return Scaffold(
-                        backgroundColor: MyColors.white,
-                        body: Builder(
+                            backgroundColor: MyColors.white,
+                            body: Builder(
                               builder: (context) {
                                 ConnectivityController.instance.init();
                                 return child!;
@@ -83,8 +92,8 @@ class FloweryDelivery extends StatelessWidget {
 
 String _getInitialRoute() {
   return SharedPrefHelper().getString(key: SharedPrefKeys.tokenKey) != null
-      // ? AppRoutes.homeScreen
-      // : AppRoutes.onBoarding;
+  // ? AppRoutes.homeScreen
+  // : AppRoutes.onBoarding;
       ? AppRoutes.pendingOrdersView
       : AppRoutes.login;
 }

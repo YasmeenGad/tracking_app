@@ -10,7 +10,8 @@ class AddOrderDetailsCase {
   AddOrderDetailsCase(this.repository);
 
   Future<DataResult<void>> call({required OrderDetailsEntity orderDetails}) async {
-    await repository.statOrder(orderId: orderDetails.orders!.id!);
+    // await repository.statOrder(orderId: orderDetails.orders!.id!);
+    // check if order is already placed
     return await repository.addOrderDetails(orderDetails: orderDetails);
   }
 }

@@ -100,6 +100,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkFactory.providerInterceptor());
     gh.singleton<_i409.GlobalKey<_i409.NavigatorState>>(
         () => registerModule.navigatorKey);
+    gh.singleton<_i357.FireStoreService>(() => _i357.FireStoreService());
     gh.lazySingleton<_i361.Dio>(() => networkFactory.provideDio());
     gh.factory<_i345.OfflineDataSource>(
         () => _i1036.OfflineDataSourceImplementation());

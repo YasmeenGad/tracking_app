@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flowery_delivery/core/networking/api/api_manager.dart';
 import 'package:flowery_delivery/core/networking/api_execute.dart';
@@ -12,7 +14,7 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: OrderDetailsOnlineDataSource)
 class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
-  final FireStoreService  _fireService;
+  final FireStoreService _fireService;
   final ApiManager _apiManager;
 
   @factoryMethod
@@ -24,12 +26,13 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
     return executeApi(() async {
       final orderDetailsDto =
           OrderDetailsMapper.toOrderDetailsModel(orderDetails);
+      final orderDetailsJson = orderDetailsDto.toJson();
       return await _fireService.fireStore
           .collection(FireStoreRefKey.users)
           .doc(orderDetailsDto.orders!.user!.id!)
           .collection(FireStoreRefKey.orders)
           .doc(orderDetailsDto.orders!.id)
-          .set(orderDetailsDto.toJson());
+          .set(jsonDecode(jsonEncode(orderDetailsJson)));
     });
   }
 
@@ -57,7 +60,9 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
 
   @override
   Future<DataResult<OrderDetailsEntity>> updateOrderStatus(
-      {required String userId, required String orderId, required String status}) {
+      {required String userId,
+      required String orderId,
+      required String status}) {
     return executeApi(() async {
       if (Firebase.apps.isEmpty) {
         Firebase.initializeApp();

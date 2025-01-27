@@ -112,18 +112,18 @@ class AppRoutes {
         return BaseRoute(
             page: MultiBlocProvider(
           providers: [
+            BlocProvider<ProfileViewModelCubit>(
+              create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
+            ),
             BlocProvider<PendingOrderViewModelCubit>(
-              create: (context) => getIt.get<PendingOrderViewModelCubit>()
-                ..onAction(GetPendingOrders()),
+              create: (context) => getIt.get<PendingOrderViewModelCubit>()..onAction(GetPendingOrders()),
             ),
             BlocProvider<OrderDetailsViewModelCubit>(
               create: (context) => getIt.get<OrderDetailsViewModelCubit>(),
             ),
-            BlocProvider<ProfileViewModelCubit>(
-              create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
-            ),
+
           ],
-          child: const PendingOrdersView(),
+          child:  PendingOrdersView(),
         ));
       default:
         return BaseRoute(page: const PageUnderBuildScreen());

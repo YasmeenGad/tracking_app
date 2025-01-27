@@ -2,11 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:flowery_delivery/core/networking/common/api_result.dart';
 import 'package:flowery_delivery/core/networking/error/error_handler.dart';
 import 'package:flowery_delivery/core/networking/error/error_model.dart';
+import 'package:flowery_delivery/core/services/firebase_notification/notification_helper.dart';
 import 'package:flowery_delivery/features/order_details/data/mappers/order_details_mapper.dart';
 import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/add_order_details_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/get_order_by_order_id_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/update_order_status.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 import 'order_details_actions.dart';
@@ -24,13 +26,13 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
       this.getOrderByOrderIdCase, this.updateOrderStatusCase)
       : super(OrderDetailsViewModelInitial());
 
-  doAction(OrderDetailsActions action) {
+ Future<void> doAction(OrderDetailsActions action) async {
     switch (action) {
       case AddOrderDetails():
-        _addOrderDetails(action);
+     await   _addOrderDetails(action);
 
       case GetOrderDetails():
-        _getOrderDetails(action);
+      await  _getOrderDetails(action);
       case UpdateOrderStatus():
         _updateOrderStatus(action);
     }
@@ -44,7 +46,13 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     ));
     switch (result) {
       case Success<void>():
+        NotificationHelper().sendTopicNotification(
+          title: 'Order Accepted',
+          body: 'Your order has been accepted by the store',
+          topic: action.order.id,
+        );
         emit(AddOrderSuccess());
+
       case Fail<void>():
         emit(
             OrderDetailsViewModelError(ErrorHandler.handle(result.exception!)));
@@ -55,7 +63,9 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     final result = await getOrderByOrderIdCase(
         orderId: action.orderId, userId: action.userId);
     switch (result) {
+
       case Success<OrderDetailsEntity>():
+debugPrint(' order details ${result.data.orders}');
         emit(GetOrderDetailsSuccess(result.data));
       case Fail<OrderDetailsEntity>():
         emit(
