@@ -114,13 +114,13 @@ class NotificationHelper {
         },
       );
 
-      debugPrint('Authorization : Bearer $serverToken');
-      debugPrint(
-          'notificationBaseUrl ${dotenv.get('NOTIFICATION_BASE_URL')}');
+      // debugPrint('Authorization : Bearer $serverToken');
+      // debugPrint(
+      //     'notificationBaseUrl ${dotenv.get('NOTIFICATION_BASE_URL')}');
       debugPrint('Notification sent successfully : ${response.data}');
-
-      debugPrint(
-          'Error sending notification: ${response.statusCode} - ${response.data.error.message}');
+      //
+      // debugPrint(
+      //     'Error sending notification: ${response.statusCode} - ${response.data.error.message}');
     } catch (e) {
       debugPrint(' notification error : ${e.toString()} - ');
     }

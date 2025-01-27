@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flowery_delivery/di/di.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_card_user_details.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_status_button.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
 import 'package:flowery_delivery/features/profile/domain/entities/response/get_logged_user_driver_response_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/styles/colors/my_colors.dart';
@@ -75,16 +75,13 @@ class CustomCardOrderDetails extends StatelessWidget {
                   textColor: MyColors.white,
                   containerClr: MyColors.baseColor,
                   onPressed: () {
-
-                      debugPrint(
-                          'Driver: $driver');
-                      context.read<OrderDetailsViewModelCubit>().doAction(
+                      getIt.get<OrderDetailsViewModelCubit>().doAction(
                         AddOrderDetails(
                           order: order,
                           driver: driver,
                         ),
                       ).whenComplete(() {
-                        context.read<OrderDetailsViewModelCubit>().doAction(
+                        getIt.get<OrderDetailsViewModelCubit>().doAction(
                             GetOrderDetails(
                               orderId: order.id!,
                               userId: order.user!.id!,
