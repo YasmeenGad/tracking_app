@@ -72,7 +72,7 @@ class CustomCardOrderDetails extends StatelessWidget {
                   },),
 
                 CustomStatusButton(
-                    statusTxt: context.translate(LangKeys.reject)),
+                    statusTxt: context.translate(LangKeys.reject), onPressed: () {  },),
                 CustomStatusButton(
                   statusTxt: context.translate(LangKeys.accept),
                   borderClr: Colors.transparent,
