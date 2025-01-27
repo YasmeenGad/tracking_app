@@ -234,8 +234,11 @@
     "vehicle_number": "Vehicle Number",
     "ready_for_delivery": "Ready for delivery",
     "vehicle_info": "Vehicle Info",
-
     "ok": "Ok",
-    "apply_now": "Apply Now"
-
+    "apply_now": "Apply Now",
+    "flower_order": "Flower Order",
+    "pickup_address": "Pickup Address",
+    "reject": "Reject",
+    "accept": "Accept",
+    "flowery_rider": "Flowery Rider"
 }

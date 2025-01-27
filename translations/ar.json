@@ -260,11 +260,11 @@
     "vehicle_type": "نوع السيارة",
     "vehicle_number": "رقم السيارة",
     "ready_for_delivery": "جاهز للتوصيل",
-    "vehicle_info": "معلومات السيارة"
-    "ok": "حسنًا",
-    "apply_now": "قدم الان"
-
-
-
-
+    "vehicle_info": "معلومات السيارة",
+    "apply_now": "قدم الان",
+    "flower_order": "طلب الزهور",
+    "pickup_address": "عنوان التسليم",
+    "reject": "رفض",
+    "accept": "قبول",
+    "flowery_rider": "رائد الزهور"
 }

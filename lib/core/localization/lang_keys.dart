@@ -233,6 +233,9 @@ class LangKeys {
   static const String vehicleNumber = 'vehicle_number';
   static const String readyForDelivery =   "ready_for_delivery";
   static const  String vehicleInfo =   "vehicle_info";
-
-
+  static const String flowerOrder = "flower_order";
+  static const String pickupAddress = "pickup_address";
+  static const String reject = "reject";
+  static const String accept = "accept";
+  static const String floweryRider = "flowery_rider";
 }
