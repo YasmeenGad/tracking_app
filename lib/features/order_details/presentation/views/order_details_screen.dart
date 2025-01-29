@@ -1,3 +1,4 @@
+import 'package:flowery_delivery/core/services/firebase_notification/notification_helper.dart';
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/core/utils/widgets/base/app_loader.dart';
 import 'package:flowery_delivery/core/utils/widgets/buttons/carved_button.dart';
@@ -103,11 +104,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       userId: order.user!.id!,
                       orderId: order.id!,
                       status: orderViewModelCubit.orderStatus.action));
+                  await NotificationHelper().sendTopicNotification(
+                    title: orderViewModelCubit.orderStatus.notificationTitle,
+                    body: orderViewModelCubit.orderStatus.notificationBody,
+                    topic: order.id,
+                  );
                 },
               ),
             ),
           );
-
         }
       },
     );

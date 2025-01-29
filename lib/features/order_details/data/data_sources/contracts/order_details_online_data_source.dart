@@ -7,5 +7,6 @@ abstract class OrderDetailsOnlineDataSource {
   Future<DataResult<void>> addOrderDetails({required OrderDetailsEntity orderDetails});
   Stream<DataResult<OrderDetailsEntity>> getOrderByOrderId({required String userId, required String orderId});
   Future<DataResult<void>> updateOrderStatus({required String orderId,required String userId, required String status});
+  Future<DataResult<void>> updateOrder({required String orderId, required String state});
 
 }

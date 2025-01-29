@@ -30,6 +30,9 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     step: 1,
     name: "Arrived at Pickup Point",
     action:FireStoreRefKey.accepted,
+  notificationTitle:"📦 Order Accepted",
+  notificationBody:"Your order has been accepted by the store",
+
   );
   OrderDetailsEntity? orderDetailsEntity;
 
@@ -55,8 +58,8 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     switch (result) {
       case Success<void>():
         NotificationHelper().sendTopicNotification(
-          title: 'Order Accepted',
-          body: 'Your order has been accepted by the store',
+          title: orderStatus.notificationTitle,
+          body: orderStatus.notificationBody,
           topic: action.order.id,
         );
         emit(AddOrderSuccess());
@@ -99,46 +102,46 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
   }
 
   updateOrderStatus(OrderDetailsEntity orderDetailsEntity) {
-
     switch (orderDetailsEntity.orders!.state!) {
-      // case FireStoreRefKey.pending:
-      //   debugPrint(' order status name ${orderStatus.name}');
-      //
-      //   return orderStatus = (
-      //     step: 1,
-      //     name: "Arrived at Pickup Point",
-      //     action:FireStoreRefKey.accepted,
-      //   );
       case FireStoreRefKey.accepted:
         debugPrint(' order status name ${orderStatus.name}');
-         orderStatus = (
-          step: 2,
-          name: "Start Delivery",
-          action: FireStoreRefKey.picked,
+        orderStatus = (
+        step: 2,
+        name: "Start Delivery",
+        action: FireStoreRefKey.picked,
+        notificationTitle: "🚚 Delivery Started",
+        notificationBody: "Your order is on the way",
         );
 
       case FireStoreRefKey.picked:
-         orderStatus = (
-          step: 3,
-          name: "Arrived to The User",
-          action: FireStoreRefKey.outForDelivery,
+        orderStatus = (
+        step: 3,
+        name: "Arrived to The User",
+        action: FireStoreRefKey.outForDelivery,
+        notificationTitle: "🏠 Arrived to The User",
+        notificationBody: "Your order has arrived to the user",
         );
 
       case FireStoreRefKey.outForDelivery:
-         orderStatus = (
-          step: 4,
-          name: "Arrived at The Destination",
-          action:FireStoreRefKey.arrived,
+        orderStatus = (
+        step: 4,
+        name: "Arrived at The Destination",
+        action: FireStoreRefKey.arrived,
+        notificationTitle: "📍 Arrived at The Destination",
+        notificationBody: "Your order has arrived at the destination",
         );
+
       case FireStoreRefKey.arrived:
-         orderStatus = (
-          step: 5,
-          name: "Delivered",
-          action: FireStoreRefKey.delivered,
+        orderStatus = (
+        step: 5,
+        name: "Delivered",
+        action: FireStoreRefKey.delivered,
+        notificationTitle: "✅ Order Delivered",
+        notificationBody: "Your order has been delivered",
         );
     }
 
-emit( UpdateStatus());
+    emit(UpdateStatus());
   }
 }
 

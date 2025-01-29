@@ -386,4 +386,21 @@ class MockApiManager extends _i1.Mock implements _i13.ApiManager {
         returnValue: _i14.Future<void>.value(),
         returnValueForMissingStub: _i14.Future<void>.value(),
       ) as _i14.Future<void>);
+
+  @override
+  _i14.Future<void> updateOrder(
+    String? id,
+    String? state,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateOrder,
+          [
+            id,
+            state,
+          ],
+        ),
+        returnValue: _i14.Future<void>.value(),
+        returnValueForMissingStub: _i14.Future<void>.value(),
+      ) as _i14.Future<void>);
 }

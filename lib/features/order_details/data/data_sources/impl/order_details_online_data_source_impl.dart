@@ -66,20 +66,20 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
     }
   }
 
-  Map<String, dynamic> _convertToJson(Map<Object?, Object?> data) {
-    return data
-        .map((key, value) => MapEntry(key.toString(), _convertValue(value)));
-  }
-
-  dynamic _convertValue(dynamic value) {
-    if (value is Map<Object?, Object?>) {
-      return _convertToJson(value);
-    } else if (value is List) {
-      return value.map((item) => _convertValue(item)).toList();
-    } else {
-      return value;
-    }
-  }
+  // Map<String, dynamic> _convertToJson(Map<Object?, Object?> data) {
+  //   return data
+  //       .map((key, value) => MapEntry(key.toString(), _convertValue(value)));
+  // }
+  //
+  // dynamic _convertValue(dynamic value) {
+  //   if (value is Map<Object?, Object?>) {
+  //     return _convertToJson(value);
+  //   } else if (value is List) {
+  //     return value.map((item) => _convertValue(item)).toList();
+  //   } else {
+  //     return value;
+  //   }
+  // }
 
   @override
   Future<DataResult<void>> updateOrderStatus(
@@ -103,5 +103,10 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   @override
   Future<DataResult<void>> statOrder({required String orderId}) {
     return executeApi(() => _apiManager.startOrder(orderId));
+  }
+
+  @override
+  Future<DataResult<void>> updateOrder({required String orderId, required String state}) {
+    return executeApi(() => _apiManager.updateOrder(orderId, state));
   }
 }
