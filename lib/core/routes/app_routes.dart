@@ -1,7 +1,7 @@
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
-import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
+import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
 import 'package:flowery_delivery/features/order_details/presentation/views/order_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +129,12 @@ class AppRoutes {
           child:  PendingOrdersView(),
         ));
         case AppRoutes.orderDetailsView:
-        return BaseRoute(page: OrderDetailsScreen(order: args as OrderDetailsEntity));
+          final arguments = settings.arguments as Map<String, String>?;
+        return BaseRoute(page: BlocProvider(
+
+  create: (context) => getIt.get<OrderDetailsViewModelCubit>()..doAction(GetOrderDetails(orderId: arguments!['orderId']!, userId: arguments['userId']!)),
+  child: OrderDetailsScreen(),
+));
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
     }

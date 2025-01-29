@@ -66,6 +66,7 @@ class UserData extends Equatable {
   final String? email;
   final String? gender;
   final String? phone;
+  final String? photo;
   final Location? location;
 
   const UserData(
@@ -74,13 +75,14 @@ class UserData extends Equatable {
       this.lastName,
       this.email,
       this.gender,
+      this.photo,
       this.phone,
       this.location});
 
   @override
   
   List<Object?> get props =>
-      [id, firstName, lastName, email, gender, phone, location];
+      [id, firstName, lastName, email, gender, phone, location, photo];
 }
 
 class OrderItems extends Equatable {
@@ -102,7 +104,7 @@ class Product extends Equatable {
   final String? slug;
   final String? description;
   final String? imgCover;
-  final List<String?>? images;
+  final List<String>? images;
   final int? price;
   final int? priceAfterDiscount;
   final int? quantity;

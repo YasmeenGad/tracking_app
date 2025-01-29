@@ -8,9 +8,9 @@ class GetOrderByOrderIdCase {
 
   GetOrderByOrderIdCase(this._repository);
 
-  Future<DataResult<OrderDetailsEntity>> call(
+  Future<Stream<DataResult<OrderDetailsEntity>>> call(
       {required String userId, required String orderId}) async {
-    return await _repository.getOrderByOrderId(
+    return  _repository.getOrderByOrderId(
         userId: userId, orderId: orderId);
   }
 }

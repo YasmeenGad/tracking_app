@@ -43,7 +43,7 @@ dependencies:
   shared_preferences: ^2.3.4
   build_runner: ^2.4.14
   awesome_snackbar_content: ^0.1.4
-  connectivity_plus: ^6.1.2
+  connectivity_plus: ^6.1.1
   cached_network_image: ^3.4.1
   flutter_localization: ^0.3.0
   google_fonts: ^6.2.1
@@ -81,6 +81,7 @@ dependencies:
   firebase_crashlytics: ^4.2.0
   firebase_analytics: ^11.3.6
   cloud_firestore: ^5.6.2
+  firebase_database: ^11.3.1
   googleapis: ^13.2.0
   googleapis_auth: ^1.6.0
   firebase_messaging:

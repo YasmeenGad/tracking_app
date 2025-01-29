@@ -17,12 +17,12 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   }
 
   @override
-  Future<DataResult<OrderDetailsEntity>> getOrderByOrderId( { required String userId ,required String orderId}) {
+  Stream<DataResult<OrderDetailsEntity>> getOrderByOrderId( { required String userId ,required String orderId}) {
     return _dataSource.getOrderByOrderId(userId:  userId,orderId: orderId);
   }
 
   @override
-  Future<DataResult<OrderDetailsEntity>> updateOrderStatus({required String userId ,required String orderId, required String status}) {
+  Future<DataResult<void>> updateOrderStatus({required String userId ,required String orderId, required String status}) {
     return _dataSource.updateOrderStatus(userId: userId, orderId: orderId, status: status);
   }
 

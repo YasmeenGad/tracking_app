@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flowery_delivery/core/networking/api/api_manager.dart';
@@ -10,6 +10,7 @@ import 'package:flowery_delivery/features/order_details/data/data_sources/contra
 import 'package:flowery_delivery/features/order_details/data/mappers/order_details_mapper.dart';
 import 'package:flowery_delivery/features/order_details/data/models/order_details_model.dart';
 import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: OrderDetailsOnlineDataSource)
@@ -21,45 +22,67 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   OrderDetailsOnlineDataSourceImpl(this._fireService, this._apiManager);
 
   @override
-  Future<DataResult<void>> addOrderDetails(
-      {required OrderDetailsEntity orderDetails}) async {
+  Future<DataResult<void>> addOrderDetails({
+    required OrderDetailsEntity orderDetails,
+  }) async {
     return executeApi(() async {
       final orderDetailsDto =
           OrderDetailsMapper.toOrderDetailsModel(orderDetails);
       final orderDetailsJson = orderDetailsDto.toJson();
       return await _fireService.fireStore
           .collection(FireStoreRefKey.users)
-          .doc(orderDetailsDto.orders!.user!.id!)
+          .doc(orderDetailsDto.orders.user.id)
           .collection(FireStoreRefKey.orders)
-          .doc(orderDetailsDto.orders!.id)
-          .set(jsonDecode(jsonEncode(orderDetailsJson)));
+          .doc(orderDetailsDto.orders.id)
+          .set(orderDetailsJson);
     });
   }
 
   @override
-  Future<DataResult<OrderDetailsEntity>> getOrderByOrderId({
+  Stream<DataResult<OrderDetailsEntity>> getOrderByOrderId({
     required String userId,
     required String orderId,
-  }) async {
-    return executeApi(() async {
-      final snapshot = await _fireService.fireStore
+  }) {
+    try {
+      return _fireService.fireStore
           .collection(FireStoreRefKey.users)
           .doc(userId)
           .collection(FireStoreRefKey.orders)
           .doc(orderId)
-          .get();
+          .snapshots()
+          .map(
+        (event) {
+          debugPrint(' $event');
+          final orderDetailsDto =
+              OrderDetailsModel.fromJson(event.data() as Map<String, dynamic>);
+          final orderEntity =
+              OrderDetailsMapper.toOrderDetailsEntity(orderDetailsDto);
 
-      if (snapshot.exists && snapshot.data() != null) {
-        final orderDetailsDto = OrderDetailsModel.fromJson(snapshot.data()!);
-        return OrderDetailsMapper.toOrderDetailsEntity(orderDetailsDto);
-      } else {
-        throw Exception('Order not found');
-      }
-    });
+          return Success(orderEntity);
+        },
+      );
+    } catch (e) {
+      return Stream.value(Fail<OrderDetailsEntity>(e as Exception?));
+    }
+  }
+
+  Map<String, dynamic> _convertToJson(Map<Object?, Object?> data) {
+    return data
+        .map((key, value) => MapEntry(key.toString(), _convertValue(value)));
+  }
+
+  dynamic _convertValue(dynamic value) {
+    if (value is Map<Object?, Object?>) {
+      return _convertToJson(value);
+    } else if (value is List) {
+      return value.map((item) => _convertValue(item)).toList();
+    } else {
+      return value;
+    }
   }
 
   @override
-  Future<DataResult<OrderDetailsEntity>> updateOrderStatus(
+  Future<DataResult<void>> updateOrderStatus(
       {required String userId,
       required String orderId,
       required String status}) {
@@ -67,27 +90,18 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
       if (Firebase.apps.isEmpty) {
         Firebase.initializeApp();
       }
-      final orderDetailsDto = OrderDetailsModel(
-        orders: OrderDataModel(state: status),
-      );
+
       return await _fireService.fireStore
           .collection(FireStoreRefKey.users)
           .doc(userId)
           .collection(FireStoreRefKey.orders)
           .doc(orderId)
-          .update(orderDetailsDto.toJson())
-          .then((value) {
-        return OrderDetailsEntity(
-          orders: OrderData(state: status),
-        );
-      });
+          .update({FireStoreRefKey.state: status});
     });
   }
 
   @override
   Future<DataResult<void>> statOrder({required String orderId}) {
-    return executeApi(() async {
-      return await _apiManager.startOrder(orderId);
-    });
+    return executeApi(() => _apiManager.startOrder(orderId));
   }
 }

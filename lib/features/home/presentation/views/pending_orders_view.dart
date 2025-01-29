@@ -54,9 +54,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                     child: verticalSpacing(29.h),
                   ),
                 ),
-                if (profileViewModelCubit.driverDataResponseEntity != null &&
-                    profileViewModelCubit.driverDataResponseEntity!.driver !=
-                        null)
+
                   SliverToBoxAdapter(
                     child: ListView.builder(
                       shrinkWrap: true,

@@ -1,19 +1,46 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
+import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class OrderItemCard extends StatelessWidget {
-  final String title;
-  final int price, quantity;
-  const OrderItemCard({super.key, required this.title, required this.price, required this.quantity});
+ final OrderItems order;
+  const OrderItemCard({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
     return Card(
+        color: MyColors.whiteBase,
+        borderOnForeground: true,
+        elevation: 4.sp,
       margin: EdgeInsets.symmetric(vertical: 4),
       child: ListTile(
-        leading: Image.network('https://via.placeholder.com/50'),
-        title: Text(title),
-        subtitle: Text('EGP $price'),
-        trailing: Text('X$quantity', style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold)),
+        leading:  ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: CachedNetworkImage(
+            imageUrl: order.product!.images!.first,
+            width: 44.w,
+            height: 44.h,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => Center(
+              child: SpinKitWave(
+                color: MyColors.baseColor,
+                size: 30.w,
+              ),
+            ),
+            errorWidget: (context, url, error) => Icon(
+              Icons.error,
+              size: 44.w,
+              color: MyColors.gray,
+            ),
+          ),
+        ),
+        title: Text(order.product!.title!, style: MyFonts.styleRegular400_13.copyWith(color: MyColors.grey)),
+        subtitle: Text('EGP ${order.product!.price!}', style: MyFonts.styleMedium500_13.copyWith(color: MyColors.blackBase)),
+        trailing: Text('X${ order.quantity}', style: MyFonts.styleMedium500_13.copyWith(color: MyColors.baseColor)),
       ),
     );
   }
