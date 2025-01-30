@@ -24,7 +24,7 @@ late ScrollController scrollController;
  int limit = 10;
  int totalItems = 0;
   bool isLoadingMore = false;
-  void onAction(PendingOrdersActions action) {
+  Future<void> onAction(PendingOrdersActions action) async {
     switch (action) {
       case GetPendingOrders():
         _getPendingOrders();

@@ -1,17 +1,26 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:flowery_delivery/core/utils/widgets/spacing.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
+import 'package:flowery_delivery/core/localization/lang_keys.dart';
+import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
+import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flowery_delivery/di/di.dart';
+import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding_animation.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_card_order_details.dart';
 import 'package:flowery_delivery/features/home/presentation/widgets/custom_text_header.dart';
 import 'package:flowery_delivery/features/profile/presentation/viewModel/profile_actions.dart';
 import 'package:flowery_delivery/features/profile/presentation/viewModel/profile_view_model_cubit.dart';
+import 'package:flowery_delivery/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/utils/widgets/base/app_loader.dart';
 import '../../../../core/utils/widgets/base/base_view.dart';
 import '../viewModel/pending_order_view_model_cubit.dart';
+import '../viewModel/pending_orders_actions.dart';
 
 class PendingOrdersView extends StatefulWidget {
   const PendingOrdersView({super.key});
@@ -23,11 +32,14 @@ class PendingOrdersView extends StatefulWidget {
 class _PendingOrdersViewState extends State<PendingOrdersView> {
   final ProfileViewModelCubit profileViewModelCubit =
       getIt.get<ProfileViewModelCubit>();
-@override
+  final indicatorController = IndicatorController();
+
+  @override
   void initState() {
-  profileViewModelCubit.doAction(GetLoggedUserData());
+    profileViewModelCubit.doAction(GetLoggedUserData());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BaseView(
@@ -48,23 +60,78 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                     child: const CustomTextHeader(),
                   ),
                 ),
-                SliverToBoxAdapter(
-                  child: FadeIn(
-                    duration: const Duration(milliseconds: 400),
-                    child: verticalSpacing(29.h),
-                  ),
-                ),
-
+                if (state.response.orders!.isEmpty)
                   SliverToBoxAdapter(
+                    child: GestureDetector(
+                      onVerticalDragDown: (details) {
+                        context.read<PendingOrderViewModelCubit>().onAction(GetPendingOrders());
+
+                      },
+                      child: FadeIn(
+                        duration: const Duration(milliseconds: 400),
+                        child: Column(
+                          children: [
+                            const OnBoardingAnimation(),
+                            SizedBox(
+                              height: 40.sp,
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: AnimatedTextKit(
+                                  repeatForever: true,
+                                  animatedTexts: [
+                                    ScaleAnimatedText(
+                                      context.translate(
+                                          LangKeys.noOrdersAvailable),
+                                      textStyle: MyFonts.styleBold700_24.copyWith(
+                                        fontFamily: 'oronteus',
+                                        color: MyColors.baseColor,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                SliverToBoxAdapter(
+                  child: CustomRefreshIndicator(
+                    onRefresh: () async {
+                      context.read<PendingOrderViewModelCubit>().onAction(GetPendingOrders());
+                    },
+                    builder: (context, child, controller) {
+                      return Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+
+                          child,
+                          AnimatedBuilder(
+                            animation: controller,
+                            builder: (context, _) {
+                              return Opacity(
+                                opacity: controller.value.clamp(0.0, 1.0),
+                                child: Lottie.asset(
+                                  width: 50,
+                                  height: 50,
+                                  Assets.imagesFloweryLoader,
+                                  alignment: Alignment.bottomCenter,
+                                  fit: BoxFit.scaleDown,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: state.response.orders!.length,
                       itemBuilder: (context, index) {
-                        if (index ==
-                                context
-                                    .read<PendingOrderViewModelCubit>()
-                                    .totalItems &&
+                        if (index == context.read<PendingOrderViewModelCubit>().totalItems &&
                             state is PendingOrderViewModelLoading) {
                           return Center(
                             child: SizedBox(height: 130.h, child: AppLoader()),
@@ -75,13 +142,14 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                           duration: const Duration(milliseconds: 1000),
                           child: CustomCardOrderDetails(
                             order: state.response.orders![index]!,
-                            driver: profileViewModelCubit
-                                .driverDataResponseEntity!.driver!,
+                            driver: profileViewModelCubit.driverDataResponseEntity!.driver!,
                           ),
                         );
                       },
                     ),
                   ),
+                ),
+
               ],
             );
           } else if (state is PendingOrderViewModelError) {
@@ -107,7 +175,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
               ),
             );
           } else {
-            return const SizedBox();
+            return const OnBoardingAnimation();
           }
         },
       ),

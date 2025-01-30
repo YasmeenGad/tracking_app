@@ -3,13 +3,13 @@ import 'package:flowery_delivery/features/order_details/domain/repositories/cont
 import 'package:injectable/injectable.dart';
 
 @injectable
-class UpdateOrderStatusCase {
+class ChangeOrderStatusCase {
   final OrderDetailsRepo _repository;
 
-  UpdateOrderStatusCase(this._repository);
+  ChangeOrderStatusCase(this._repository);
 
   Future<DataResult<void>> call(
       {required String orderId, required String state}) async {
-    return await _repository.updateOrder(orderId: orderId, state: state);
+    return await _repository.changeOrderStatus(orderId: orderId, state: state);
   }
 }

@@ -7,6 +7,7 @@ import 'package:flowery_delivery/core/services/firebase_notification/notificatio
 import 'package:flowery_delivery/features/order_details/data/mappers/order_details_mapper.dart';
 import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/add_order_details_case.dart';
+import 'package:flowery_delivery/features/order_details/domain/use_cases/change_order_status.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/get_order_by_order_id_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/update_order_status.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,9 +23,10 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
   final GetOrderByOrderIdCase getOrderByOrderIdCase;
 
   final UpdateOrderStatusCase updateOrderStatusCase;
+  final ChangeOrderStatusCase changeOrderStatusCase;
 
   OrderDetailsViewModelCubit(this.addOrderDetailsCase,
-      this.getOrderByOrderIdCase, this.updateOrderStatusCase)
+      this.getOrderByOrderIdCase, this.updateOrderStatusCase, this.changeOrderStatusCase)
       : super(OrderDetailsViewModelInitial());
   var orderStatus = (
     step: 1,
@@ -45,6 +47,8 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
         await _getOrderDetails(action);
       case UpdateOrderStatus():
         _updateOrderStatus(action);
+      case ChangeOrderStatus():
+        _changeOrderStatus(action);
     }
   }
 
@@ -95,6 +99,20 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
         debugPrint(' order status updated ${action.status}');
 
         emit(UpdateOrderStatusSuccess());
+      case Fail<void>():
+        emit(
+            OrderDetailsViewModelError(ErrorHandler.handle(result.exception!)));
+    }
+  }
+  Future<void> _changeOrderStatus(ChangeOrderStatus action) async {
+    emit(OrderDetailsViewModelLoading());
+    final result = await changeOrderStatusCase(
+       orderId: action.orderId, state: action.state);
+    switch (result) {
+      case Success<void>():
+        debugPrint(' order status updated ${action.state}');
+
+        emit(ChangeOrderStatusSuccess());
       case Fail<void>():
         emit(
             OrderDetailsViewModelError(ErrorHandler.handle(result.exception!)));

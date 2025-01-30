@@ -76,6 +76,6 @@ abstract class ApiManager {
   @PUT("${ApiConstants.startOrder}{id}")
   Future<void> startOrder(@Path("id") String id);
   @PUT("${ApiConstants.updateOrder}{id}")
-  Future<void> updateOrder(@Path("id") String id,@Body() String state);
+  Future<void> changeOrderStatus(@Path("id") String id,@Body() String state);
 
 }

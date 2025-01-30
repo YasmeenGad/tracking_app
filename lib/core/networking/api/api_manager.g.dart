@@ -431,7 +431,7 @@ class _ApiManager implements ApiManager {
   }
 
   @override
-  Future<void> updateOrder(
+  Future<void> changeOrderStatus(
     String id,
     String state,
   ) async {

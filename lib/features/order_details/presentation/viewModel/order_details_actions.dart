@@ -32,3 +32,12 @@ class UpdateOrderStatus extends OrderDetailsActions {
     required this.status,
   });
 }
+class ChangeOrderStatus extends OrderDetailsActions {
+  final String orderId;
+  final String state;
+
+  ChangeOrderStatus({
+    required this.orderId,
+    required this.state,
+  });
+}

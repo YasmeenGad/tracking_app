@@ -1,8 +1,12 @@
+import 'package:flowery_delivery/core/routes/app_routes.dart';
+import 'package:flowery_delivery/core/services/firebase_helper/fire_store_ref_key.dart';
 import 'package:flowery_delivery/core/services/firebase_notification/notification_helper.dart';
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import 'package:flowery_delivery/core/utils/widgets/base/app_loader.dart';
 import 'package:flowery_delivery/core/utils/widgets/buttons/carved_button.dart';
 import 'package:flowery_delivery/core/utils/widgets/custom_appbar.dart';
+import 'package:flowery_delivery/di/di.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/address_section.dart';
@@ -109,6 +113,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     body: orderViewModelCubit.orderStatus.notificationBody,
                     topic: order.id,
                   );
+                  if(order.state==FireStoreRefKey.delivered){
+                    await getIt.get<OrderDetailsViewModelCubit>()
+                        .doAction(ChangeOrderStatus(
+                      orderId: order.id!,
+                      state:FireStoreRefKey.completed,
+                    )).whenComplete(() {
+                      if(!context.mounted)return;
+                    context.pushNamed(AppRoutes.pendingOrdersView,);
+                    },);
+                  }
                 },
               ),
             ),

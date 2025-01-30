@@ -62,6 +62,8 @@ import '../features/order_details/domain/repositories/contract/order_details_rep
     as _i439;
 import '../features/order_details/domain/use_cases/add_order_details_case.dart'
     as _i811;
+import '../features/order_details/domain/use_cases/change_order_status.dart'
+    as _i114;
 import '../features/order_details/domain/use_cases/get_order_by_order_id_case.dart'
     as _i341;
 import '../features/order_details/domain/use_cases/update_order_status.dart'
@@ -130,6 +132,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i341.GetOrderByOrderIdCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i182.UpdateOrderStatusCase>(
         () => _i182.UpdateOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
+    gh.factory<_i114.ChangeOrderStatusCase>(
+        () => _i114.ChangeOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i43.PendingOrdersRepo>(() =>
         _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(
@@ -146,18 +150,19 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
     gh.factory<_i811.AddOrderDetailsCase>(
         () => _i811.AddOrderDetailsCase(gh<_i439.OrderDetailsRepo>()));
-    gh.factory<_i42.OrderDetailsViewModelCubit>(
-        () => _i42.OrderDetailsViewModelCubit(
-              gh<_i811.AddOrderDetailsCase>(),
-              gh<_i341.GetOrderByOrderIdCase>(),
-              gh<_i182.UpdateOrderStatusCase>(),
-            ));
     gh.factory<_i638.EditProfileCubit>(() => _i638.EditProfileCubit(
           gh<_i804.ProfileUseCase>(),
           gh<_i345.OfflineDataSource>(),
         ));
     gh.factory<_i508.SignUpViewModel>(
         () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
+    gh.factory<_i42.OrderDetailsViewModelCubit>(
+        () => _i42.OrderDetailsViewModelCubit(
+              gh<_i811.AddOrderDetailsCase>(),
+              gh<_i341.GetOrderByOrderIdCase>(),
+              gh<_i182.UpdateOrderStatusCase>(),
+              gh<_i114.ChangeOrderStatusCase>(),
+            ));
     gh.factory<_i317.PendingOrderViewModelCubit>(
         () => _i317.PendingOrderViewModelCubit(gh<_i15.PendingOrderUseCase>()));
     gh.factory<_i338.VehiclesCubit>(

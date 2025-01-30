@@ -32,7 +32,7 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   }
 
   @override
-  Future<DataResult<void>> updateOrder({required String orderId, required String state}) {
-    return _dataSource.updateOrder(orderId: orderId, state: state);
+  Future<DataResult<void>> changeOrderStatus({required String orderId, required String state}) {
+    return _dataSource.changeOrderStatus(orderId: orderId, state: state);
   }
 }

@@ -22,11 +22,8 @@ final class GetOrderDetailsSuccess extends OrderDetailsViewModelState {
   GetOrderDetailsSuccess(this.orderDetailsEntity);
 }
 
-final class UpdateOrderStatusSuccess extends OrderDetailsViewModelState {
-  // final OrderDetailsEntity orderDetailsEntity;
-  //
-  // UpdateOrderStatusSuccess(this.orderDetailsEntity);
-}
+final class UpdateOrderStatusSuccess extends OrderDetailsViewModelState {}
+final class ChangeOrderStatusSuccess extends OrderDetailsViewModelState {}
 
 final class UpdateStatus extends OrderDetailsViewModelState {
 

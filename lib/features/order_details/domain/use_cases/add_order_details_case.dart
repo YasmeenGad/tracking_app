@@ -17,7 +17,7 @@ class AddOrderDetailsCase {
       case Success<void>():
         return await repository.statOrder(orderId: orderDetails.orders!.id!);
       case Fail<void>():
-        return await repository.updateOrder(
+        return await repository.changeOrderStatus(
             orderId: orderDetails.orders!.id!, state: FireStoreRefKey.pending);
     }
   }
