@@ -13,6 +13,7 @@ class Assets {
   static const String imagesCancel = 'assets/images/cancel.png';
   static const String imagesCategory = 'assets/images/category.png';
   static const String imagesCheckCircle = 'assets/images/check-circle.svg';
+  static const String imagesCheckorders = 'assets/images/checkorders.png';
   static const String imagesDelete = 'assets/images/delete.png';
   static const String imagesDeliveryAnimation = 'assets/images/delivery_animation.json';
   static const String imagesDribbleFlowers = 'assets/images/dribble_flowers.gif';
@@ -46,6 +47,7 @@ class Assets {
   static const String imagesPerson = 'assets/images/person.png';
   static const String imagesPlace = 'assets/images/place.png';
   static const String imagesProfile = 'assets/images/profile.png';
+  static const String imagesProfilenav = 'assets/images/profilenav.png';
   static const String imagesRectangle = 'assets/images/rectangle.png';
   static const String imagesRemove = 'assets/images/remove.png';
   static const String imagesSavedAddress = 'assets/images/saved-address.png';
@@ -58,5 +60,4 @@ class Assets {
   static const String imagesUpload = 'assets/images/upload.png';
   static const String translationsAr = 'translations/ar.json';
   static const String translationsEn = 'translations/en.json';
-
 }
