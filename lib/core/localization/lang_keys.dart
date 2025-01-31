@@ -46,6 +46,7 @@ class LangKeys {
   static const String labelContinue = 'label_continue';
   static const String login = 'login';
   static const String signUp = 'sign_up';
+  static const String applyNow = 'apply_now';
   static const String alreadyHaveAnAccount = 'already_have_an_account';
   static const String notHaveAnAccount = 'not_have_an_account';
   static const String resend = 'resend';
@@ -225,4 +226,16 @@ class LangKeys {
   static const String errorGettingLocation = 'error_getting_location';
   static const String getLocation = 'get_location';
   static const String addressNotFound = 'address_not_found';
+  static const String changeToTheLanguage = 'change_to_the_language';
+  static const String ok = 'ok';
+  static const String vehicleLicense = 'vehicle_license';
+  static const String vehicleType = 'vehicle_type';
+  static const String vehicleNumber = 'vehicle_number';
+  static const String readyForDelivery =   "ready_for_delivery";
+  static const  String vehicleInfo =   "vehicle_info";
+  static const String flowerOrder = "flower_order";
+  static const String pickupAddress = "pickup_address";
+  static const String reject = "reject";
+  static const String accept = "accept";
+  static const String floweryRider = "flowery_rider";
 }
