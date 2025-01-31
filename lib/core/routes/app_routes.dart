@@ -1,4 +1,5 @@
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
+import '../../features/home/presentation/views/home_layout.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
@@ -36,6 +37,8 @@ class AppRoutes {
   static const String emailVerification = 'emailVerification';
   static const String resetPassWord = 'resetPassWord';
   static const String changePassWord = 'changePassWord';
+  static const String homeLayout = 'homeLayout';
+
   static const String homeScreen = 'homeScreen';
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
@@ -46,6 +49,8 @@ class AppRoutes {
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case homeLayout:
+        return BaseRoute(page: const HomeLayout());
       case AppRoutes.onBoarding:
         return BaseRoute(
           page: const OnBoarding(),

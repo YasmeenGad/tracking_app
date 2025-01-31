@@ -5,9 +5,15 @@ sealed class PendingOrderViewModelState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class PendingOrderViewModelInitial extends PendingOrderViewModelState {}
+final class PendingOrderViewModelInitial extends PendingOrderViewModelState {
+  @override
+  List<Object?> get props => [];
+}
 
-final class PendingOrderViewModelLoading extends PendingOrderViewModelState {}
+final class PendingOrderViewModelLoading extends PendingOrderViewModelState {
+  @override
+  List<Object?> get props => [];
+}
 
 final class PendingOrderViewModelLoaded extends PendingOrderViewModelState {
   final PendingOrderResponseEntity response;

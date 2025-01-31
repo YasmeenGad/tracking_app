@@ -1,21 +1,29 @@
-class PendingOrderResponseEntity {
+import 'package:equatable/equatable.dart';
+
+class PendingOrderResponseEntity extends Equatable {
   final PendingOrderResponseEntityMetadata? metadata;
   final List<PendingOrderResponseEntityOrders?>? orders;
 
-  PendingOrderResponseEntity({this.metadata, this.orders});
+  const PendingOrderResponseEntity({this.metadata, this.orders});
+
+  @override
+  List<Object?> get props => [metadata, orders];
 }
 
-class PendingOrderResponseEntityMetadata {
+class PendingOrderResponseEntityMetadata extends Equatable {
   final int? currentPage;
   final int? totalPages;
   final int? totalItems;
   final int? limit;
 
-  PendingOrderResponseEntityMetadata(
+  const PendingOrderResponseEntityMetadata(
       this.currentPage, this.totalPages, this.totalItems, this.limit);
+
+  @override
+  List<Object?> get props => [currentPage, totalPages, totalItems, limit];
 }
 
-class PendingOrderResponseEntityOrders {
+class PendingOrderResponseEntityOrders extends Equatable {
   final String? id;
   final PendingOrderResponseEntityOrdersUser? user;
   final List<PendingOrderResponseEntityOrdersOrderItems?>? orderItems;
@@ -29,7 +37,7 @@ class PendingOrderResponseEntityOrders {
   final String? orderNumber;
   final PendingOrderResponseEntityOrdersStore? store;
 
-  PendingOrderResponseEntityOrders(
+  const PendingOrderResponseEntityOrders(
       {this.id,
       this.user,
       this.orderItems,
@@ -42,9 +50,25 @@ class PendingOrderResponseEntityOrders {
       this.updatedAt,
       this.orderNumber,
       this.store});
+
+  @override
+  List<Object?> get props => [
+        id,
+        user,
+        orderItems,
+        totalPrice,
+        paymentType,
+        isPaid,
+        isDelivered,
+        state,
+        createdAt,
+        updatedAt,
+        orderNumber,
+        store
+      ];
 }
 
-class PendingOrderResponseEntityOrdersUser {
+class PendingOrderResponseEntityOrdersUser extends Equatable {
   final String? id;
   final String? firstName;
   final String? lastName;
@@ -53,7 +77,7 @@ class PendingOrderResponseEntityOrdersUser {
   final String? phone;
   final String? photo;
 
-  PendingOrderResponseEntityOrdersUser(
+  const PendingOrderResponseEntityOrdersUser(
       {this.id,
       this.firstName,
       this.lastName,
@@ -61,19 +85,26 @@ class PendingOrderResponseEntityOrdersUser {
       this.gender,
       this.phone,
       this.photo});
+
+  @override
+  List<Object?> get props =>
+      [id, firstName, lastName, email, gender, phone, photo];
 }
 
-class PendingOrderResponseEntityOrdersOrderItems {
+class PendingOrderResponseEntityOrdersOrderItems extends Equatable {
   final PendingOrderResponseEntityOrdersOrderItemsProduct? product;
   final int? price;
   final int? quantity;
   final String? id;
 
-  PendingOrderResponseEntityOrdersOrderItems(
+  const PendingOrderResponseEntityOrdersOrderItems(
       {this.product, this.price, this.quantity, this.id});
+
+  @override
+  List<Object?> get props => [product, price, quantity, id];
 }
 
-class PendingOrderResponseEntityOrdersOrderItemsProduct {
+class PendingOrderResponseEntityOrdersOrderItemsProduct extends Equatable {
   final String? id;
   final String? title;
   final String? slug;
@@ -90,7 +121,7 @@ class PendingOrderResponseEntityOrdersOrderItemsProduct {
   final int? discount;
   final int? sold;
 
-  PendingOrderResponseEntityOrdersOrderItemsProduct(
+  const PendingOrderResponseEntityOrdersOrderItemsProduct(
       {this.id,
       this.title,
       this.slug,
@@ -106,15 +137,37 @@ class PendingOrderResponseEntityOrdersOrderItemsProduct {
       this.updatedAt,
       this.discount,
       this.sold});
+
+  @override
+  List<Object?> get props => [
+        id,
+        title,
+        slug,
+        description,
+        imgCover,
+        images,
+        price,
+        priceAfterDiscount,
+        quantity,
+        category,
+        occasion,
+        createdAt,
+        updatedAt,
+        discount,
+        sold
+      ];
 }
 
-class PendingOrderResponseEntityOrdersStore {
+class PendingOrderResponseEntityOrdersStore extends Equatable {
   final String? name;
   final String? image;
   final String? address;
   final String? phoneNumber;
   final String? latLong;
 
-  PendingOrderResponseEntityOrdersStore(
+  const PendingOrderResponseEntityOrdersStore(
       {this.name, this.image, this.address, this.phoneNumber, this.latLong});
+
+  @override
+  List<Object?> get props => [name, image, address, phoneNumber, latLong];
 }
