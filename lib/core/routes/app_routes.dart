@@ -1,3 +1,5 @@
+import 'package:flowery_delivery/features/App_approve/presentation/views/success_apply_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import '../../features/home/presentation/views/home_layout.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
@@ -37,6 +39,7 @@ class AppRoutes {
   static const String homeLayout = 'homeLayout';
 
   static const String homeScreen = 'homeScreen';
+  static const String successApplyView = 'successApplyView';
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
   static const String vehicleView = "vehicleView";
@@ -61,6 +64,8 @@ class AppRoutes {
               create: (context) => getIt.get<SignUpViewModel>(),
               child: const SignUpView()),
         );
+         case successApplyView:
+        return BaseRoute(page: const SuccessApplyView());
       case AppRoutes.forgetPassword:
         return BaseRoute(
           page: BlocProvider(
