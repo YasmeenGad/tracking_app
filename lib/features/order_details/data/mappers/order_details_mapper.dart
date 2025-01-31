@@ -1,4 +1,5 @@
 import 'package:flowery_delivery/features/home/domain/entities/response/pending_order_response_entity.dart';
+import 'package:flowery_delivery/features/order_details/data/models/change_order_state_dto.dart';
 import 'package:flowery_delivery/features/order_details/data/models/order_details_model.dart';
 import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flowery_delivery/features/profile/domain/entities/response/get_logged_user_driver_response_entity.dart';
@@ -213,5 +214,9 @@ class OrderDetailsMapper {
            
       ),
     );
+  }
+
+  static ChangeOrderStateDto toChangeOrderDto(String state){
+    return ChangeOrderStateDto( state);
   }
 }

@@ -107,6 +107,6 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
 
   @override
   Future<DataResult<void>> changeOrderStatus({required String orderId, required String state}) {
-    return executeApi(() => _apiManager.changeOrderStatus(orderId, state));
+    return executeApi(() => _apiManager.changeOrderStatus(orderId, OrderDetailsMapper.toChangeOrderDto(state)));
   }
 }

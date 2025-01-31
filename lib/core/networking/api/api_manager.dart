@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flowery_delivery/features/order_details/data/models/change_order_state_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -76,6 +77,6 @@ abstract class ApiManager {
   @PUT("${ApiConstants.startOrder}{id}")
   Future<void> startOrder(@Path("id") String id);
   @PUT("${ApiConstants.updateOrder}{id}")
-  Future<void> changeOrderStatus(@Path("id") String id,@Body() String state);
+  Future<void> changeOrderStatus(@Path("id") String id,@Body() ChangeOrderStateDto state);
 
 }

@@ -82,9 +82,12 @@ class CustomCardOrderDetails extends StatelessWidget {
                       orderId: order.id!,
                       state: FireStoreRefKey.cancelled,
                     )).whenComplete(() {
-                      if(!context.mounted)return;
-                      context.read<PendingOrderViewModelCubit>().onAction(
-                          GetPendingOrders());
+                      Future.delayed(Durations.extralong4).whenComplete(() {
+                        if(!context.mounted)return;
+                        context.read<PendingOrderViewModelCubit>().onAction(
+                            GetPendingOrders());
+                      },);
+
                     },);
                   },
                 ),

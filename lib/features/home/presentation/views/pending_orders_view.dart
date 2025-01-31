@@ -50,87 +50,73 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
               context.read<PendingOrderViewModelCubit>().limit == 10) {
             return AppLoader();
           } else if (state is PendingOrderViewModelLoaded) {
-            return CustomScrollView(
-              controller:
-                  context.read<PendingOrderViewModelCubit>().scrollController,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: FadeInDown(
-                    duration: const Duration(milliseconds: 500),
-                    child: const CustomTextHeader(),
-                  ),
-                ),
-                if (state.response.orders!.isEmpty)
-                  SliverToBoxAdapter(
-                    child: GestureDetector(
-                      onVerticalDragDown: (details) {
-                        context.read<PendingOrderViewModelCubit>().onAction(GetPendingOrders());
+            return  CustomMaterialIndicator(
+                onRefresh: () async {
+                  context.read<PendingOrderViewModelCubit>().onAction(GetPendingOrders());
+                },
+                indicatorBuilder: (context,  controller) {
 
-                      },
-                      child: FadeIn(
-                        duration: const Duration(milliseconds: 400),
-                        child: Column(
-                          children: [
-                            const OnBoardingAnimation(),
-                            SizedBox(
-                              height: 40.sp,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: AnimatedTextKit(
-                                  repeatForever: true,
-                                  animatedTexts: [
-                                    ScaleAnimatedText(
-                                      context.translate(
-                                          LangKeys.noOrdersAvailable),
-                                      textStyle: MyFonts.styleBold700_24.copyWith(
-                                        fontFamily: 'oronteus',
-                                        color: MyColors.baseColor,
+                  return Lottie.asset(
+                    width: 50,
+                    height: 50,
+                    Assets.imagesFloweryLoader,
+                    alignment: Alignment.bottomCenter,
+                    fit: BoxFit.scaleDown,
+                  );
+                },
+              child: CustomScrollView(
+                controller:
+                    context.read<PendingOrderViewModelCubit>().scrollController,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: FadeInDown(
+                      duration: const Duration(milliseconds: 500),
+                      child: const CustomTextHeader(),
+                    ),
+                  ),
+                  if (state.response.orders!.isEmpty)
+                    SliverToBoxAdapter(
+                      child: GestureDetector(
+                        onVerticalDragDown: (details) {
+                          context.read<PendingOrderViewModelCubit>().onAction(GetPendingOrders());
+
+                        },
+                        child: FadeIn(
+                          duration: const Duration(milliseconds: 400),
+                          child: Column(
+                            children: [
+                              const OnBoardingAnimation(),
+                              SizedBox(
+                                height: 40.sp,
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: AnimatedTextKit(
+                                    repeatForever: true,
+                                    animatedTexts: [
+                                      ScaleAnimatedText(
+                                        context.translate(
+                                            LangKeys.noOrdersAvailable),
+                                        textStyle: MyFonts.styleBold700_24.copyWith(
+                                          fontFamily: 'oronteus',
+                                          color: MyColors.baseColor,
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                SliverToBoxAdapter(
-                  child: CustomRefreshIndicator(
-                    onRefresh: () async {
-                      context.read<PendingOrderViewModelCubit>().onAction(GetPendingOrders());
-                    },
-                    builder: (context, child, controller) {
-                      return Stack(
-                        alignment: Alignment.topCenter,
-                        children: [
-
-                          child,
-                          AnimatedBuilder(
-                            animation: controller,
-                            builder: (context, _) {
-                              return Opacity(
-                                opacity: controller.value.clamp(0.0, 1.0),
-                                child: Lottie.asset(
-                                  width: 50,
-                                  height: 50,
-                                  Assets.imagesFloweryLoader,
-                                  alignment: Alignment.bottomCenter,
-                                  fit: BoxFit.scaleDown,
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
+                  SliverToBoxAdapter(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics: const  BouncingScrollPhysics(),
                       itemCount: state.response.orders!.length,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (_, index) {
                         if (index == context.read<PendingOrderViewModelCubit>().totalItems &&
                             state is PendingOrderViewModelLoading) {
                           return Center(
@@ -148,9 +134,9 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                       },
                     ),
                   ),
-                ),
 
-              ],
+                ],
+              ),
             );
           } else if (state is PendingOrderViewModelError) {
             return Center(

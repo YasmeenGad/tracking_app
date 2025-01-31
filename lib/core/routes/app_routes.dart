@@ -1,5 +1,4 @@
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
-import '../../features/home/presentation/views/home_layout.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
@@ -17,6 +16,7 @@ import '../../features/auth/presentation/login/view/login_view.dart';
 import '../../features/auth/presentation/signup/view/signup_view.dart';
 import '../../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart';
 import '../../features/home/presentation/viewModel/pending_orders_actions.dart';
+import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/pending_orders_view.dart';
 import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
@@ -46,26 +46,27 @@ class AppRoutes {
   static const String pendingOrdersView = "pendingOrdersView";
   static const String resetPasswordProfileView = "resetPasswordProfileView";
   static const String orderDetailsView = "orderDetailsView";
+
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case homeLayout:
-        return BaseRoute(page: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                  create: (context) => getIt.get<ProfileViewModelCubit>()
-                    ..doAction(GetLoggedUserData())),
-              BlocProvider<PendingOrderViewModelCubit>(
-                create: (context) => getIt.get<PendingOrderViewModelCubit>()..onAction(GetPendingOrders()),
-              ),
-              BlocProvider<OrderDetailsViewModelCubit>(
-                create: (context) => getIt.get<OrderDetailsViewModelCubit>(),
-              ),
-              BlocProvider(
-                  create: (context) => getIt.get<VehiclesCubit>()
-                    ..doAction(GetAllVehicles())),
-            ],
-            child: const HomeLayout()));
+        return BaseRoute(
+            page: MultiBlocProvider(providers: [
+          BlocProvider(
+              create: (context) => getIt.get<ProfileViewModelCubit>()
+                ..doAction(GetLoggedUserData())),
+          BlocProvider<PendingOrderViewModelCubit>(
+            create: (context) => getIt.get<PendingOrderViewModelCubit>()
+              ..onAction(GetPendingOrders()),
+          ),
+          BlocProvider<OrderDetailsViewModelCubit>(
+            create: (context) => getIt.get<OrderDetailsViewModelCubit>(),
+          ),
+          BlocProvider(
+              create: (context) =>
+                  getIt.get<VehiclesCubit>()..doAction(GetAllVehicles())),
+        ], child: const HomeLayout()));
       case AppRoutes.onBoarding:
         return BaseRoute(
           page: const OnBoarding(),
@@ -101,37 +102,38 @@ class AppRoutes {
         );
       case AppRoutes.profileMainScreen:
         return BaseRoute(
-            page: ProfileMainScreen(),
+          page: ProfileMainScreen(),
         );
       case AppRoutes.profileView:
         return BaseRoute(page: const ProfileView());
       case AppRoutes.vehicleView:
         return BaseRoute(
-            page: MultiBlocProvider(
-                providers: [
-                  BlocProvider<ProfileViewModelCubit>(
-                    create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
-                  ),
-                  BlocProvider<VehiclesCubit>(
-                    create: (context) => getIt.get<VehiclesCubit>()..doAction(GetAllVehicles()),
-                  ),
-                  BlocProvider<EditProfileCubit>(
-                    create: (context) => getIt.get<EditProfileCubit>(),
-                  ),
-                ],
-                child: const VehicleView()));
+            page: MultiBlocProvider(providers: [
+          BlocProvider<ProfileViewModelCubit>(
+            create: (context) => getIt.get<ProfileViewModelCubit>()
+              ..doAction(GetLoggedUserData()),
+          ),
+          BlocProvider<VehiclesCubit>(
+            create: (context) =>
+                getIt.get<VehiclesCubit>()..doAction(GetAllVehicles()),
+          ),
+          BlocProvider<EditProfileCubit>(
+            create: (context) => getIt.get<EditProfileCubit>(),
+          ),
+        ], child: const VehicleView()));
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
       case AppRoutes.pendingOrdersView:
+        return BaseRoute(page: PendingOrdersView());
+      case AppRoutes.orderDetailsView:
+        final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(
-            page: PendingOrdersView());
-        case AppRoutes.orderDetailsView:
-          final arguments = settings.arguments as Map<String, String>?;
-        return BaseRoute(page: BlocProvider(
-
-  create: (context) => getIt.get<OrderDetailsViewModelCubit>()..doAction(GetOrderDetails(orderId: arguments!['orderId']!, userId: arguments['userId']!)),
-  child: OrderDetailsScreen(),
-));
+            page: BlocProvider(
+          create: (context) => getIt.get<OrderDetailsViewModelCubit>()
+            ..doAction(GetOrderDetails(
+                orderId: arguments!['orderId']!, userId: arguments['userId']!)),
+          child: OrderDetailsScreen(),
+        ));
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
     }
