@@ -92,8 +92,8 @@ class FloweryDelivery extends StatelessWidget {
 
 String _getInitialRoute() {
   return SharedPrefHelper().getString(key: SharedPrefKeys.tokenKey) != null
-  // ? AppRoutes.homeLayout
-  // : AppRoutes.onBoarding;
-      ? AppRoutes.pendingOrdersView
-      : AppRoutes.homeLayout;
+  ? AppRoutes.homeLayout
+  : AppRoutes.onBoarding;
+      // ? AppRoutes.pendingOrdersView
+      // : AppRoutes.homeLayout;
 }

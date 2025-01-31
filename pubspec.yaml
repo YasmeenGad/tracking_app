@@ -41,7 +41,7 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_screenutil: ^5.9.3
   http_parser: ^4.1.2
-  shared_preferences: ^2.3.4
+  shared_preferences: ^2.5.0
   build_runner: ^2.4.14
   awesome_snackbar_content: ^0.1.4
   connectivity_plus: ^6.1.1

@@ -32,7 +32,7 @@ void main() {
         metadata: PendingOrderResponseEntityMetadata(1, 1, 1, 10),
         orders: [],
       );
-      when(mockUseCase.getPendingOrders())
+      when(mockUseCase.getPendingOrders(limit: 20))
           .thenAnswer((_) async => Success(response));
       return cubit;
     },
@@ -46,13 +46,13 @@ void main() {
         ),
       ),
     ],
-    verify: (_) => verify(mockUseCase.getPendingOrders()).called(1),
+    verify: (_) => verify(mockUseCase.getPendingOrders(limit: 20)).called(1),
   );
 
   blocTest<PendingOrderViewModelCubit, PendingOrderViewModelState>(
     'should emit [PendingOrderViewModelLoading, PendingOrderViewModelError] when getPendingOrders is called',
     build: () {
-      when(mockUseCase.getPendingOrders())
+      when(mockUseCase.getPendingOrders(limit: 20))
           .thenAnswer((_) async => Fail(Exception()));
       return cubit;
     },
@@ -63,6 +63,6 @@ void main() {
           ErrorModel(error: "An unknown error occurred. Please try again.")),
       // Added period here
     ],
-    verify: (_) => verify(mockUseCase.getPendingOrders()).called(1),
+    verify: (_) => verify(mockUseCase.getPendingOrders(limit: 20)).called(1),
   );
 }

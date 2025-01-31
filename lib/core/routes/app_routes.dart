@@ -50,7 +50,22 @@ class AppRoutes {
     final args = settings.arguments;
     switch (settings.name) {
       case homeLayout:
-        return BaseRoute(page: const HomeLayout());
+        return BaseRoute(page: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                  create: (context) => getIt.get<ProfileViewModelCubit>()
+                    ..doAction(GetLoggedUserData())),
+              BlocProvider<PendingOrderViewModelCubit>(
+                create: (context) => getIt.get<PendingOrderViewModelCubit>()..onAction(GetPendingOrders()),
+              ),
+              BlocProvider<OrderDetailsViewModelCubit>(
+                create: (context) => getIt.get<OrderDetailsViewModelCubit>(),
+              ),
+              BlocProvider(
+                  create: (context) => getIt.get<VehiclesCubit>()
+                    ..doAction(GetAllVehicles())),
+            ],
+            child: const HomeLayout()));
       case AppRoutes.onBoarding:
         return BaseRoute(
           page: const OnBoarding(),
@@ -86,16 +101,7 @@ class AppRoutes {
         );
       case AppRoutes.profileMainScreen:
         return BaseRoute(
-            page: MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                    create: (context) => getIt.get<ProfileViewModelCubit>()
-                      ..doAction(GetLoggedUserData())),
-                BlocProvider(
-                    create: (context) => getIt.get<VehiclesCubit>()
-                      ..doAction(GetAllVehicles())),
-              ],
-                  child: ProfileMainScreen()),
+            page: ProfileMainScreen(),
         );
       case AppRoutes.profileView:
         return BaseRoute(page: const ProfileView());
@@ -118,21 +124,7 @@ class AppRoutes {
         return BaseRoute(page: const ResetPasswordProfileView());
       case AppRoutes.pendingOrdersView:
         return BaseRoute(
-            page: MultiBlocProvider(
-          providers: [
-            BlocProvider<ProfileViewModelCubit>(
-              create: (context) => getIt.get<ProfileViewModelCubit>()..doAction(GetLoggedUserData()),
-            ),
-            BlocProvider<PendingOrderViewModelCubit>(
-              create: (context) => getIt.get<PendingOrderViewModelCubit>()..onAction(GetPendingOrders()),
-            ),
-            BlocProvider<OrderDetailsViewModelCubit>(
-              create: (context) => getIt.get<OrderDetailsViewModelCubit>(),
-            ),
-
-          ],
-          child:  PendingOrdersView(),
-        ));
+            page: PendingOrdersView());
         case AppRoutes.orderDetailsView:
           final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(page: BlocProvider(

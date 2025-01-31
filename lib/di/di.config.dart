@@ -128,12 +128,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i496.LoginUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i853.SignUpUseCase>(
         () => _i853.SignUpUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i114.ChangeOrderStatusCase>(
+        () => _i114.ChangeOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i341.GetOrderByOrderIdCase>(
         () => _i341.GetOrderByOrderIdCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i182.UpdateOrderStatusCase>(
         () => _i182.UpdateOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
-    gh.factory<_i114.ChangeOrderStatusCase>(
-        () => _i114.ChangeOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i43.PendingOrdersRepo>(() =>
         _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(

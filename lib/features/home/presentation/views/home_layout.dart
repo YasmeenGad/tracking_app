@@ -1,4 +1,6 @@
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/features/home/presentation/views/pending_orders_view.dart';
+import 'package:flowery_delivery/features/profile/presentation/views/profile_main_screen.dart';
 import 'package:flowery_delivery/generated/assets.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +15,9 @@ class _HomeLayoutState extends State<HomeLayout> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    Center(child: Text('Home Screen')),
+    PendingOrdersView(),
     Center(child: Text('Check Order Screen')),
-    Center(child: Text('Profile Screen')),
+    ProfileMainScreen(),
   ];
 
   @override
