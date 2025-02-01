@@ -132,7 +132,7 @@ class OrderDetailsMapper {
       isDelivered: orders.isDelivered,
       state: orders.state,
       createdAt: orders.createdAt,
-      updatedAt: DateFormat('dd/MM/yyyy hh:mm a').format(DateTime.now()),
+      updatedAt: DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.now()),
       orderNumber: orders.orderNumber,
       store: Store(
         name: orders.store!.name,
