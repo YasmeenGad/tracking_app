@@ -1,13 +1,26 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:flowery_delivery/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flowery_delivery/core/localization/lang_keys.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
-
+import 'package:location/location.dart';
 class LocationHelper {
+  LocationHelper._();
+  static final LocationHelper _instance = LocationHelper._();
+  factory LocationHelper() {
+    return _instance;
+  }
+  static final GlobalKey<NavigatorState> navigatorKey =
+  getIt<GlobalKey<NavigatorState>>();
+
+  BuildContext? get context => navigatorKey.currentState?.context;
+  LocationData? myLocation;
+  double latitude =0.0;
+  double longitude = 0.0;
   Future<void> saveLocation(String location) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -34,7 +47,7 @@ class LocationHelper {
     }
   }
 
-  Future<LocationPermission> requestLocationPermission(BuildContext context) async {
+  Future<LocationPermission> requestLocationPermission() async {
     try {
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
@@ -42,21 +55,24 @@ class LocationHelper {
       }
       return permission;
     } catch (e) {
-      throw Exception(context.translate(LangKeys.failure));
+      throw Exception(context?.translate(LangKeys.failure));
     }
   }
 
-  Future<Position> getCurrentLocation(BuildContext context) async {
+  Future<Position> getCurrentLocation() async {
     try {
-      return await Geolocator.getCurrentPosition(
+      final position = await Geolocator.getCurrentPosition(
         locationSettings: LocationSettings(),
       );
+  longitude=    position.longitude;
+  longitude=    position.latitude;
+      return position;
     } catch (e) {
-      throw Exception(context.translate(LangKeys.failure));
+      throw Exception(context?.translate(LangKeys.failure));
     }
   }
 
-  Future<String> getAddressFromLatLng(double latitude, double longitude, BuildContext context) async {
+  Future<String?> getAddressFromLatLng(double latitude, double longitude, ) async {
     try {
       List<Placemark> placeMarks = await placemarkFromCoordinates(latitude, longitude);
       if (placeMarks.isNotEmpty) {
@@ -66,6 +82,6 @@ class LocationHelper {
     } catch (e) {
       debugPrint('$e');
     }
-    return context.translate(LangKeys.addressNotFound);
+    return context?.translate(LangKeys.addressNotFound);
   }
 }

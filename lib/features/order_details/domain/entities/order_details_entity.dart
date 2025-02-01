@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:flowery_delivery/features/profile/domain/entities/response/get_logged_user_driver_response_entity.dart';
 import 'package:geocoding/geocoding.dart';
 
 class OrderDetailsEntity extends Equatable {
   final OrderData? orders;
-  final DriverEntity? driver;
+  final Driver? driver;
 
   const OrderDetailsEntity({this.driver, this.orders});
 
@@ -165,4 +164,40 @@ class Store extends Equatable {
   @override
   
   List<Object?> get props => [name, image, address, phoneNumber, latLong];
+}
+class Driver {
+  Driver({
+    this.id,
+    this.country,
+    this.firstName,
+    this.lastName,
+    this.vehicleType,
+    this.vehicleNumber,
+    this.vehicleLicense,
+    this.nid,
+    this.nIDImg,
+    this.email,
+    this.gender,
+    this.phone,
+    this.photo,
+    this.createdAt,
+    this.location,
+  });
+
+  String? id;
+  String? country;
+  String? firstName;
+  String? lastName;
+  String? vehicleType;
+  String? vehicleNumber;
+  String? vehicleLicense;
+  String? nid;
+  String? nIDImg;
+  String? email;
+  String? gender;
+  String? phone;
+  String? photo;
+  String? createdAt;
+  Location? location;
+
 }

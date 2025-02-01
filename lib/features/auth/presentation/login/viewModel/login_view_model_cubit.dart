@@ -4,12 +4,13 @@ import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/networking/common/api_result.dart';
 import '../../../../../core/networking/error/error_model.dart';
 import '../../../../../core/routes/app_routes.dart';
-import '../../../../../core/services/shared_preference/location_helper.dart';
+import '../../../../../core/services/location_helper.dart';
 import '../../../../../di/di.dart';
 import '../../../data/data_sources/contracts/offline_data_source.dart';
 import '../../../domain/entities/response/login_response_entity.dart';
@@ -22,7 +23,7 @@ part 'login_view_model_state.dart';
 class LoginViewModel extends Cubit<LoginViewModelState> {
   final LoginUseCase _loginUseCase;
   final OfflineDataSource _offlineDataSource = getIt<OfflineDataSource>();
-  final LocationHelper _locationHelper = LocationHelper();
+  // final LocationHelper _locationHelper = LocationHelper();
 
   @factoryMethod
   LoginViewModel(this._loginUseCase) : super(LoginViewModelInitial());
@@ -37,17 +38,16 @@ class LoginViewModel extends Cubit<LoginViewModelState> {
   Future<void> _login(LoginAction action, BuildContext context) async {
     emit(LoginViewModelLoading());
     // Check location permission
-    bool isServiceEnabled = await _locationHelper.isLocationServiceEnabled();
+    bool isServiceEnabled = await LocationHelper().isLocationServiceEnabled();
     if (!isServiceEnabled) {
       emit(LocationPermissionDenied());
       return;
     }
-    //
-    // LocationPermission permission = await _locationHelper.requestLocationPermission(context);
-    // if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-    //   emit(LocationPermissionDenied());
-    //   return;
-    // }
+    LocationPermission permission = await LocationHelper().requestLocationPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      emit(LocationPermissionDenied());
+      return;
+    }
 
     var result = await _loginUseCase.login(action.request);
     switch (result) {

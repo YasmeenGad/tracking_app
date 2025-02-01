@@ -2,6 +2,7 @@ class FireStoreRefKey {
   static const String orders = 'orders';
   static const String users = 'users';
   static const String state = 'orders.state';
+  static const String updatedAt = 'orders.updatedAt';
   static const String accepted = 'Accepted';
   static const String picked = 'Picked';
   static const String outForDelivery = 'Out for delivery';

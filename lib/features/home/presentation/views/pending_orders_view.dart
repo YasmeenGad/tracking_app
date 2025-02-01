@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flowery_delivery/core/localization/lang_keys.dart';
+import 'package:flowery_delivery/core/services/location_helper.dart';
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
@@ -37,6 +38,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
   @override
   void initState() {
     profileViewModelCubit.doAction(GetLoggedUserData());
+     LocationHelper().getCurrentLocation();
     super.initState();
   }
 
@@ -64,6 +66,7 @@ class _PendingOrdersViewState extends State<PendingOrdersView> {
                     fit: BoxFit.scaleDown,
                   );
                 },
+             triggerMode: IndicatorTriggerMode.anywhere,
               child: CustomScrollView(
                 controller:
                     context.read<PendingOrderViewModelCubit>().scrollController,

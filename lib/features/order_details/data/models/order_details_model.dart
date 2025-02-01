@@ -8,8 +8,12 @@ class OrderDetailsModel {
 
   factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
     return OrderDetailsModel(
-      driver: json['driver'] != null ? DriverDto.fromJson(json['driver']) : DriverDto(),
-      orders: json['orders'] != null ? OrderDataModel.fromJson(json['orders']) : OrderDataModel(),
+      driver: json['driver'] != null
+          ? DriverDto.fromJson(json['driver'])
+          : DriverDto(),
+      orders: json['orders'] != null
+          ? OrderDataModel.fromJson(json['orders'])
+          : OrderDataModel(),
     );
   }
 
@@ -64,9 +68,14 @@ class OrderDataModel {
   factory OrderDataModel.fromJson(Map<String, dynamic> json) {
     return OrderDataModel(
       id: json['id'],
-      user: json['user'] != null ? UserDataModel.fromJson(json['user']) : UserDataModel(),
+      user: json['user'] != null
+          ? UserDataModel.fromJson(json['user'])
+          : UserDataModel(),
       orderItems: json['orderItems'] != null
-          ? (json['orderItems'] as List).map((e) => e != null ? OrderItemsModel.fromJson(e) : OrderItemsModel()).toList()
+          ? (json['orderItems'] as List)
+              .map((e) =>
+                  e != null ? OrderItemsModel.fromJson(e) : OrderItemsModel())
+              .toList()
           : [],
       totalPrice: json['totalPrice'],
       paymentType: json['paymentType'],
@@ -76,7 +85,9 @@ class OrderDataModel {
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
       orderNumber: json['orderNumber'],
-      store: json['store'] != null ? StoreModel.fromJson(json['store']) : StoreModel(),
+      store: json['store'] != null
+          ? StoreModel.fromJson(json['store'])
+          : StoreModel(),
     );
   }
 
@@ -135,7 +146,9 @@ class UserDataModel {
       gender: json['gender'],
       phone: json['phone'],
       photo: json['photo'],
-      location: json['location'] != null ? LocationModel.fromJson(json['location']) : LocationModel(),
+      location: json['location'] != null
+          ? LocationModel.fromJson(json['location'])
+          : LocationModel(),
     );
   }
 
@@ -159,7 +172,8 @@ class OrderItemsModel {
   final int quantity;
   final String id;
 
-  OrderItemsModel({ProductModel? product, int? price, int? quantity, String? id})
+  OrderItemsModel(
+      {ProductModel? product, int? price, int? quantity, String? id})
       : product = product ?? ProductModel(),
         price = price ?? 0,
         quantity = quantity ?? 0,
@@ -167,7 +181,9 @@ class OrderItemsModel {
 
   factory OrderItemsModel.fromJson(Map<String, dynamic> json) {
     return OrderItemsModel(
-      product: json['product'] != null ? ProductModel.fromJson(json['product']) : ProductModel(),
+      product: json['product'] != null
+          ? ProductModel.fromJson(json['product'])
+          : ProductModel(),
       price: json['price'],
       quantity: json['quantity'],
       id: json['id'],
@@ -281,7 +297,12 @@ class StoreModel {
   final String phoneNumber;
   final String latLong;
 
-  StoreModel({String? name, String? image, String? address, String? phoneNumber, String? latLong})
+  StoreModel(
+      {String? name,
+      String? image,
+      String? address,
+      String? phoneNumber,
+      String? latLong})
       : name = name ?? '',
         image = image ?? '',
         address = address ?? '',
@@ -319,8 +340,8 @@ class LocationModel {
 
   factory LocationModel.fromJson(Map<String, dynamic> json) {
     return LocationModel(
-      latitude: json['latitude']!=null?json['latitude'].toDouble():0.0,
-      longitude: json['longitude'] !=null?json['longitude'].toDouble():0.0,
+      latitude: json['latitude'] != null ? json['latitude'].toDouble() : 0.0,
+      longitude: json['longitude'] != null ? json['longitude'].toDouble() : 0.0,
     );
   }
 
@@ -347,6 +368,7 @@ class DriverDto {
   final String phone;
   final String photo;
   final String createdAt;
+  final LocationModel location;
 
   DriverDto({
     String? id,
@@ -363,6 +385,7 @@ class DriverDto {
     String? phone,
     String? photo,
     String? createdAt,
+    LocationModel? location,
   })  : id = id ?? '',
         country = country ?? '',
         firstName = firstName ?? '',
@@ -376,25 +399,28 @@ class DriverDto {
         gender = gender ?? '',
         phone = phone ?? '',
         photo = photo ?? '',
-        createdAt = createdAt ?? '';
+        createdAt = createdAt ?? '',
+        location = location ?? LocationModel();
 
   factory DriverDto.fromJson(Map<String, dynamic> json) {
     return DriverDto(
-      id: json['id'],
-      country: json['country'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      vehicleType: json['vehicleType'],
-      vehicleNumber: json['vehicleNumber'],
-      vehicleLicense: json['vehicleLicense'],
-      nID: json['nID'],
-      nIDImg: json['nIDImg'],
-      email: json['email'],
-      gender: json['gender'],
-      phone: json['phone'],
-      photo: json['photo'],
-      createdAt: json['createdAt'],
-    );
+        id: json['id'],
+        country: json['country'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        vehicleType: json['vehicleType'],
+        vehicleNumber: json['vehicleNumber'],
+        vehicleLicense: json['vehicleLicense'],
+        nID: json['nID'],
+        nIDImg: json['nIDImg'],
+        email: json['email'],
+        gender: json['gender'],
+        phone: json['phone'],
+        photo: json['photo'],
+        createdAt: json['createdAt'],
+        location: json['location'] != null
+            ? LocationModel.fromJson(json['location'])
+            : LocationModel());
   }
 
   Map<String, dynamic> toJson() {
@@ -413,6 +439,7 @@ class DriverDto {
       'phone': phone,
       'photo': photo,
       'createdAt': createdAt,
+      'location': location.toJson(),
     };
   }
 }
