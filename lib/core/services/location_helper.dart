@@ -65,7 +65,7 @@ class LocationHelper {
         locationSettings: LocationSettings(),
       );
   longitude=    position.longitude;
-  longitude=    position.latitude;
+  latitude=    position.latitude;
       return position;
     } catch (e) {
       throw Exception(context?.translate(LangKeys.failure));
