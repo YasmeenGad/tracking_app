@@ -17,12 +17,13 @@ part 'profile_view_model_state.dart';
 class ProfileViewModelCubit extends Cubit<ProfileViewModelState> {
   final ProfileUseCase _useCase;
   final VehiclesCubit _vehiclesCubit;
-
+  GetLoggedDriverDataResponseEntity? driverDataResponseEntity;
 
   @factoryMethod
-  ProfileViewModelCubit(this._useCase, this._vehiclesCubit) : super(ProfileViewModelInitial());
+  ProfileViewModelCubit(this._useCase, this._vehiclesCubit)
+      : super(ProfileViewModelInitial());
 
-  void doAction(ProfileActions action) {
+  Future<void> doAction(ProfileActions action) async {
     switch (action) {
       case GetLoggedUserData():
         _getLoggedUserData();
@@ -35,7 +36,12 @@ class ProfileViewModelCubit extends Cubit<ProfileViewModelState> {
     switch (result) {
       case Success<GetLoggedDriverDataResponseEntity>():
         _vehiclesCubit.doAction(GetAllVehicles());
-        emit(GetLoggedUserDataSuccess(data: result.data));
+        driverDataResponseEntity = result.data;
+        debugPrint('');
+        debugPrint('************ driver ====>>> ${driverDataResponseEntity!.driver!}');
+        debugPrint('************ driver ====>>> ${driverDataResponseEntity!.driver!.firstName}');
+        emit(GetLoggedUserDataSuccess(
+            data: driverDataResponseEntity = result.data));
       case Fail<GetLoggedDriverDataResponseEntity>():
         emit(GetLoggedUserDataError(
             error: ErrorHandler.handle(result.exception!)));

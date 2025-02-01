@@ -168,6 +168,7 @@ class LangKeys {
   static const String creatingAccount = 'creating_account';
   static const String all = 'all';
   static const String noProductsAvailable = 'no_products_available';
+  static const String noOrdersAvailable = 'no_orders_available';
   static const String price = 'price';
   static const String currency = 'currency';
   static const String status = 'status';

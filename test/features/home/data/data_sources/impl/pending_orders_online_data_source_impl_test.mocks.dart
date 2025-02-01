@@ -29,6 +29,8 @@ import 'package:flowery_delivery/features/auth/data/models/response/verify_reset
     as _i5;
 import 'package:flowery_delivery/features/home/data/models/response/pending_order_response_dto.dart'
     as _i12;
+import 'package:flowery_delivery/features/order_details/data/models/change_order_state_dto.dart'
+    as _i22;
 import 'package:flowery_delivery/features/profile/data/models/request/change_password_request_dto.dart'
     as _i21;
 import 'package:flowery_delivery/features/profile/data/models/response/change_password_response_dto.dart'
@@ -59,57 +61,32 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeLoginResponseDto_0 extends _i1.SmartFake
     implements _i2.LoginResponseDto {
-  _FakeLoginResponseDto_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeLoginResponseDto_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeSignUpResponseDto_1 extends _i1.SmartFake
     implements _i3.SignUpResponseDto {
-  _FakeSignUpResponseDto_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeSignUpResponseDto_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeForgetPasswordResponseDto_2 extends _i1.SmartFake
     implements _i4.ForgetPasswordResponseDto {
-  _FakeForgetPasswordResponseDto_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeForgetPasswordResponseDto_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeVerifyResetCodeResponseDto_3 extends _i1.SmartFake
     implements _i5.VerifyResetCodeResponseDto {
-  _FakeVerifyResetCodeResponseDto_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeVerifyResetCodeResponseDto_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResetPasswordResponseDto_4 extends _i1.SmartFake
     implements _i6.ResetPasswordResponseDto {
-  _FakeResetPasswordResponseDto_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResetPasswordResponseDto_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeGetLoggedDriverDataResponseDto_5 extends _i1.SmartFake
@@ -117,65 +94,37 @@ class _FakeGetLoggedDriverDataResponseDto_5 extends _i1.SmartFake
   _FakeGetLoggedDriverDataResponseDto_5(
     Object parent,
     Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  ) : super(parent, parentInvocation);
 }
 
 class _FakeEditProfileResponseDto_6 extends _i1.SmartFake
     implements _i8.EditProfileResponseDto {
-  _FakeEditProfileResponseDto_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeEditProfileResponseDto_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUploadPhotoResponseDto_7 extends _i1.SmartFake
     implements _i9.UploadPhotoResponseDto {
-  _FakeUploadPhotoResponseDto_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUploadPhotoResponseDto_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeGetAllVehiclesDto_8 extends _i1.SmartFake
     implements _i10.GetAllVehiclesDto {
-  _FakeGetAllVehiclesDto_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeGetAllVehiclesDto_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeChangePasswordResponseDto_9 extends _i1.SmartFake
     implements _i11.ChangePasswordResponseDto {
-  _FakeChangePasswordResponseDto_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeChangePasswordResponseDto_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakePendingOrderResponseDto_10 extends _i1.SmartFake
     implements _i12.PendingOrderResponseDto {
-  _FakePendingOrderResponseDto_10(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakePendingOrderResponseDto_10(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [ApiManager].
@@ -189,191 +138,174 @@ class MockApiManager extends _i1.Mock implements _i13.ApiManager {
   @override
   _i14.Future<_i2.LoginResponseDto> login(_i15.LoginRequestDto? request) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #login,
-          [request],
-        ),
-        returnValue:
-            _i14.Future<_i2.LoginResponseDto>.value(_FakeLoginResponseDto_0(
-          this,
-          Invocation.method(
-            #login,
-            [request],
-          ),
-        )),
-      ) as _i14.Future<_i2.LoginResponseDto>);
+            Invocation.method(#login, [request]),
+            returnValue: _i14.Future<_i2.LoginResponseDto>.value(
+              _FakeLoginResponseDto_0(
+                this,
+                Invocation.method(#login, [request]),
+              ),
+            ),
+          )
+          as _i14.Future<_i2.LoginResponseDto>);
 
   @override
   _i14.Future<_i3.SignUpResponseDto> signUp(_i16.SignUpRequestDto? request) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signUp,
-          [request],
-        ),
-        returnValue:
-            _i14.Future<_i3.SignUpResponseDto>.value(_FakeSignUpResponseDto_1(
-          this,
-          Invocation.method(
-            #signUp,
-            [request],
-          ),
-        )),
-      ) as _i14.Future<_i3.SignUpResponseDto>);
+            Invocation.method(#signUp, [request]),
+            returnValue: _i14.Future<_i3.SignUpResponseDto>.value(
+              _FakeSignUpResponseDto_1(
+                this,
+                Invocation.method(#signUp, [request]),
+              ),
+            ),
+          )
+          as _i14.Future<_i3.SignUpResponseDto>);
 
   @override
   _i14.Future<_i4.ForgetPasswordResponseDto> forgetPassword(
-          _i17.ForgetPasswordRequestDto? request) =>
+    _i17.ForgetPasswordRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #forgetPassword,
-          [request],
-        ),
-        returnValue: _i14.Future<_i4.ForgetPasswordResponseDto>.value(
-            _FakeForgetPasswordResponseDto_2(
-          this,
-          Invocation.method(
-            #forgetPassword,
-            [request],
-          ),
-        )),
-      ) as _i14.Future<_i4.ForgetPasswordResponseDto>);
+            Invocation.method(#forgetPassword, [request]),
+            returnValue: _i14.Future<_i4.ForgetPasswordResponseDto>.value(
+              _FakeForgetPasswordResponseDto_2(
+                this,
+                Invocation.method(#forgetPassword, [request]),
+              ),
+            ),
+          )
+          as _i14.Future<_i4.ForgetPasswordResponseDto>);
 
   @override
   _i14.Future<_i5.VerifyResetCodeResponseDto> verifyResetCode(
-          _i18.VerifyResetCodeRequestDto? resetCode) =>
+    _i18.VerifyResetCodeRequestDto? resetCode,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #verifyResetCode,
-          [resetCode],
-        ),
-        returnValue: _i14.Future<_i5.VerifyResetCodeResponseDto>.value(
-            _FakeVerifyResetCodeResponseDto_3(
-          this,
-          Invocation.method(
-            #verifyResetCode,
-            [resetCode],
-          ),
-        )),
-      ) as _i14.Future<_i5.VerifyResetCodeResponseDto>);
+            Invocation.method(#verifyResetCode, [resetCode]),
+            returnValue: _i14.Future<_i5.VerifyResetCodeResponseDto>.value(
+              _FakeVerifyResetCodeResponseDto_3(
+                this,
+                Invocation.method(#verifyResetCode, [resetCode]),
+              ),
+            ),
+          )
+          as _i14.Future<_i5.VerifyResetCodeResponseDto>);
 
   @override
   _i14.Future<_i6.ResetPasswordResponseDto> resetPassword(
-          _i19.ResetPasswordRequestDto? resetPassword) =>
+    _i19.ResetPasswordRequestDto? resetPassword,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #resetPassword,
-          [resetPassword],
-        ),
-        returnValue: _i14.Future<_i6.ResetPasswordResponseDto>.value(
-            _FakeResetPasswordResponseDto_4(
-          this,
-          Invocation.method(
-            #resetPassword,
-            [resetPassword],
-          ),
-        )),
-      ) as _i14.Future<_i6.ResetPasswordResponseDto>);
+            Invocation.method(#resetPassword, [resetPassword]),
+            returnValue: _i14.Future<_i6.ResetPasswordResponseDto>.value(
+              _FakeResetPasswordResponseDto_4(
+                this,
+                Invocation.method(#resetPassword, [resetPassword]),
+              ),
+            ),
+          )
+          as _i14.Future<_i6.ResetPasswordResponseDto>);
 
   @override
   _i14.Future<_i7.GetLoggedDriverDataResponseDto> getLoggedDriverData() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getLoggedDriverData,
-          [],
-        ),
-        returnValue: _i14.Future<_i7.GetLoggedDriverDataResponseDto>.value(
-            _FakeGetLoggedDriverDataResponseDto_5(
-          this,
-          Invocation.method(
-            #getLoggedDriverData,
-            [],
-          ),
-        )),
-      ) as _i14.Future<_i7.GetLoggedDriverDataResponseDto>);
+            Invocation.method(#getLoggedDriverData, []),
+            returnValue: _i14.Future<_i7.GetLoggedDriverDataResponseDto>.value(
+              _FakeGetLoggedDriverDataResponseDto_5(
+                this,
+                Invocation.method(#getLoggedDriverData, []),
+              ),
+            ),
+          )
+          as _i14.Future<_i7.GetLoggedDriverDataResponseDto>);
 
   @override
   _i14.Future<_i8.EditProfileResponseDto> editProfile(
-          Map<String, dynamic>? body) =>
+    Map<String, dynamic>? body,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #editProfile,
-          [body],
-        ),
-        returnValue: _i14.Future<_i8.EditProfileResponseDto>.value(
-            _FakeEditProfileResponseDto_6(
-          this,
-          Invocation.method(
-            #editProfile,
-            [body],
-          ),
-        )),
-      ) as _i14.Future<_i8.EditProfileResponseDto>);
+            Invocation.method(#editProfile, [body]),
+            returnValue: _i14.Future<_i8.EditProfileResponseDto>.value(
+              _FakeEditProfileResponseDto_6(
+                this,
+                Invocation.method(#editProfile, [body]),
+              ),
+            ),
+          )
+          as _i14.Future<_i8.EditProfileResponseDto>);
 
   @override
   _i14.Future<_i9.UploadPhotoResponseDto> uploadPhoto(_i20.File? photo) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #uploadPhoto,
-          [photo],
-        ),
-        returnValue: _i14.Future<_i9.UploadPhotoResponseDto>.value(
-            _FakeUploadPhotoResponseDto_7(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [photo],
-          ),
-        )),
-      ) as _i14.Future<_i9.UploadPhotoResponseDto>);
+            Invocation.method(#uploadPhoto, [photo]),
+            returnValue: _i14.Future<_i9.UploadPhotoResponseDto>.value(
+              _FakeUploadPhotoResponseDto_7(
+                this,
+                Invocation.method(#uploadPhoto, [photo]),
+              ),
+            ),
+          )
+          as _i14.Future<_i9.UploadPhotoResponseDto>);
 
   @override
-  _i14.Future<_i10.GetAllVehiclesDto> getAllVehicles() => (super.noSuchMethod(
-        Invocation.method(
-          #getAllVehicles,
-          [],
-        ),
-        returnValue:
-            _i14.Future<_i10.GetAllVehiclesDto>.value(_FakeGetAllVehiclesDto_8(
-          this,
-          Invocation.method(
-            #getAllVehicles,
-            [],
-          ),
-        )),
-      ) as _i14.Future<_i10.GetAllVehiclesDto>);
+  _i14.Future<_i10.GetAllVehiclesDto> getAllVehicles() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAllVehicles, []),
+            returnValue: _i14.Future<_i10.GetAllVehiclesDto>.value(
+              _FakeGetAllVehiclesDto_8(
+                this,
+                Invocation.method(#getAllVehicles, []),
+              ),
+            ),
+          )
+          as _i14.Future<_i10.GetAllVehiclesDto>);
 
   @override
   _i14.Future<_i11.ChangePasswordResponseDto> changePassword(
-          _i21.ChangePasswordRequestDto? request) =>
+    _i21.ChangePasswordRequestDto? request,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #changePassword,
-          [request],
-        ),
-        returnValue: _i14.Future<_i11.ChangePasswordResponseDto>.value(
-            _FakeChangePasswordResponseDto_9(
-          this,
-          Invocation.method(
-            #changePassword,
-            [request],
-          ),
-        )),
-      ) as _i14.Future<_i11.ChangePasswordResponseDto>);
+            Invocation.method(#changePassword, [request]),
+            returnValue: _i14.Future<_i11.ChangePasswordResponseDto>.value(
+              _FakeChangePasswordResponseDto_9(
+                this,
+                Invocation.method(#changePassword, [request]),
+              ),
+            ),
+          )
+          as _i14.Future<_i11.ChangePasswordResponseDto>);
 
   @override
-  _i14.Future<_i12.PendingOrderResponseDto> getPendingOrders() =>
+  _i14.Future<_i12.PendingOrderResponseDto> getPendingOrders(int? limit) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getPendingOrders,
-          [],
-        ),
-        returnValue: _i14.Future<_i12.PendingOrderResponseDto>.value(
-            _FakePendingOrderResponseDto_10(
-          this,
-          Invocation.method(
-            #getPendingOrders,
-            [],
-          ),
-        )),
-      ) as _i14.Future<_i12.PendingOrderResponseDto>);
+            Invocation.method(#getPendingOrders, [limit]),
+            returnValue: _i14.Future<_i12.PendingOrderResponseDto>.value(
+              _FakePendingOrderResponseDto_10(
+                this,
+                Invocation.method(#getPendingOrders, [limit]),
+              ),
+            ),
+          )
+          as _i14.Future<_i12.PendingOrderResponseDto>);
+
+  @override
+  _i14.Future<void> startOrder(String? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#startOrder, [id]),
+            returnValue: _i14.Future<void>.value(),
+            returnValueForMissingStub: _i14.Future<void>.value(),
+          )
+          as _i14.Future<void>);
+
+  @override
+  _i14.Future<void> changeOrderStatus(
+    String? id,
+    _i22.ChangeOrderStateDto? state,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#changeOrderStatus, [id, state]),
+            returnValue: _i14.Future<void>.value(),
+            returnValueForMissingStub: _i14.Future<void>.value(),
+          )
+          as _i14.Future<void>);
 }

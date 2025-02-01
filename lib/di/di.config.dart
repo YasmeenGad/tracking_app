@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -17,6 +18,7 @@ import '../core/app_cubit/app_cubit.dart' as _i693;
 import '../core/networking/api/api_manager.dart' as _i282;
 import '../core/networking/common/regestet_context_module.dart' as _i125;
 import '../core/networking/network_factory.dart' as _i377;
+import '../core/services/firebase_helper/fire_store_helper.dart' as _i357;
 import '../features/auth/data/data_sources/contracts/auth_online_data_source.dart'
     as _i901;
 import '../features/auth/data/data_sources/contracts/offline_data_source.dart'
@@ -51,6 +53,24 @@ import '../features/home/domain/contracts/pending_orders_repo.dart' as _i43;
 import '../features/home/domain/use_cases/pending_orders_usecase.dart' as _i15;
 import '../features/home/presentation/viewModel/pending_order_view_model_cubit.dart'
     as _i317;
+import '../features/order_details/data/data_sources/contracts/order_details_online_data_source.dart'
+    as _i722;
+import '../features/order_details/data/data_sources/impl/order_details_online_data_source_impl.dart'
+    as _i266;
+import '../features/order_details/data/repositories/order_details_repo_impl.dart'
+    as _i962;
+import '../features/order_details/domain/repositories/contract/order_details_repo.dart'
+    as _i439;
+import '../features/order_details/domain/use_cases/add_order_details_case.dart'
+    as _i811;
+import '../features/order_details/domain/use_cases/change_order_status.dart'
+    as _i114;
+import '../features/order_details/domain/use_cases/get_order_by_order_id_case.dart'
+    as _i341;
+import '../features/order_details/domain/use_cases/update_order_status.dart'
+    as _i182;
+import '../features/order_details/presentation/viewModel/order_details_view_model_cubit.dart'
+    as _i42;
 import '../features/profile/data/data_sources/contracts/profile_online_data_source.dart'
     as _i46;
 import '../features/profile/data/data_sources/impl/profile_online_data_source_impl.dart'
@@ -83,10 +103,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => networkFactory.providerInterceptor());
     gh.singleton<_i409.GlobalKey<_i409.NavigatorState>>(
         () => registerModule.navigatorKey);
+    gh.singleton<_i357.FireStoreService>(() => _i357.FireStoreService());
     gh.lazySingleton<_i361.Dio>(() => networkFactory.provideDio());
     gh.factory<_i345.OfflineDataSource>(
         () => _i1036.OfflineDataSourceImplementation());
     gh.singleton<_i282.ApiManager>(() => _i282.ApiManager(gh<_i361.Dio>()));
+    gh.factory<_i722.OrderDetailsOnlineDataSource>(
+        () => _i266.OrderDetailsOnlineDataSourceImpl(
+              gh<_i357.FireStoreService>(),
+              gh<_i282.ApiManager>(),
+            ));
     gh.factory<_i46.ProfileOnlineDataSource>(
         () => _i74.ProfileOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i969.PendingOrdersOnlineDataSource>(
@@ -97,10 +123,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
+    gh.factory<_i439.OrderDetailsRepo>(() =>
+        _i962.OrderDetailsRepoImpl(gh<_i722.OrderDetailsOnlineDataSource>()));
     gh.factory<_i496.LoginUseCase>(
         () => _i496.LoginUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i853.SignUpUseCase>(
         () => _i853.SignUpUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i114.ChangeOrderStatusCase>(
+        () => _i114.ChangeOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
+    gh.factory<_i341.GetOrderByOrderIdCase>(
+        () => _i341.GetOrderByOrderIdCase(gh<_i439.OrderDetailsRepo>()));
+    gh.factory<_i182.UpdateOrderStatusCase>(
+        () => _i182.UpdateOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i43.PendingOrdersRepo>(() =>
         _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(
@@ -115,12 +149,21 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i690.LoginViewModel(gh<_i496.LoginUseCase>()));
     gh.factory<_i804.ProfileUseCase>(
         () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
+    gh.factory<_i811.AddOrderDetailsCase>(
+        () => _i811.AddOrderDetailsCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i638.EditProfileCubit>(() => _i638.EditProfileCubit(
           gh<_i804.ProfileUseCase>(),
           gh<_i345.OfflineDataSource>(),
         ));
     gh.factory<_i508.SignUpViewModel>(
         () => _i508.SignUpViewModel(gh<_i853.SignUpUseCase>()));
+    gh.factory<_i42.OrderDetailsViewModelCubit>(
+        () => _i42.OrderDetailsViewModelCubit(
+              gh<_i811.AddOrderDetailsCase>(),
+              gh<_i341.GetOrderByOrderIdCase>(),
+              gh<_i182.UpdateOrderStatusCase>(),
+              gh<_i114.ChangeOrderStatusCase>(),
+            ));
     gh.factory<_i317.PendingOrderViewModelCubit>(
         () => _i317.PendingOrderViewModelCubit(gh<_i15.PendingOrderUseCase>()));
     gh.factory<_i338.VehiclesCubit>(

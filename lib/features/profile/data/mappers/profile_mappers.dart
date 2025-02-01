@@ -31,7 +31,7 @@ class ProfileMapper {
           email: dto.driver?.email,
           gender: dto.driver?.gender,
           phone: dto.driver?.phone,
-          photo: dto.driver?.photo,
+          photo:"https://flower.elevateegy.com/uploads/${dto.driver!.photo!.split("https://flower.elevateegy.com/uploads/").last}" ,
           createdAt: dto.driver?.createdAt,
         ) : null,
     );
@@ -54,7 +54,7 @@ class ProfileMapper {
       password: dto.password,
       gender: dto.gender,
       phone: dto.phone,
-      photo: dto.photo,
+      photo:"https://flower.elevateegy.com/uploads/${dto.photo!.split("https://flower.elevateegy.com/uploads/").last}",
       role: dto.role,
       createdAt: dto.createdAt,
       country: dto.country,

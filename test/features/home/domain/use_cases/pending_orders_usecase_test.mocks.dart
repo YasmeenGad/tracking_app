@@ -36,20 +36,19 @@ class MockPendingOrdersRepo extends _i1.Mock implements _i2.PendingOrdersRepo {
   }
 
   @override
-  _i3.Future<_i4.DataResult<_i5.PendingOrderResponseEntity>>
-      getPendingOrders() => (super.noSuchMethod(
-            Invocation.method(
-              #getPendingOrders,
-              [],
-            ),
-            returnValue: _i3
-                .Future<_i4.DataResult<_i5.PendingOrderResponseEntity>>.value(
-                _i6.dummyValue<_i4.DataResult<_i5.PendingOrderResponseEntity>>(
-              this,
-              Invocation.method(
-                #getPendingOrders,
-                [],
+  _i3.Future<_i4.DataResult<_i5.PendingOrderResponseEntity>> getPendingOrders({
+    required int? limit,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getPendingOrders, [], {#limit: limit}),
+            returnValue: _i3.Future<
+              _i4.DataResult<_i5.PendingOrderResponseEntity>
+            >.value(
+              _i6.dummyValue<_i4.DataResult<_i5.PendingOrderResponseEntity>>(
+                this,
+                Invocation.method(#getPendingOrders, [], {#limit: limit}),
               ),
-            )),
-          ) as _i3.Future<_i4.DataResult<_i5.PendingOrderResponseEntity>>);
+            ),
+          )
+          as _i3.Future<_i4.DataResult<_i5.PendingOrderResponseEntity>>);
 }

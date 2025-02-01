@@ -8,7 +8,6 @@ import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flowery_delivery/generated/assets.dart';
-import '../spacing.dart';
 
 class AppLoader extends StatefulWidget {
   const AppLoader({super.key});
@@ -44,28 +43,32 @@ class AppLoaderState extends State<AppLoader> with SingleTickerProviderStateMixi
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Lottie.asset(
-              Assets.imagesFloweryLoader,
+            SizedBox(
               height: 80.sp,
-              alignment: Alignment.bottomCenter,
-              fit: BoxFit.scaleDown,
+              child: Lottie.asset(
+                Assets.imagesFloweryLoader,
+                alignment: Alignment.bottomCenter,
+                fit: BoxFit.scaleDown,
+              ),
             ),
-            verticalSpacing(15),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: AnimatedTextKit(
-                repeatForever: true,
-                animatedTexts: [
-                  ScaleAnimatedText(
-                    context.translate(LangKeys.appName ),
-                    textStyle: MyFonts.styleBold700_24.copyWith(
-                      fontFamily: 'oronteus',
-                      color: MyColors.baseColor,
+            SizedBox(
+              height: 40.sp,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: AnimatedTextKit(
+                  repeatForever: true,
+                  animatedTexts: [
+                    ScaleAnimatedText(
+                      context.translate(LangKeys.appName ),
+                      textStyle: MyFonts.styleBold700_24.copyWith(
+                        fontFamily: 'oronteus',
+                        color: MyColors.baseColor,
+                      ),
+
+                      textAlign: TextAlign.center,
                     ),
-                    scalingFactor: 1.5,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

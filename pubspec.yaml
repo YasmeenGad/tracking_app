@@ -41,7 +41,7 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_screenutil: ^5.9.3
   http_parser: ^4.1.2
-  shared_preferences: ^2.3.4
+  shared_preferences: ^2.5.0
   build_runner: ^2.4.14
   awesome_snackbar_content: ^0.1.4
   connectivity_plus: ^6.1.1
@@ -65,6 +65,7 @@ dependencies:
   auto_size_text: ^3.0.0
   image_picker: ^1.1.2
   animate_do: ^3.3.4
+  custom_refresh_indicator: ^4.0.1
 
   # Dependency Injection
   injectable: ^2.5.0
@@ -74,13 +75,27 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_svg: ^2.0.16
   bloc: ^8.1.4
+
+  # Maps
   geolocator: ^13.0.2
   geocoding: ^3.0.0
+  location: ^8.0.0
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+
+
 
   # Firebase
   firebase_core: ^3.9.0
   firebase_crashlytics: ^4.2.0
   firebase_analytics: ^11.3.6
+  cloud_firestore: ^5.6.2
+  firebase_database: ^11.3.1
+  googleapis: ^13.2.0
+  googleapis_auth: ^1.6.0
+  firebase_messaging:
+  flutter_local_notifications:
+
 
 dev_dependencies:
   flutter_test:

@@ -29,15 +29,15 @@ void main() {
         orders: [],
         metadata: PendingOrderResponseEntityMetadata(1, 1, 1, 10),
       );
-      when(mockRepo.getPendingOrders()).thenAnswer(
+      when(mockRepo.getPendingOrders(limit: 20)).thenAnswer(
           (_) async => Success<PendingOrderResponseEntity>(response));
 
-      final result = await useCase.getPendingOrders();
+      final result = await useCase.getPendingOrders(limit: 20);
 
       expect(result, isA<Success<PendingOrderResponseEntity>>());
       final successResult = result as Success<PendingOrderResponseEntity>;
       expect(successResult.data, response);
-      verify(mockRepo.getPendingOrders()).called(1);
+      verify(mockRepo.getPendingOrders(limit: 20)).called(1);
     });
   });
 }

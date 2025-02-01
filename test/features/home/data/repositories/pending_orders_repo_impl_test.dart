@@ -29,22 +29,22 @@ void main() {
         metadata: PendingOrderResponseEntityMetadata(1, 1, 1, 10),
         orders: [],
       );
-      when(mockDataSource.getPendingOrders()).thenAnswer(
+      when(mockDataSource.getPendingOrders(limit: 20)).thenAnswer(
           (_) async => Success<PendingOrderResponseEntity>(response));
-      final result = await repo.getPendingOrders();
+      final result = await repo.getPendingOrders(limit: 20);
       expect(result, isA<Success<PendingOrderResponseEntity>>());
       final successResult = result as Success<PendingOrderResponseEntity>;
       expect(successResult.data, response);
-      verify(mockDataSource.getPendingOrders()).called(1);
+      verify(mockDataSource.getPendingOrders(limit: 20)).called(1);
     });
     test('should return PendingOrderResponseEntity on error', () async {
-      when(mockDataSource.getPendingOrders()).thenAnswer(
+      when(mockDataSource.getPendingOrders(limit: 20)).thenAnswer(
           (_) async => (Fail<PendingOrderResponseEntity>(Exception())));
-      final result = await repo.getPendingOrders();
+      final result = await repo.getPendingOrders(limit: 20);
       expect(result, isA<Fail<PendingOrderResponseEntity>>());
       final failResult = result as Fail<PendingOrderResponseEntity>;
       expect(failResult.exception, isA<Exception>());
-      verify(mockDataSource.getPendingOrders()).called(1);
+      verify(mockDataSource.getPendingOrders(limit: 20)).called(1);
     });
   });
 }

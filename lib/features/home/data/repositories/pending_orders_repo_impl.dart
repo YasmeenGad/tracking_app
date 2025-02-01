@@ -14,6 +14,6 @@ class PendingOrdersRepoImpl implements PendingOrdersRepo {
   PendingOrdersRepoImpl(this._onlineDataSource);
 
   @override
-  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders() async =>
-      await _onlineDataSource.getPendingOrders();
+  Future<DataResult<PendingOrderResponseEntity>> getPendingOrders(  {required int limit } ) async =>
+      await _onlineDataSource.getPendingOrders(limit: limit );
 }

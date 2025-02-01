@@ -18,7 +18,7 @@ class CustomVehicleData extends StatelessWidget {
   Widget build(BuildContext context) {
     final vehicleTypeName = vehicles
         .firstWhere(
-          (vehicle) => vehicle.id == state.data.driver!.vehicleType,
+          (vehicle) => vehicle.type == state.data.driver!.vehicleType,
       orElse: () => Vehicles(type: 'Unknown'),
     )
         .type;
@@ -29,7 +29,7 @@ class CustomVehicleData extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Column(
-          spacing: 8.h,
+          spacing: 6.h,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

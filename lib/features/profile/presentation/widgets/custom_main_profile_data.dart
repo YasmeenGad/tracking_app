@@ -18,9 +18,10 @@ class CustomMainProfileData extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const CustomPictureMainScreen(),
+
+        CustomPictureMainScreen(state: state),
         Column(
-          spacing: 8.h,
+          spacing: 6.h,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

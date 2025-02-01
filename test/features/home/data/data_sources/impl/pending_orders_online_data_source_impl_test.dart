@@ -25,14 +25,14 @@ void main() {
         PendingOrderResponseDtoMetadata(1, 1, 1, 10),
         [],
       );
-      when(mockApiManager.getPendingOrders()).thenAnswer((_) async => response);
-      final result = await onlineDataSource.getPendingOrders();
+      when(mockApiManager.getPendingOrders(20)).thenAnswer((_) async => response);
+      final result = await onlineDataSource.getPendingOrders(limit: 20);
       expect(result, isA<Success<PendingOrderResponseEntity>>());
     });
 
     test('should return PendingOrderResponseDto on error', () async {
-      when(mockApiManager.getPendingOrders()).thenThrow(Exception());
-      final result = await onlineDataSource.getPendingOrders();
+      when(mockApiManager.getPendingOrders(20)).thenThrow(Exception());
+      final result = await onlineDataSource.getPendingOrders(limit: 20);
       expect(result, isA<Fail<PendingOrderResponseEntity>>());
     });
   });
