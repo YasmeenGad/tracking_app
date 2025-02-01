@@ -8,10 +8,12 @@ class Assets {
   static const String imagesAdd = 'assets/images/add.png';
   static const String imagesArrowBackIos = 'assets/images/arrow_back_ios.png';
   static const String imagesArrowDownIos = 'assets/images/arrow_down_ios.png';
+  static const String imagesBg = 'assets/images/bg.svg';
   static const String imagesButtonFilter = 'assets/images/button_filter.png';
   static const String imagesCall = 'assets/images/call.svg';
   static const String imagesCancel = 'assets/images/cancel.png';
   static const String imagesCategory = 'assets/images/category.png';
+  static const String imagesCheckCircle = 'assets/images/check-circle.svg';
   static const String imagesCheckorders = 'assets/images/checkorders.png';
   static const String imagesDelete = 'assets/images/delete.png';
   static const String imagesDeliveryAnimation = 'assets/images/delivery_animation.json';
