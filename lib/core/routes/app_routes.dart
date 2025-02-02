@@ -5,25 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
-import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
-import 'package:flowery_delivery/features/order_details/presentation/views/order_details_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../di/di.dart';
 import '../../features/auth/presentation/forget_password/ViewModel/forget_password_view_model_cubit.dart';
 import '../../features/auth/presentation/forget_password/view/email_verification.dart';
 import '../../features/auth/presentation/forget_password/view/forget_password.dart';
 import '../../features/auth/presentation/forget_password/view/reset_password.dart';
 import '../../features/auth/presentation/login/view/login_view.dart';
-import '../../features/auth/presentation/signup/view/signup_view.dart';
-import '../../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart';
 import '../../features/home/presentation/viewModel/pending_orders_actions.dart';
 import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/pending_orders_view.dart';
-
-import '../../features/pick up location/presentation/views/location_view.dart';
 import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
 import '../../features/profile/presentation/viewModel/profile_view_model_cubit.dart';
@@ -33,18 +24,15 @@ import '../../features/profile/presentation/views/profile_main_screen.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/profile/presentation/views/reset_password_profile_view.dart';
 import '../../features/profile/presentation/views/vehicle_view.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/auth/presentation/apply/viewModel/apply_form_view_model.dart';
 import '../../features/auth/presentation/apply/views/apply_view.dart';
 import 'base_routes.dart';
 
 class AppRoutes {
-  /* static const String onBoarding = '/';
+  static const String onBoarding = '/';
   static const String login = 'login';
   static const String forgetPassword = 'forgetPassword';
   static const String emailVerification = 'emailVerification';
   static const String resetPassWord = 'resetPassWord';
-  static const String changePassWord = 'changePassWord';*/
   static const String changePassWord = 'changePassWord';
   static const String homeLayout = 'homeLayout';
 
@@ -59,7 +47,7 @@ class AppRoutes {
   static const String orderDetailsView = "orderDetailsView";
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
-    //final args = settings.arguments;
+    final args = settings.arguments;
     switch (settings.name) {
       case applyView:
         return BaseRoute(
@@ -90,12 +78,6 @@ class AppRoutes {
       case AppRoutes.login:
         return BaseRoute(
           page: const LoginView(),
-        );
-      case AppRoutes.register:
-        return BaseRoute(
-          page: BlocProvider(
-              create: (context) => getIt.get<SignUpViewModel>(),
-              child: const SignUpView()),
         );
          case successApplyView:
         return BaseRoute(page: const SuccessApplyView());

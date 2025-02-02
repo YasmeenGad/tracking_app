@@ -55,7 +55,7 @@ abstract class ApiManager {
       @Part(name: 'rePassword') String rePassword,
       @Part(name: 'gender') String gender,
       @Part(name: 'phone') String phone);
-}
+
   @POST(ApiConstants.signInApi)
   Future<LoginResponseDto> login(@Body() LoginRequestDto request);
 
