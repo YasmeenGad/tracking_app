@@ -14,8 +14,8 @@ jobs:
         with:
           channel: 'stable'
           flutter-version: 3.27.1
-      - name: Create placeholder ..env.firebase
-        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > ..env.firebase
+      - name: Create placeholder .env.firebase
+        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > .env.firebase
 
       - run: flutter pub get
       - run: flutter test --coverage
