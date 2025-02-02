@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:flowery_delivery/features/auth/data/models/response/apply_response_dto.dart';
 import 'package:flowery_delivery/features/order_details/data/models/change_order_state_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';

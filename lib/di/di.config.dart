@@ -23,6 +23,8 @@ import '../features/auth/data/data_sources/contracts/auth_online_data_source.dar
     as _i901;
 import '../features/auth/data/data_sources/contracts/offline_data_source.dart'
     as _i345;
+import '../features/auth/data/data_sources/impl/apply_driver_online_data_source_impl.dart'
+    as _i603;
 import '../features/auth/data/data_sources/impl/auth_offline_data_source_impl.dart'
     as _i1036;
 import '../features/auth/data/data_sources/impl/auth_online_data_source_impl.dart'
@@ -121,6 +123,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
+    gh.factory<_i603.ApplyDriverOnlineDataSourceImpl>(
+        () => _i603.ApplyDriverOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
     gh.factory<_i439.OrderDetailsRepo>(() =>

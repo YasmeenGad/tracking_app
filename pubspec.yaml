@@ -130,6 +130,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/files/
     - lib/generated/assets.dart
     - .env.firebase
     - translations/ar.json

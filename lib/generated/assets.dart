@@ -2,6 +2,19 @@
 class Assets {
   Assets._();
 
+  static const String assetsImagesBg = 'assets/images/bg.svg~';
+
+  static const String
+
+  floweryTrackingApp.env
+
+  =
+
+  '
+
+  .env.firebase
+
+  ';
   static const String fontsOronteusFinaeus = 'assets/fonts/oronteus_finaeus.ttf';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String imagesAboutAppImage = 'assets/images/about_app_image.gif';
@@ -62,4 +75,5 @@ class Assets {
   static const String imagesWhatsapp = 'assets/images/whatsapp.svg';
   static const String translationsAr = 'translations/ar.json';
   static const String translationsEn = 'translations/en.json';
+
 }
