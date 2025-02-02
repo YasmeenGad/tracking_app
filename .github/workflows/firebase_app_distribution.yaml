@@ -35,8 +35,8 @@ jobs:
         # This action installs Flutter and ensures the correct version is available for building.
 
       # Step 4: Create placeholder ..env.firebase file
-      - name: Create placeholder ..env.firebase
-        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > ..env.firebase
+      - name: Create placeholder .env.firebase
+        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > .env.firebase
         # This step creates a placeholder `..env.firebase` file, which may be used for Firebase configurations.
 
       # Step 5: Decode and place google-services.json
