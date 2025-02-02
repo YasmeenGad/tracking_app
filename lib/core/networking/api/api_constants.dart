@@ -19,4 +19,6 @@ class ApiConstants {
   static const String getPendingOrders = "api/v1/orders/pending-orders/";
   static const String startOrder = "api/v1/orders/start/";
   static const String updateOrder = "api/v1/orders/state/";
+
+  static const String apply = "api/v1/drivers/apply";
 }

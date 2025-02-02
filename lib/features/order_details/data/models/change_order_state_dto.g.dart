@@ -6,6 +6,10 @@ part of 'change_order_state_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ChangeOrderStateDto _$ChangeOrderStateDtoFromJson(Map<String, dynamic> json) =>
+    ChangeOrderStateDto(
+      json['state'] as String?,
+    );
 
 Map<String, dynamic> _$ChangeOrderStateDtoToJson(
         ChangeOrderStateDto instance) =>
