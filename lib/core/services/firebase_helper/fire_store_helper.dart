@@ -13,13 +13,6 @@ class FireStoreService {
   }
 
   FireStoreService._internal();
-initFirebaseDatabase() {
-    // _firebaseDatabase.setPersistenceEnabled(true);
-    // _firebaseDatabase.setPersistenceCacheSizeBytes(10000000);
-    // _firebaseDatabase.databaseURL = "https://flowery-app-78949-default-rtdb.firebaseio.com/";
-    // _firebaseDatabase.setLoggingEnabled(true);
-    // _firebaseDatabase.goOnline();
-  }
   FirebaseFirestore get fireStore => _fireStore;
   FirebaseDatabase get firebaseDatabase => _firebaseDatabase;
 }

@@ -67,6 +67,8 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
           title: orderStatus.notificationTitle,
           body: orderStatus.notificationBody,
           topic: action.order.id,
+          orderId: action.order.id,
+          userId: action.order.user!.id,
         );
         emit(AddOrderSuccess());
 
