@@ -112,6 +112,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     title: orderViewModelCubit.orderStatus.notificationTitle,
                     body: orderViewModelCubit.orderStatus.notificationBody,
                     topic: order.id,
+                    userId: order.user!.id!,
+                    orderId: order.id
                   );
                   if(order.state==FireStoreRefKey.delivered){
                     await getIt.get<OrderDetailsViewModelCubit>()
