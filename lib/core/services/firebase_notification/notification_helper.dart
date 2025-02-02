@@ -83,7 +83,8 @@ class NotificationHelper {
   Future<void> sendTopicNotification(
       {String? topic,
         String? token,
-        String? productId,
+        String? orderId,
+        String?userId,
         required String title,
         required String body}) async {
     FirebaseServerToken firebaseServerToken = FirebaseServerToken();
@@ -108,8 +109,9 @@ class NotificationHelper {
             "notification": {
               "title": title,
               "body": body,
+
             },
-            // 'data': {'productId': productId},
+             'data': {'orderId': orderId, 'userId': userId},
           },
         },
       );

@@ -131,15 +131,12 @@ class AppRoutes {
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
       case AppRoutes.pendingOrdersView:
-        return BaseRoute(page: PendingOrdersView());
-      case AppRoutes.orderDetailsView:
-        final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(
-            page: BlocProvider(
-          create: (context) => getIt.get<OrderDetailsViewModelCubit>()
-            ..doAction(GetOrderDetails(
-                orderId: arguments!['orderId']!, userId: arguments['userId']!)),
-          child: OrderDetailsScreen(),
+            page: BlocProvider<PendingOrderViewModelCubit>(
+              create: (context) =>
+              getIt.get<PendingOrderViewModelCubit>()
+                ..onAction(GetPendingOrders()),
+              child: const PendingOrdersView(),
         ));
       case AppRoutes.locationView:
         return BaseRoute(

@@ -33,7 +33,6 @@ dependencies:
   # Core functionality
   bloc_test: ^9.1.7
   badges: ^3.1.1
-  row_item: ^2.2.1+1
   dio: ^5.7.0
   retrofit: ^4.4.1
   logger: ^2.5.0
