@@ -8,7 +8,7 @@ import '../../../order_details/presentation/widgets/address_section.dart';
 import '../widgets/custom_address_details.dart';
 
 class LocationView extends StatelessWidget {
-  final LatLng? selectedLocation; // Pass this from the parent widget
+  final LatLng? selectedLocation;
 
   const LocationView({super.key, this.selectedLocation});
 

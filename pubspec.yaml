@@ -64,7 +64,6 @@ dependencies:
   auto_size_text: ^3.0.0
   image_picker: ^1.1.2
   animate_do: ^3.3.4
-  http:
   custom_refresh_indicator: ^4.0.1
 
   # Dependency Injection

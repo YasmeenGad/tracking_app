@@ -12,4 +12,6 @@ class FireStoreRefKey {
   static const String inProgress = 'inProgress';
   static const String completed = 'completed';
   static const String cancelled = 'canceled';
+  static const String driverLatitude = 'driver.location.latitude';
+  static const String driverLongitude = 'driver.location.longitude';
 }

@@ -85,7 +85,8 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   Future<DataResult<void>> updateOrderStatus(
       {required String userId,
       required String orderId,
-      required String status}) {
+    required String status,
+  }) {
     return executeApi(() async {
       if (Firebase.apps.isEmpty) {
         Firebase.initializeApp();
@@ -109,4 +110,9 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   Future<DataResult<void>> changeOrderStatus({required String orderId, required String state}) {
     return executeApi(() => _apiManager.changeOrderStatus(orderId, OrderDetailsMapper.toChangeOrderDto(state)));
   }
+
+// @override
+// Future<DataResult<void>> updateLocation({required String orderId, required String useId, required LocationModel location}) {
+//
+// }
 }

@@ -56,33 +56,3 @@ class CustomAddressDetails extends StatelessWidget {
   }
 }
 
-// دالة لعرض الـ Bottom Sheet القابل للسحب
-void showCustomAddressBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    // يسمح بالتحكم في الارتفاع
-    backgroundColor: Colors.white,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (context) {
-      return DraggableScrollableSheet(
-        initialChildSize: 0.3,
-        // الارتفاع المبدئي (30% من الشاشة)
-        minChildSize: 0.2,
-        // أقل ارتفاع (20% من الشاشة)
-        maxChildSize: 0.8,
-        // أكبر ارتفاع (80% من الشاشة)
-        expand: false,
-        // لا يجبره على التمدد بالكامل
-        builder: (context, scrollController) {
-          return SingleChildScrollView(
-            controller: scrollController,
-            child: const CustomAddressDetails(),
-          );
-        },
-      );
-    },
-  );
-}
