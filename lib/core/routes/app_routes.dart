@@ -20,6 +20,7 @@ import '../../features/auth/presentation/signup/view_model/signup_view_model_cub
 import '../../features/home/presentation/viewModel/pending_orders_actions.dart';
 import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/pending_orders_view.dart';
+import '../../features/pick up location/presentation/views/location_view.dart';
 import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
 import '../../features/profile/presentation/viewModel/profile_view_model_cubit.dart';
@@ -49,6 +50,7 @@ class AppRoutes {
   static const String pendingOrdersView = "pendingOrdersView";
   static const String resetPasswordProfileView = "resetPasswordProfileView";
   static const String orderDetailsView = "orderDetailsView";
+  static const String locationView = "locationView";
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -139,6 +141,10 @@ class AppRoutes {
                 orderId: arguments!['orderId']!, userId: arguments['userId']!)),
           child: OrderDetailsScreen(),
         ));
+      case AppRoutes.locationView:
+        return BaseRoute(
+          page: LocationView(),
+        );
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
     }
