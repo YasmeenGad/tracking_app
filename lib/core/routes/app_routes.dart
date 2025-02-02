@@ -20,6 +20,8 @@ import '../../features/auth/presentation/signup/view_model/signup_view_model_cub
 import '../../features/home/presentation/viewModel/pending_orders_actions.dart';
 import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/pending_orders_view.dart';
+
+import '../../features/pick up location/presentation/views/location_view.dart';
 import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
 import '../../features/profile/presentation/viewModel/profile_view_model_cubit.dart';
@@ -129,15 +131,12 @@ class AppRoutes {
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
       case AppRoutes.pendingOrdersView:
-        return BaseRoute(page: PendingOrdersView());
-      case AppRoutes.orderDetailsView:
-        final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(
-            page: BlocProvider(
-          create: (context) => getIt.get<OrderDetailsViewModelCubit>()
-            ..doAction(GetOrderDetails(
-                orderId: arguments!['orderId']!, userId: arguments['userId']!)),
-          child: OrderDetailsScreen(),
+            page: BlocProvider<PendingOrderViewModelCubit>(
+              create: (context) =>
+              getIt.get<PendingOrderViewModelCubit>()
+                ..onAction(GetPendingOrders()),
+              child: const PendingOrdersView(),
         ));
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
