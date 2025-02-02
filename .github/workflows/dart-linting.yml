@@ -20,7 +20,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version:  3.27.1
 
       - name: Cache Flutter dependencies
         uses: actions/cache@v3
@@ -38,8 +37,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-dart-tool-
 
-      - name: Create placeholder ..env.firebase
-        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > ..env.firebase
+      - name: Create placeholder .env.firebase
+        run: echo "FIREBASE_CONFIG_PLACEHOLDER=true" > .env.firebase
 
       - name: Install dependencies
         run: flutter pub get
