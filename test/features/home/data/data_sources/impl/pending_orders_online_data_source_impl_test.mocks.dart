@@ -204,10 +204,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i3.LoginResponseDto>.value(
           _FakeLoginResponseDto_1(
             this,
-                Invocation.method(#login, [request]),
+            Invocation.method(#login, [request]),
               ),
             ),
-          ) as _i15.Future<_i3.LoginResponseDto>);
+      ) as _i15.Future<_i3.LoginResponseDto>);
 
   @override
   _i15.Future<_i4.SignUpResponseDto> signUp(_i18.SignUpRequestDto? request) =>
@@ -216,10 +216,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i4.SignUpResponseDto>.value(
           _FakeSignUpResponseDto_2(
             this,
-                Invocation.method(#signUp, [request]),
+            Invocation.method(#signUp, [request]),
               ),
             ),
-          ) as _i15.Future<_i4.SignUpResponseDto>);
+      ) as _i15.Future<_i4.SignUpResponseDto>);
 
   @override
   _i15.Future<_i5.ForgetPasswordResponseDto> forgetPassword(
@@ -230,10 +230,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i5.ForgetPasswordResponseDto>.value(
           _FakeForgetPasswordResponseDto_3(
             this,
-                Invocation.method(#forgetPassword, [request]),
+            Invocation.method(#forgetPassword, [request]),
               ),
             ),
-          ) as _i15.Future<_i5.ForgetPasswordResponseDto>);
+      ) as _i15.Future<_i5.ForgetPasswordResponseDto>);
 
   @override
   _i15.Future<_i6.VerifyResetCodeResponseDto> verifyResetCode(
@@ -244,10 +244,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i6.VerifyResetCodeResponseDto>.value(
           _FakeVerifyResetCodeResponseDto_4(
             this,
-                Invocation.method(#verifyResetCode, [resetCode]),
+            Invocation.method(#verifyResetCode, [resetCode]),
               ),
             ),
-          ) as _i15.Future<_i6.VerifyResetCodeResponseDto>);
+      ) as _i15.Future<_i6.VerifyResetCodeResponseDto>);
 
   @override
   _i15.Future<_i7.ResetPasswordResponseDto> resetPassword(
@@ -258,10 +258,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i7.ResetPasswordResponseDto>.value(
           _FakeResetPasswordResponseDto_5(
             this,
-                Invocation.method(#resetPassword, [resetPassword]),
+            Invocation.method(#resetPassword, [resetPassword]),
               ),
             ),
-          ) as _i15.Future<_i7.ResetPasswordResponseDto>);
+      ) as _i15.Future<_i7.ResetPasswordResponseDto>);
 
   @override
   _i15.Future<_i8.GetLoggedDriverDataResponseDto> getLoggedDriverData() =>
@@ -270,10 +270,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i8.GetLoggedDriverDataResponseDto>.value(
           _FakeGetLoggedDriverDataResponseDto_6(
             this,
-                Invocation.method(#getLoggedDriverData, []),
+            Invocation.method(#getLoggedDriverData, []),
               ),
             ),
-          ) as _i15.Future<_i8.GetLoggedDriverDataResponseDto>);
+      ) as _i15.Future<_i8.GetLoggedDriverDataResponseDto>);
 
   @override
   _i15.Future<_i9.EditProfileResponseDto> editProfile(
@@ -284,10 +284,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i9.EditProfileResponseDto>.value(
           _FakeEditProfileResponseDto_7(
             this,
-                Invocation.method(#editProfile, [body]),
+            Invocation.method(#editProfile, [body]),
               ),
             ),
-          ) as _i15.Future<_i9.EditProfileResponseDto>);
+      ) as _i15.Future<_i9.EditProfileResponseDto>);
 
   @override
   _i15.Future<_i10.UploadPhotoResponseDto> uploadPhoto(_i16.File? photo) =>
@@ -296,21 +296,21 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i10.UploadPhotoResponseDto>.value(
           _FakeUploadPhotoResponseDto_8(
             this,
-                Invocation.method(#uploadPhoto, [photo]),
+            Invocation.method(#uploadPhoto, [photo]),
               ),
             ),
-          ) as _i15.Future<_i10.UploadPhotoResponseDto>);
+      ) as _i15.Future<_i10.UploadPhotoResponseDto>);
 
   @override
   _i15.Future<_i11.GetAllVehiclesDto> getAllVehicles() => (super.noSuchMethod(
-            Invocation.method(#getAllVehicles, []),
+        Invocation.method(#getAllVehicles, []),
         returnValue: _i15.Future<_i11.GetAllVehiclesDto>.value(
           _FakeGetAllVehiclesDto_9(
             this,
-                Invocation.method(#getAllVehicles, []),
+            Invocation.method(#getAllVehicles, []),
               ),
             ),
-          ) as _i15.Future<_i11.GetAllVehiclesDto>);
+      ) as _i15.Future<_i11.GetAllVehiclesDto>);
 
   @override
   _i15.Future<_i12.ChangePasswordResponseDto> changePassword(
@@ -321,10 +321,10 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i12.ChangePasswordResponseDto>.value(
           _FakeChangePasswordResponseDto_10(
             this,
-                Invocation.method(#changePassword, [request]),
+            Invocation.method(#changePassword, [request]),
               ),
             ),
-          ) as _i15.Future<_i12.ChangePasswordResponseDto>);
+      ) as _i15.Future<_i12.ChangePasswordResponseDto>);
 
   @override
   _i15.Future<_i13.PendingOrderResponseDto> getPendingOrders(int? limit) =>
@@ -333,14 +333,14 @@ class MockApiManager extends _i1.Mock implements _i14.ApiManager {
         returnValue: _i15.Future<_i13.PendingOrderResponseDto>.value(
           _FakePendingOrderResponseDto_11(
             this,
-                Invocation.method(#getPendingOrders, [limit]),
+            Invocation.method(#getPendingOrders, [limit]),
               ),
             ),
-          ) as _i15.Future<_i13.PendingOrderResponseDto>);
+      ) as _i15.Future<_i13.PendingOrderResponseDto>);
 
   @override
   _i15.Future<void> startOrder(String? id) => (super.noSuchMethod(
-            Invocation.method(#startOrder, [id]),
+        Invocation.method(#startOrder, [id]),
         returnValue: _i15.Future<void>.value(),
         returnValueForMissingStub: _i15.Future<void>.value(),
       ) as _i15.Future<void>);

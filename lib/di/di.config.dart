@@ -21,8 +21,6 @@ import '../core/networking/network_factory.dart' as _i377;
 import '../core/services/firebase_helper/fire_store_helper.dart' as _i357;
 import '../features/auth/data/data_sources/contracts/apply_driver_online_data_source.dart'
     as _i832;
-import '../features/auth/data/data_sources/contracts/apply_driver_online_data_source.dart'
-    as _i832;
 import '../features/auth/data/data_sources/contracts/auth_online_data_source.dart'
     as _i901;
 import '../features/auth/data/data_sources/contracts/offline_data_source.dart'
@@ -159,22 +157,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i906.ResetPasswordUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i642.VerifyResetCodeUseCase>(
         () => _i642.VerifyResetCodeUseCase(gh<_i665.AuthRepository>()));
-    gh.factory<_i94.ApplyDriverUseCase>(
-        () => _i94.ApplyDriverUseCase(gh<_i804.ApplyDriverRepo>()));
-    gh.factory<_i782.ApplyDriverViewModelCubit>(
-        () => _i782.ApplyDriverViewModelCubit(gh<_i94.ApplyDriverUseCase>()));
-import '../features/auth/data/data_sources/impl/apply_driver_online_data_source_impl.dart'
-    as _i603;
-import '../features/auth/data/repositories/apply_driver_repo_impl.dart'
-    as _i622;
-import '../features/auth/domain/contracts/apply_driver_repo.dart' as _i804;
-import '../features/auth/domain/use_cases/apply_driver_usecase.dart' as _i94;
-import '../features/auth/presentation/apply/viewModel/apply_driver_view_model_cubit.dart'
-    as _i782;
-    gh.factory<_i832.ApplyDriverOnlineDataSource>(
-        () => _i603.ApplyDriverOnlineDataSourceImpl(gh<_i282.ApiManager>()));
-    gh.factory<_i804.ApplyDriverRepo>(() =>
-        _i622.ApplyDriverRepoImpl(gh<_i832.ApplyDriverOnlineDataSource>()));
     gh.factory<_i94.ApplyDriverUseCase>(
         () => _i94.ApplyDriverUseCase(gh<_i804.ApplyDriverRepo>()));
     gh.factory<_i782.ApplyDriverViewModelCubit>(
