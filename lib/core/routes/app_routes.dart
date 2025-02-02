@@ -1,4 +1,6 @@
 import 'package:flowery_delivery/features/App_approve/presentation/views/success_apply_view.dart';
+import 'package:flowery_delivery/di/di.dart';
+import 'package:flowery_delivery/features/auth/presentation/apply/viewModel/apply_driver_view_model_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
@@ -31,19 +33,23 @@ import '../../features/profile/presentation/views/profile_main_screen.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/profile/presentation/views/reset_password_profile_view.dart';
 import '../../features/profile/presentation/views/vehicle_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/auth/presentation/apply/viewModel/apply_form_view_model.dart';
+import '../../features/auth/presentation/apply/views/apply_view.dart';
 import 'base_routes.dart';
 
 class AppRoutes {
-  static const String onBoarding = '/';
+  /* static const String onBoarding = '/';
   static const String login = 'login';
-  static const String register = 'register';
   static const String forgetPassword = 'forgetPassword';
   static const String emailVerification = 'emailVerification';
   static const String resetPassWord = 'resetPassWord';
+  static const String changePassWord = 'changePassWord';*/
   static const String changePassWord = 'changePassWord';
   static const String homeLayout = 'homeLayout';
 
   static const String homeScreen = 'homeScreen';
+  static const String applyView = 'applyView';
   static const String successApplyView = 'successApplyView';
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
@@ -53,8 +59,13 @@ class AppRoutes {
   static const String orderDetailsView = "orderDetailsView";
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    //final args = settings.arguments;
     switch (settings.name) {
+      case applyView:
+        return BaseRoute(
+            page: BlocProvider<ApplyDriverViewModelCubit>(
+                create: (context) => getIt.get<ApplyDriverViewModelCubit>(),
+                child: const ApplyView()));
       case homeLayout:
         return BaseRoute(
             page: MultiBlocProvider(providers: [

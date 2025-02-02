@@ -384,6 +384,114 @@ class _ApiManager implements ApiManager {
     await _dio.fetch<void>(_options);
   }
 
+  @override
+  Future<ApplyResponseDto> applyDriver(
+    String country,
+    String firstName,
+    String lastName,
+    String vechicleType,
+    String vechicleNumber,
+    File vechicleLicense,
+    String nID,
+    File nIDImg,
+    String email,
+    String password,
+    String rePassword,
+    String gender,
+    String phone,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'country',
+      country,
+    ));
+    _data.fields.add(MapEntry(
+      'firstName',
+      firstName,
+    ));
+    _data.fields.add(MapEntry(
+      'lastName',
+      lastName,
+    ));
+    _data.fields.add(MapEntry(
+      'vehicleType',
+      vechicleType,
+    ));
+    _data.fields.add(MapEntry(
+      'vehicleNumber',
+      vechicleNumber,
+    ));
+    _data.files.add(MapEntry(
+      'vehicleLicense',
+      MultipartFile.fromFileSync(
+        vechicleLicense.path,
+        filename: vechicleLicense.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpeg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'NID',
+      nID,
+    ));
+    _data.files.add(MapEntry(
+      'NIDImg',
+      MultipartFile.fromFileSync(
+        nIDImg.path,
+        filename: nIDImg.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpeg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'email',
+      email,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
+    _data.fields.add(MapEntry(
+      'rePassword',
+      rePassword,
+    ));
+    _data.fields.add(MapEntry(
+      'gender',
+      gender,
+    ));
+    _data.fields.add(MapEntry(
+      'phone',
+      phone,
+    ));
+    final _options = _setStreamType<ApplyResponseDto>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'multipart/form-data',
+    )
+        .compose(
+          _dio.options,
+          'api/v1/drivers/apply',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApplyResponseDto _value;
+    try {
+      _value = ApplyResponseDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

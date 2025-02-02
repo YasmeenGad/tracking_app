@@ -239,4 +239,13 @@ class LangKeys {
   static const String reject = "reject";
   static const String accept = "accept";
   static const String floweryRider = "flowery_rider";
+  static const nidIsRequired = 'nid_is_required';
+  static const nidLengthError = 'nid_length_error';
+  static const vehicleLicenseIsRequired = 'vehicle_license_is_required';
+  static const nidImgIsRequired = 'nid_img_is_required';
+  static const vehicleNumberIsRequired = 'vehicle_number_is_required';
+  static const vehicleTypeIsRequired = 'vehicle_type_is_required';
+  static const vehicleTypeLengthError = 'vehicle_type_length_error';
+  static const genderIsRequired = 'gender_is_required';
+  static const invalidGender = 'invalid_gender';
 }
