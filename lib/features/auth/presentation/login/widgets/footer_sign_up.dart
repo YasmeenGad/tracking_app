@@ -29,7 +29,7 @@ class FooterSignUp extends StatelessWidget {
                   decoration: TextDecoration.underline),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  context.pushNamed(AppRoutes.register);
+                  context.pushNamed(AppRoutes.applyView);
                 },
             ),
           ],

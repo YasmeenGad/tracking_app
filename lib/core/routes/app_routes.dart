@@ -1,22 +1,17 @@
 import 'package:flowery_delivery/features/App_approve/presentation/views/success_apply_view.dart';
+import 'package:flowery_delivery/di/di.dart';
+import 'package:flowery_delivery/features/auth/presentation/apply/viewModel/apply_driver_view_model_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
-import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_actions.dart';
 import 'package:flowery_delivery/features/order_details/presentation/viewModel/order_details_view_model_cubit.dart';
-import 'package:flowery_delivery/features/order_details/presentation/views/order_details_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../di/di.dart';
 import '../../features/auth/presentation/forget_password/ViewModel/forget_password_view_model_cubit.dart';
 import '../../features/auth/presentation/forget_password/view/email_verification.dart';
 import '../../features/auth/presentation/forget_password/view/forget_password.dart';
 import '../../features/auth/presentation/forget_password/view/reset_password.dart';
 import '../../features/auth/presentation/login/view/login_view.dart';
-import '../../features/auth/presentation/signup/view/signup_view.dart';
-import '../../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart';
 import '../../features/home/presentation/viewModel/pending_orders_actions.dart';
 import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/pending_orders_view.dart';
@@ -29,12 +24,12 @@ import '../../features/profile/presentation/views/profile_main_screen.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/profile/presentation/views/reset_password_profile_view.dart';
 import '../../features/profile/presentation/views/vehicle_view.dart';
+import '../../features/auth/presentation/apply/views/apply_view.dart';
 import 'base_routes.dart';
 
 class AppRoutes {
   static const String onBoarding = '/';
   static const String login = 'login';
-  static const String register = 'register';
   static const String forgetPassword = 'forgetPassword';
   static const String emailVerification = 'emailVerification';
   static const String resetPassWord = 'resetPassWord';
@@ -42,6 +37,7 @@ class AppRoutes {
   static const String homeLayout = 'homeLayout';
 
   static const String homeScreen = 'homeScreen';
+  static const String applyView = 'applyView';
   static const String successApplyView = 'successApplyView';
   static const String profileMainScreen = 'profileMainScreen';
   static const String profileView = "profileView";
@@ -53,6 +49,11 @@ class AppRoutes {
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case applyView:
+        return BaseRoute(
+            page: BlocProvider<ApplyDriverViewModelCubit>(
+                create: (context) => getIt.get<ApplyDriverViewModelCubit>(),
+                child: const ApplyView()));
       case homeLayout:
         return BaseRoute(
             page: MultiBlocProvider(providers: [
@@ -77,12 +78,6 @@ class AppRoutes {
       case AppRoutes.login:
         return BaseRoute(
           page: const LoginView(),
-        );
-      case AppRoutes.register:
-        return BaseRoute(
-          page: BlocProvider(
-              create: (context) => getIt.get<SignUpViewModel>(),
-              child: const SignUpView()),
         );
          case successApplyView:
         return BaseRoute(page: const SuccessApplyView());
@@ -129,15 +124,12 @@ class AppRoutes {
       case AppRoutes.resetPasswordProfileView:
         return BaseRoute(page: const ResetPasswordProfileView());
       case AppRoutes.pendingOrdersView:
-        return BaseRoute(page: PendingOrdersView());
-      case AppRoutes.orderDetailsView:
-        final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(
-            page: BlocProvider(
-          create: (context) => getIt.get<OrderDetailsViewModelCubit>()
-            ..doAction(GetOrderDetails(
-                orderId: arguments!['orderId']!, userId: arguments['userId']!)),
-          child: OrderDetailsScreen(),
+            page: BlocProvider<PendingOrderViewModelCubit>(
+              create: (context) =>
+              getIt.get<PendingOrderViewModelCubit>()
+                ..onAction(GetPendingOrders()),
+              child: const PendingOrdersView(),
         ));
       default:
         return BaseRoute(page: const PageUnderBuildScreen());

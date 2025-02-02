@@ -19,16 +19,24 @@ import '../core/networking/api/api_manager.dart' as _i282;
 import '../core/networking/common/regestet_context_module.dart' as _i125;
 import '../core/networking/network_factory.dart' as _i377;
 import '../core/services/firebase_helper/fire_store_helper.dart' as _i357;
+import '../features/auth/data/data_sources/contracts/apply_driver_online_data_source.dart'
+    as _i832;
 import '../features/auth/data/data_sources/contracts/auth_online_data_source.dart'
     as _i901;
 import '../features/auth/data/data_sources/contracts/offline_data_source.dart'
     as _i345;
+import '../features/auth/data/data_sources/impl/apply_driver_online_data_source_impl.dart'
+    as _i603;
 import '../features/auth/data/data_sources/impl/auth_offline_data_source_impl.dart'
     as _i1036;
 import '../features/auth/data/data_sources/impl/auth_online_data_source_impl.dart'
     as _i326;
+import '../features/auth/data/repositories/apply_driver_repo_impl.dart'
+    as _i622;
 import '../features/auth/data/repositories/auth_repo_impl.dart' as _i990;
+import '../features/auth/domain/contracts/apply_driver_repo.dart' as _i804;
 import '../features/auth/domain/contracts/auth_repo.dart' as _i665;
+import '../features/auth/domain/use_cases/apply_driver_usecase.dart' as _i94;
 import '../features/auth/domain/use_cases/forgot_password_use_case.dart'
     as _i301;
 import '../features/auth/domain/use_cases/login_use_case.dart' as _i496;
@@ -37,6 +45,8 @@ import '../features/auth/domain/use_cases/reset_password_use_case.dart'
 import '../features/auth/domain/use_cases/signup_use_case.dart' as _i853;
 import '../features/auth/domain/use_cases/verify_reset_code_use_case.dart'
     as _i642;
+import '../features/auth/presentation/apply/viewModel/apply_driver_view_model_cubit.dart'
+    as _i782;
 import '../features/auth/presentation/forget_password/ViewModel/forget_password_view_model_cubit.dart'
     as _i60;
 import '../features/auth/presentation/login/viewModel/login_view_model_cubit.dart'
@@ -121,6 +131,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
+    gh.factory<_i832.ApplyDriverOnlineDataSource>(
+        () => _i603.ApplyDriverOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
     gh.factory<_i439.OrderDetailsRepo>(() =>
@@ -137,12 +149,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i182.UpdateOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i43.PendingOrdersRepo>(() =>
         _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
+    gh.factory<_i804.ApplyDriverRepo>(() =>
+        _i622.ApplyDriverRepoImpl(gh<_i832.ApplyDriverOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(
         () => _i301.ForgotPasswordUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i906.ResetPasswordUseCase>(
         () => _i906.ResetPasswordUseCase(gh<_i665.AuthRepository>()));
     gh.factory<_i642.VerifyResetCodeUseCase>(
         () => _i642.VerifyResetCodeUseCase(gh<_i665.AuthRepository>()));
+    gh.factory<_i94.ApplyDriverUseCase>(
+        () => _i94.ApplyDriverUseCase(gh<_i804.ApplyDriverRepo>()));
+    gh.factory<_i782.ApplyDriverViewModelCubit>(
+        () => _i782.ApplyDriverViewModelCubit(gh<_i94.ApplyDriverUseCase>()));
     gh.factory<_i15.PendingOrderUseCase>(
         () => _i15.PendingOrderUseCase(gh<_i43.PendingOrdersRepo>()));
     gh.factory<_i690.LoginViewModel>(

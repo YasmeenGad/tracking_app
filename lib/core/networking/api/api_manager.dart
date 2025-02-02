@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'dart:convert';
+import 'dart:io';
 
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide DioMediaType;
+import 'package:flowery_delivery/features/auth/data/models/response/apply_response_dto.dart';
 import 'package:flowery_delivery/features/order_details/data/models/change_order_state_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -23,6 +26,7 @@ import '../../../features/profile/data/models/response/edit_profile_response_dto
 import '../../../features/profile/data/models/response/get_all_vehicles_dto.dart';
 import '../../../features/profile/data/models/response/get_logged_driver_data_response_dto.dart';
 import '../../../features/profile/data/models/response/upload_photo_response_dto.dart';
+import 'package:http_parser/http_parser.dart';
 import 'api_constants.dart';
 
 part 'api_manager.g.dart';
@@ -33,6 +37,24 @@ part 'api_manager.g.dart';
 abstract class ApiManager {
   @factoryMethod
   factory ApiManager(Dio dio) = _ApiManager;
+
+  @POST(ApiConstants.apply)
+  @MultiPart()
+  Future<ApplyResponseDto> applyDriver(
+      @Part(name: 'country') String country,
+      @Part(name: 'firstName') String firstName,
+      @Part(name: 'lastName') String lastName,
+      @Part(name: 'vehicleType') String vechicleType,
+      @Part(name: 'vehicleNumber') String vechicleNumber,
+      @Part(name: 'vehicleLicense', contentType: 'image/jpeg')
+      File vechicleLicense,
+      @Part(name: 'NID') String nID,
+      @Part(name: 'NIDImg', contentType: 'image/jpeg') File nIDImg,
+      @Part(name: 'email') String email,
+      @Part(name: 'password') String password,
+      @Part(name: 'rePassword') String rePassword,
+      @Part(name: 'gender') String gender,
+      @Part(name: 'phone') String phone);
 
   @POST(ApiConstants.signInApi)
   Future<LoginResponseDto> login(@Body() LoginRequestDto request);

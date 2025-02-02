@@ -94,4 +94,34 @@ class Validators {
   static bool hasMinLength(String password) {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
   }
+
+  static String? validateNID(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.nidIsRequired);
+    }
+    if (value!.length != 14) {
+      return context.translate(LangKeys.nidLengthError);
+    }
+    return null;
+  }
+
+  static String? validateVehicleType(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.vehicleTypeIsRequired);
+    }
+    if (value!.length != 24) {
+      return context.translate(LangKeys.vehicleTypeLengthError);
+    }
+    return null;
+  }
+
+  static String? validateGender(String? value, BuildContext context) {
+    if (_isEmpty(value)) {
+      return context.translate(LangKeys.genderIsRequired);
+    }
+    if (value != 'male' && value != 'female') {
+      return context.translate(LangKeys.invalidGender);
+    }
+    return null;
+  }
 }

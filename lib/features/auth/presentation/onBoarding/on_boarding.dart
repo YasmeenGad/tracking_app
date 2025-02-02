@@ -37,8 +37,8 @@ class OnBoarding extends StatelessWidget {
                textColor: MyColors.gray,
                title: context.translate(LangKeys.applyNow),
                onTap: () {
-               context.pushNamed(AppRoutes.register);
-               },
+                  context.pushNamed(AppRoutes.applyView);
+                },
              ),
       
            ],
