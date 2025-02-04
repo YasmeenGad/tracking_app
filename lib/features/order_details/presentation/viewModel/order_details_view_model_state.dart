@@ -29,3 +29,12 @@ final class UpdateStatus extends OrderDetailsViewModelState {
 
 }
 
+
+final class UpdateLocationSuccess extends OrderDetailsViewModelState {}
+
+final class UpdateLocationError extends OrderDetailsViewModelState {
+  final String errorMessage;
+
+  UpdateLocationError(this.errorMessage);
+}
+

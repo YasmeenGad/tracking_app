@@ -9,6 +9,7 @@ import 'package:flowery_delivery/features/order_details/domain/entities/order_de
 import 'package:flowery_delivery/features/order_details/domain/use_cases/add_order_details_case.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/change_order_status.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/get_order_by_order_id_case.dart';
+import 'package:flowery_delivery/features/order_details/domain/use_cases/update_driver_location.dart';
 import 'package:flowery_delivery/features/order_details/domain/use_cases/update_order_status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
@@ -24,9 +25,11 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
 
   final UpdateOrderStatusCase updateOrderStatusCase;
   final ChangeOrderStatusCase changeOrderStatusCase;
+  final UpdateDriverLocationUseCase updateDriverLocationUseCase;
 
   OrderDetailsViewModelCubit(
       this.addOrderDetailsCase,
+      this.updateDriverLocationUseCase,
       this.getOrderByOrderIdCase,
       this.updateOrderStatusCase,
       this.changeOrderStatusCase)
@@ -44,13 +47,14 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     switch (action) {
       case AddOrderDetails():
         await _addOrderDetails(action);
-
       case GetOrderDetails():
         await _getOrderDetails(action);
       case UpdateOrderStatus():
         _updateOrderStatus(action);
       case ChangeOrderStatus():
         _changeOrderStatus(action);
+      case UpdateLocation():
+        _updateLocation(action);
     }
   }
 
@@ -167,6 +171,24 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
 
     emit(UpdateStatus());
   }
+
+  Future<void> _updateLocation(UpdateLocation action) async {
+    final result = await updateDriverLocationUseCase.execute(
+        orderId: action.orderId,
+        userId: action.userId,
+        location: action.location);
+    switch (result) {
+      case Success<void>():
+        emit(UpdateLocationSuccess());
+        break;
+      case Fail<void>():
+        emit(UpdateLocationError("can't update location"));
+        break;
+    }
+  }
+
+
+
 }
 
 enum OrderStatus { accepted, picked, outForDelivery, arrived, delivered }
