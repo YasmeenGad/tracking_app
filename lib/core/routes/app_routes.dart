@@ -2,6 +2,9 @@ import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/di/di.dart';
 import 'package:flowery_delivery/features/App_approve/presentation/views/success_apply_view.dart';
 import 'package:flowery_delivery/features/auth/presentation/apply/viewModel/apply_driver_view_model_cubit.dart';
+import 'package:flowery_delivery/features/order_details/presentation/views/order_details_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flowery_delivery/core/utils/screens/under_build_screen.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding.dart';
 import 'package:flowery_delivery/features/driver_orders/domain/entities/response/driver_order_entity.dart';
 import 'package:flowery_delivery/features/driver_orders/presentation/views/driver_order_details_screen.dart';
@@ -141,6 +144,8 @@ class AppRoutes {
         return BaseRoute(
           page: LocationView(),
         );
+      case AppRoutes.orderDetailsView:
+        return BaseRoute(page: OrderDetailsScreen());
       case AppRoutes.orderDetailsView:
         final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(
