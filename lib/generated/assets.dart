@@ -2,6 +2,9 @@
 class Assets {
   Assets._();
 
+  static const String filesCities = 'assets/files/cities.json';
+  static const String filesCountry = 'assets/files/country.json';
+  static const String filesStates = 'assets/files/states.json';
   static const String fontsOronteusFinaeus = 'assets/fonts/oronteus_finaeus.ttf';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String imagesAboutAppImage = 'assets/images/about_app_image.gif';
@@ -15,6 +18,8 @@ class Assets {
   static const String imagesCategory = 'assets/images/category.png';
   static const String imagesCheckCircle = 'assets/images/check-circle.svg';
   static const String imagesCheckorders = 'assets/images/checkorders.png';
+  static const String imagesCircleCancel = 'assets/images/circle_cancel.svg';
+  static const String imagesCircleComplete = 'assets/images/circle_complete.svg';
   static const String imagesDelete = 'assets/images/delete.png';
   static const String imagesDeliveryAnimation = 'assets/images/delivery_animation.json';
   static const String imagesDribbleFlowers = 'assets/images/dribble_flowers.gif';
@@ -47,6 +52,7 @@ class Assets {
   static const String imagesPen = 'assets/images/pen.png';
   static const String imagesPerson = 'assets/images/person.png';
   static const String imagesPlace = 'assets/images/place.png';
+  static const String imagesProcess = 'assets/images/Process.svg';
   static const String imagesProfile = 'assets/images/profile.png';
   static const String imagesProfilenav = 'assets/images/profilenav.png';
   static const String imagesRectangle = 'assets/images/rectangle.png';
@@ -62,4 +68,5 @@ class Assets {
   static const String imagesWhatsapp = 'assets/images/whatsapp.svg';
   static const String translationsAr = 'translations/ar.json';
   static const String translationsEn = 'translations/en.json';
+
 }

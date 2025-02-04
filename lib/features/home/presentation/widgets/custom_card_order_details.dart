@@ -3,6 +3,7 @@ import 'package:flowery_delivery/core/routes/app_routes.dart';
 import 'package:flowery_delivery/core/services/firebase_helper/fire_store_ref_key.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flowery_delivery/core/utils/extension/navigation.dart';
+import 'package:flowery_delivery/core/utils/extension/string_exetension.dart';
 import 'package:flowery_delivery/di/di.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_orders_actions.dart';
@@ -52,7 +53,7 @@ class CustomCardOrderDetails extends StatelessWidget {
               context.translate(LangKeys.pickupAddress),
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
-            CustomCardUserDetails(
+            CustomCardAddressDetails(
                 title: order.store?.name ?? '',
                 subtitle: order.store?.address ?? '',
                 image: order.store?.image ?? ''),
@@ -61,11 +62,11 @@ class CustomCardOrderDetails extends StatelessWidget {
               context.translate(LangKeys.deliveryAddress),
               style: MyFonts.styleRegular400_12.copyWith(color: MyColors.gray),
             ),
-            CustomCardUserDetails(
+            CustomCardAddressDetails(
                 title:
                 '${order.user?.firstName ?? ''} ${order.user?.lastName ?? ''}',
                 subtitle: order.user?.email ?? '',
-                image: order.user?.photo ?? ''),
+                image: order.user?.photo!.imageFormat() ?? ''),
             verticalSpacing(16.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flowery_delivery/core/utils/extension/string_exetension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +31,7 @@ class _CustomPictureMainScreenState extends State<CustomPictureMainScreen> {
             backgroundImage: AssetImage(Assets.imagesProfile),
           )
               : CircleAvatar(
-    backgroundImage: CachedNetworkImageProvider(widget.state.data.driver!.photo!)),
+    backgroundImage: CachedNetworkImageProvider(widget.state.data.driver!.photo!.imageFormat())),
         ],
       ),
     );

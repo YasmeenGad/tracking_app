@@ -1,5 +1,8 @@
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/di/di.dart';
+import 'package:flowery_delivery/features/driver_orders/presentation/viewModel/driver_order_view_model_cubit.dart';
+import 'package:flowery_delivery/features/driver_orders/presentation/viewModel/driver_orders_actions.dart';
+import 'package:flowery_delivery/features/driver_orders/presentation/views/driver_orders_view.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_order_view_model_cubit.dart';
 import 'package:flowery_delivery/features/home/presentation/viewModel/pending_orders_actions.dart';
 import 'package:flowery_delivery/features/home/presentation/views/pending_orders_view.dart';
@@ -30,7 +33,15 @@ class _HomeLayoutState extends State<HomeLayout> {
           ..onAction(GetPendingOrders()),
       )
     ], child: PendingOrdersView()),
-    Center(child: Text('Check Order Screen')),
+    MultiBlocProvider(providers: [
+      BlocProvider(
+          create: (context) => getIt.get<ProfileViewModelCubit>()
+            ..doAction(GetLoggedUserData())),
+      BlocProvider<DriverOrderViewModelCubit>(
+        create: (context) => getIt.get<DriverOrderViewModelCubit>()
+          ..onAction(GetMyOrders()),
+      )
+    ], child: DriverOrdersView()),
     ProfileMainScreen(),
   ];
 
