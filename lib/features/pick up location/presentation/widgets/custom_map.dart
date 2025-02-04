@@ -41,7 +41,7 @@ class CustomMap extends StatelessWidget {
                         height: 45.h,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue.withOpacity(0.3),
+                          color: Colors.blue.withValues(alpha: 0.3),
                         ),
                       ),
                       Container(
@@ -52,7 +52,7 @@ class CustomMap extends StatelessWidget {
                           color: Colors.red,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.blue.withOpacity(0.6),
+                              color: Colors.blue.withValues(alpha: 0.6),
                               blurRadius: 8,
                               spreadRadius: 2,
                             ),

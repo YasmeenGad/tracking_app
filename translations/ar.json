@@ -265,5 +265,7 @@
     "pickup_address": "عنوان التسليم",
     "reject": "رفض",
     "accept": "قبول",
-    "flowery_rider": "رائد الزهور"
+    "flowery_rider": "مندوب الزهور",
+    "order_details" : "تفاصيل الطلب",
+    "in_progress": "قيد التنفيذ"
 }

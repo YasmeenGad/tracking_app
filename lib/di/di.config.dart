@@ -53,6 +53,18 @@ import '../features/auth/presentation/login/viewModel/login_view_model_cubit.dar
     as _i690;
 import '../features/auth/presentation/signup/view_model/signup_view_model_cubit.dart'
     as _i508;
+import '../features/driver_orders/data/data_sources/contracts/online_data_source/driver_orders_online_data_source.dart'
+    as _i876;
+import '../features/driver_orders/data/data_sources/impl/driver_orders_online_data_source_impl.dart'
+    as _i30;
+import '../features/driver_orders/data/repositories/driver_orders_repo_impl.dart'
+    as _i236;
+import '../features/driver_orders/domain/contracts/driver_orders_repo.dart'
+    as _i644;
+import '../features/driver_orders/domain/use_cases/driver_orders_use_case.dart'
+    as _i542;
+import '../features/driver_orders/presentation/viewModel/driver_order_view_model_cubit.dart'
+    as _i870;
 import '../features/home/data/data_sources/contracts/online_data_source/pending_orders_online_data_source.dart'
     as _i969;
 import '../features/home/data/data_sources/impl/pending_orders_online_data_source_impl.dart'
@@ -129,10 +141,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i352.PendingOrdersOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i901.AuthOnlineDataSource>(
         () => _i326.AuthOnlineDataSourceImpl(gh<_i282.ApiManager>()));
+    gh.factory<_i876.DriverOrdersOnlineDataSource>(
+        () => _i30.DriverOrdersOnlineDataSourceImpl(gh<_i282.ApiManager>()));
     gh.factory<_i665.AuthRepository>(
         () => _i990.AuthRepositoryImpl(gh<_i901.AuthOnlineDataSource>()));
     gh.factory<_i832.ApplyDriverOnlineDataSource>(
         () => _i603.ApplyDriverOnlineDataSourceImpl(gh<_i282.ApiManager>()));
+    gh.factory<_i644.DriverOrdersRepo>(() =>
+        _i236.DriverOrdersRepoImpl(gh<_i876.DriverOrdersOnlineDataSource>()));
     gh.factory<_i49.ProfileRepo>(
         () => _i933.ProfileRepoImpl(gh<_i46.ProfileOnlineDataSource>()));
     gh.factory<_i439.OrderDetailsRepo>(() =>
@@ -165,6 +181,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i15.PendingOrderUseCase(gh<_i43.PendingOrdersRepo>()));
     gh.factory<_i690.LoginViewModel>(
         () => _i690.LoginViewModel(gh<_i496.LoginUseCase>()));
+    gh.factory<_i542.DriverOrderUseCase>(
+        () => _i542.DriverOrderUseCase(gh<_i644.DriverOrdersRepo>()));
     gh.factory<_i804.ProfileUseCase>(
         () => _i804.ProfileUseCase(gh<_i49.ProfileRepo>()));
     gh.factory<_i811.AddOrderDetailsCase>(
@@ -192,6 +210,8 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i642.VerifyResetCodeUseCase>(),
               gh<_i906.ResetPasswordUseCase>(),
             ));
+    gh.factory<_i870.DriverOrderViewModelCubit>(
+        () => _i870.DriverOrderViewModelCubit(gh<_i542.DriverOrderUseCase>()));
     gh.factory<_i907.ProfileViewModelCubit>(() => _i907.ProfileViewModelCubit(
           gh<_i804.ProfileUseCase>(),
           gh<_i338.VehiclesCubit>(),
