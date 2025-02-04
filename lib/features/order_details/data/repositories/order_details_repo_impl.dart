@@ -1,5 +1,6 @@
 import 'package:flowery_delivery/core/networking/common/api_result.dart';
 import 'package:flowery_delivery/features/order_details/data/data_sources/contracts/order_details_online_data_source.dart';
+import 'package:flowery_delivery/features/order_details/data/models/order_details_model.dart';
 import 'package:flowery_delivery/features/order_details/domain/entities/order_details_entity.dart';
 import 'package:flowery_delivery/features/order_details/domain/repositories/contract/order_details_repo.dart';
 import 'package:injectable/injectable.dart';
@@ -34,5 +35,14 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   @override
   Future<DataResult<void>> changeOrderStatus({required String orderId, required String state}) {
     return _dataSource.changeOrderStatus(orderId: orderId, state: state);
+  }
+
+  @override
+  Future<DataResult<void>> updateLocation(
+      {required String orderId,
+      required String useId,
+      required LocationModel location}) async {
+    return await _dataSource.updateLocation(
+        orderId: orderId, useId: useId, location: location);
   }
 }
