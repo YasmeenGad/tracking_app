@@ -14,6 +14,7 @@ import 'package:flowery_delivery/features/order_details/presentation/widgets/ord
 import 'package:flowery_delivery/features/order_details/presentation/widgets/order_status_card.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/order_summary.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/stepper_indicator.dart';
+import 'package:flowery_delivery/features/pick%20up%20location/presentation/models/address_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,22 +68,60 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           date: 'Wed, 03 Sep 2024, 11:00 AM'),
                       SizedBox(height: 20),
                       if (order.store != null)
-                        AddressSection(
-                          title: 'Pickup address',
-                          name: order.store!.name ?? '',
-                          address: order.store!.address ?? '',
-                          image: order.store!.image ?? '',
-                          phone: order.store!.phoneNumber ?? '',
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, AppRoutes.locationView,
+                                arguments: AddressDetailsModel(
+                                    isPickup: true,
+                                    userTitle: 'User Address',
+                                    userName:
+                                        '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
+                                    userAddress: order.user!.email ?? '',
+                                    userImage: order.user!.photo ?? '',
+                                    userPhone: order.user!.phone ?? '',
+                                    pickupTitle: 'Pickup address',
+                                    pickupName: order.store!.name ?? '',
+                                    pickupAddress: order.store!.address ?? '',
+                                    pickupImage: order.store!.image ?? '',
+                                    pickupPhone:
+                                        order.store!.phoneNumber ?? ''));
+                          },
+                          child: AddressSection(
+                            title: 'Pickup address',
+                            name: order.store!.name ?? '',
+                            address: order.store!.address ?? '',
+                            image: order.store!.image ?? '',
+                            phone: order.store!.phoneNumber ?? '',
+                          ),
                         ),
                       SizedBox(height: 16),
                       if (order.user != null)
-                        AddressSection(
-                          title: 'User address',
-                          name:
-                              '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
-                          address: order.user!.email ?? '',
-                          image: order.user!.photo ?? '',
-                          phone: order.user!.phone ?? '',
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, AppRoutes.locationView,
+                                arguments: AddressDetailsModel(
+                                    isPickup: false,
+                                    userTitle: 'User Address',
+                                    userName:
+                                        '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
+                                    userAddress: order.user!.email ?? '',
+                                    userImage: order.user!.photo ?? '',
+                                    userPhone: order.user!.phone ?? '',
+                                    pickupTitle: 'Pickup address',
+                                    pickupName: order.store!.name ?? '',
+                                    pickupAddress: order.store!.address ?? '',
+                                    pickupImage: order.store!.image ?? '',
+                                    pickupPhone:
+                                        order.store!.phoneNumber ?? ''));
+                          },
+                          child: AddressSection(
+                            title: 'User address',
+                            name:
+                                '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
+                            address: order.user!.email ?? '',
+                            image: order.user!.photo ?? '',
+                            phone: order.user!.phone ?? '',
+                          ),
                         ),
                       SizedBox(height: 16),
                       if (order.orderItems != null)
@@ -109,21 +148,26 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       orderId: order.id!,
                       status: orderViewModelCubit.orderStatus.action));
                   await NotificationHelper().sendTopicNotification(
-                    title: orderViewModelCubit.orderStatus.notificationTitle,
-                    body: orderViewModelCubit.orderStatus.notificationBody,
-                    topic: order.id,
-                    userId: order.user!.id!,
-                    orderId: order.id
-                  );
-                  if(order.state==FireStoreRefKey.delivered){
-                    await getIt.get<OrderDetailsViewModelCubit>()
+                      title: orderViewModelCubit.orderStatus.notificationTitle,
+                      body: orderViewModelCubit.orderStatus.notificationBody,
+                      topic: order.id,
+                      userId: order.user!.id!,
+                      orderId: order.id);
+                  if (order.state == FireStoreRefKey.delivered) {
+                    await getIt
+                        .get<OrderDetailsViewModelCubit>()
                         .doAction(ChangeOrderStatus(
-                      orderId: order.id!,
-                      state:FireStoreRefKey.completed,
-                    )).whenComplete(() {
-                      if(!context.mounted)return;
-                    context.pushNamed(AppRoutes.pendingOrdersView,);
-                    },);
+                          orderId: order.id!,
+                          state: FireStoreRefKey.completed,
+                        ))
+                        .whenComplete(
+                      () {
+                        if (!context.mounted) return;
+                        context.pushNamed(
+                          AppRoutes.pendingOrdersView,
+                        );
+                      },
+                    );
                   }
                 },
               ),

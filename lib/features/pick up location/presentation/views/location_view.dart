@@ -1,3 +1,4 @@
+import 'package:flowery_delivery/features/pick%20up%20location/presentation/models/address_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +11,10 @@ import '../widgets/custom_address_details.dart';
 class LocationView extends StatelessWidget {
   final LatLng? selectedLocation;
 
-  const LocationView({super.key, this.selectedLocation});
+  final AddressDetailsModel? addressDetailsModel;
+
+  const LocationView(
+      {super.key, this.selectedLocation, this.addressDetailsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +89,7 @@ class LocationView extends StatelessWidget {
         ),
         Expanded(
           flex: 1,
-          child: CustomAddressDetails(),
+          child: CustomAddressDetails(addressDetailsModel: addressDetailsModel),
         ),
       ],
     );

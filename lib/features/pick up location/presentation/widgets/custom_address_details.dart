@@ -1,17 +1,21 @@
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
+import 'package:flowery_delivery/features/pick%20up%20location/presentation/models/address_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../generated/assets.dart';
 import '../../../order_details/presentation/widgets/address_section.dart';
 
 class CustomAddressDetails extends StatelessWidget {
-  const CustomAddressDetails({super.key});
+  const CustomAddressDetails({super.key, required this.addressDetailsModel});
+
+  final AddressDetailsModel? addressDetailsModel;
 
   @override
   Widget build(BuildContext context) {
+    bool isPickup = addressDetailsModel?.isPickup == true;
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           Container(
@@ -26,26 +30,43 @@ class CustomAddressDetails extends StatelessWidget {
           Expanded(
             child: CustomScrollView(
               slivers: [
+                // Show Pickup Address First if Pickup is true, otherwise show User Address First
                 SliverToBoxAdapter(
-                  child: AddressSection(
-                    title: 'Pickup address',
-                    name: "Flowery Store",
-                    address: "20, Sheikh Zayed St, Cairo, Egypt",
-                    image: Assets.imagesFloweryLogo,
-                    phone: "01095932819",
-                  ),
+                  child: isPickup
+                      ? AddressSection(
+                          title: addressDetailsModel?.pickupTitle ?? "",
+                          name: addressDetailsModel?.pickupName ?? "",
+                          address: addressDetailsModel?.pickupAddress ?? "",
+                          image: addressDetailsModel?.pickupImage ?? "",
+                          phone: addressDetailsModel?.pickupPhone ?? "",
+                        )
+                      : AddressSection(
+                          title: addressDetailsModel?.userTitle ?? "",
+                          name: addressDetailsModel?.userName ?? "",
+                          address: addressDetailsModel?.userAddress ?? "",
+                          image: addressDetailsModel?.userImage ?? "",
+                          phone: addressDetailsModel?.userPhone ?? "",
+                        ),
                 ),
+                SliverToBoxAdapter(child: SizedBox(height: 16.h)),
+
+                // Show the other address
                 SliverToBoxAdapter(
-                  child: SizedBox(height: 16.h),
-                ),
-                SliverToBoxAdapter(
-                  child: AddressSection(
-                    title: 'User address',
-                    name: "Yasmeen Gad",
-                    address: "20, Sheikh Zayed St, Cairo, Egypt",
-                    image: Assets.imagesFloweryLogo,
-                    phone: "01095932819",
-                  ),
+                  child: isPickup
+                      ? AddressSection(
+                          title: addressDetailsModel?.userTitle ?? "",
+                          name: addressDetailsModel?.userName ?? "",
+                          address: addressDetailsModel?.userAddress ?? "",
+                          image: addressDetailsModel?.userImage ?? "",
+                          phone: addressDetailsModel?.userPhone ?? "",
+                        )
+                      : AddressSection(
+                          title: addressDetailsModel?.pickupTitle ?? "",
+                          name: addressDetailsModel?.pickupName ?? "",
+                          address: addressDetailsModel?.pickupAddress ?? "",
+                          image: addressDetailsModel?.pickupImage ?? "",
+                          phone: addressDetailsModel?.pickupPhone ?? "",
+                        ),
                 ),
               ],
             ),
@@ -55,4 +76,3 @@ class CustomAddressDetails extends StatelessWidget {
     );
   }
 }
-

@@ -24,6 +24,7 @@ import '../../features/auth/presentation/login/view/login_view.dart';
 import '../../features/home/presentation/viewModel/pending_orders_actions.dart';
 import '../../features/home/presentation/views/home_layout.dart';
 import '../../features/home/presentation/views/pending_orders_view.dart';
+import '../../features/pick up location/presentation/models/address_details_model.dart';
 import '../../features/pick up location/presentation/views/location_view.dart';
 import '../../features/profile/presentation/viewModel/edit_profile/edit_profile_cubit.dart';
 import '../../features/profile/presentation/viewModel/profile_actions.dart';
@@ -141,11 +142,12 @@ class AppRoutes {
               child: const PendingOrdersView(),
         ));
       case AppRoutes.locationView:
+        final arguments = settings.arguments as AddressDetailsModel?;
         return BaseRoute(
-          page: LocationView(),
+          page: LocationView(
+            addressDetailsModel: arguments, // Pass the arguments to the screen
+          ),
         );
-      case AppRoutes.orderDetailsView:
-        return BaseRoute(page: OrderDetailsScreen());
       case AppRoutes.orderDetailsView:
         final arguments = settings.arguments as Map<String, String>?;
         return BaseRoute(
