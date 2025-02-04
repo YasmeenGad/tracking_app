@@ -111,8 +111,26 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
     return executeApi(() => _apiManager.changeOrderStatus(orderId, OrderDetailsMapper.toChangeOrderDto(state)));
   }
 
-// @override
-// Future<DataResult<void>> updateLocation({required String orderId, required String useId, required LocationModel location}) {
-//
-// }
+  @override
+  Future<DataResult<void>> updateLocation({
+    required String orderId,
+    required String useId,
+    required LocationModel location,
+  }) {
+    return executeApi(() async {
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp();
+      }
+
+      return await _fireService.fireStore
+          .collection(FireStoreRefKey.users)
+          .doc(useId)
+          .collection(FireStoreRefKey.orders)
+          .doc(orderId)
+          .update({
+        FireStoreRefKey.driverLatitude: location.latitude,
+        FireStoreRefKey.driverLongitude: location.longitude,
+      });
+    });
+  }
 }

@@ -1,21 +1,55 @@
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/features/pick%20up%20location/presentation/models/address_details_model.dart';
+import 'package:flowery_delivery/features/pick%20up%20location/presentation/widgets/delivery_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
 
 import '../widgets/custom_address_details.dart';
 
-class LocationView extends StatelessWidget {
-  final LatLng? selectedLocation;
+class LocationView extends StatefulWidget {
   final AddressDetailsModel? addressDetailsModel;
 
   const LocationView({
     super.key,
-    this.selectedLocation,
     this.addressDetailsModel,
   });
+
+  @override
+  _LocationViewState createState() => _LocationViewState();
+}
+
+class _LocationViewState extends State<LocationView> {
+  LocationData? currentLocation;
+  final MapController mapController = MapController();
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    var location = Location();
+
+    try {
+      var userLocation = await location.getLocation();
+      setState(() {
+        currentLocation = userLocation;
+      });
+    } on Exception {
+      currentLocation = null;
+    }
+
+    location.onLocationChanged.listen((LocationData newLocation) {
+      setState(() {
+        currentLocation = newLocation;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,74 +59,48 @@ class LocationView extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: FlutterMap(
-                options: MapOptions(
-                  initialCenter: LatLng(37.42796133580664, -122.085749655962),
-                  initialZoom: 12.0,
-                  onTap: (tapPosition, point) {
-                    debugPrint("Tapped at: $point");
-                  },
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    subdomains: const ['a', 'b', 'c'],
-                  ),
-                  if (selectedLocation != null)
-                    MarkerLayer(
-                      markers: [
-                        Marker(
-                          width: 80.w,
-                          height: 80.h,
-                          point: selectedLocation!,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeOut,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  width: 45.w,
-                                  height: 45.h,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.blue.withOpacity(0.3),
-                                  ),
-                                ),
-                                Container(
-                                  width: 22.w,
-                                  height: 22.h,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.red,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.blue.withOpacity(0.6),
-                                        blurRadius: 8,
-                                        spreadRadius: 2,
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.location_on,
-                                    color: Colors.white,
-                                    size: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+              child: currentLocation == null
+                  ? Center(
+                      child: Center(
+                          child: SpinKitThreeInOut(
+                      color: MyColors.baseColor,
+                      size: 40.0,
+                    )))
+                  : FlutterMap(
+                      mapController: mapController,
+                      options: MapOptions(
+                        initialCenter: LatLng(currentLocation!.latitude!,
+                            currentLocation!.longitude!),
+                        initialZoom: 15.0,
+                        onTap: (tapPosition, point) {
+                          debugPrint("Tapped at: $point");
+                        },
+                      ),
+                      children: [
+                        TileLayer(
+                          urlTemplate:
+                              "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          subdomains: const ['a', 'b', 'c'],
+                        ),
+                        MarkerLayer(
+                          markers: [
+                            if (currentLocation != null)
+                              Marker(
+                                  width: 115,
+                                  height: 35,
+                                  point: LatLng(currentLocation!.latitude!,
+                                      currentLocation!.longitude!),
+                                  child: const DeliveryLocation()),
+                          ],
                         ),
                       ],
                     ),
-                ],
-              ),
             ),
             Expanded(
               flex: 1,
               child: CustomAddressDetails(
-                  addressDetailsModel: addressDetailsModel),
+                addressDetailsModel: widget.addressDetailsModel,
+              ),
             ),
           ],
         ),
@@ -111,7 +119,7 @@ class LocationView extends StatelessWidget {
                 color: MyColors.baseColor,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: Colors.black.withOpacity(0.3),
                     blurRadius: 5,
                     spreadRadius: 2,
                   ),
