@@ -7,8 +7,8 @@ import '../../../../core/styles/colors/my_colors.dart';
 import '../../../../core/styles/fonts/my_fonts.dart';
 import '../../../../core/utils/widgets/spacing.dart';
 
-class CustomCardAddressDetails extends StatelessWidget {
-  const CustomCardAddressDetails({
+class CustomCardUserDetails extends StatelessWidget {
+  const CustomCardUserDetails({
     super.key,
     required this.title,
     required this.subtitle,

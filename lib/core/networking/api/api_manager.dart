@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart' hide DioMediaType;
 import 'package:flowery_delivery/features/auth/data/models/response/apply_response_dto.dart';
 import 'package:flowery_delivery/features/auth/data/models/response/apply_response_dto.dart';
+import 'package:flowery_delivery/features/driver_orders/data/models/response/driver_order_response_dto.dart';
 import 'package:flowery_delivery/features/order_details/data/models/change_order_state_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -96,8 +95,12 @@ abstract class ApiManager {
   @GET(ApiConstants.getPendingOrders)
   Future<PendingOrderResponseDto> getPendingOrders(@Query("limit") int limit);
 
+  @GET(ApiConstants.getDriverOrders)
+  Future<DriverOrderResponseDto> getDriverOrders(@Query("limit") int limit);
+
   @PUT("${ApiConstants.startOrder}{id}")
   Future<void> startOrder(@Path("id") String id);
+
   @PUT("${ApiConstants.updateOrder}{id}")
   Future<void> changeOrderStatus(@Path("id") String id,@Body() ChangeOrderStateDto state);
 

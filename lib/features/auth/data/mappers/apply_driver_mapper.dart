@@ -1,5 +1,3 @@
-import 'package:flowery_delivery/features/auth/data/models/request/apply_request_dto.dart';
-import 'package:flowery_delivery/features/auth/domain/entities/request/apply_request_entity.dart';
 import '../../domain/entities/response/apply_response_entity.dart';
 import '../models/response/apply_response_dto.dart';
 
