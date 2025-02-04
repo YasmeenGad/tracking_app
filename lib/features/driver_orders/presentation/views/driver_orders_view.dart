@@ -2,14 +2,16 @@ import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flowery_delivery/core/localization/lang_keys.dart';
-import 'package:flowery_delivery/core/services/location_helper.dart';
+import 'package:flowery_delivery/core/routes/app_routes.dart';
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/core/styles/fonts/my_fonts.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
+import 'package:flowery_delivery/core/utils/extension/navigation.dart';
+import 'package:flowery_delivery/core/utils/widgets/spacing.dart';
 import 'package:flowery_delivery/di/di.dart';
 import 'package:flowery_delivery/features/auth/presentation/onBoarding/on_boarding_animation.dart';
+import 'package:flowery_delivery/features/driver_orders/presentation/widgets/diver_order_status_header.dart';
 import 'package:flowery_delivery/features/driver_orders/presentation/widgets/driver_card_order_details.dart';
-import 'package:flowery_delivery/features/home/presentation/widgets/custom_text_header.dart';
 import 'package:flowery_delivery/features/profile/presentation/viewModel/profile_actions.dart';
 import 'package:flowery_delivery/features/profile/presentation/viewModel/profile_view_model_cubit.dart';
 import 'package:flowery_delivery/generated/assets.dart';
@@ -31,14 +33,13 @@ class DriverOrdersView extends StatefulWidget {
 }
 
 class _DriverOrdersViewState extends State<DriverOrdersView> {
-  final ProfileViewModelCubit profileViewModelCubit =
-      getIt.get<ProfileViewModelCubit>();
+  final ProfileViewModelCubit profileViewModelCubit = getIt.get<ProfileViewModelCubit>();
+  final DriverOrderViewModelCubit driverViewModelCubit = getIt.get<DriverOrderViewModelCubit>();
   final indicatorController = IndicatorController();
 
   @override
   void initState() {
     profileViewModelCubit.doAction(GetLoggedUserData());
-    LocationHelper().getCurrentLocation();
     super.initState();
   }
 
@@ -74,9 +75,27 @@ class _DriverOrdersViewState extends State<DriverOrdersView> {
                   SliverToBoxAdapter(
                     child: FadeInDown(
                       duration: const Duration(milliseconds: 500),
-                      child: const CustomTextHeader(),
-                    ),
-                  ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: DriverOrderStatusHeader(
+                              count: driverViewModelCubit.countCanceledOrders().toString(),
+                              icon: Assets.imagesCircleCancel,
+                              state: context.translate(LangKeys.cancelled),
+
+                            ),
+                          ),
+                          horizontalSpacing(5),
+                          Expanded(
+                            child: DriverOrderStatusHeader(
+                              count: driverViewModelCubit.countCompletedOrders().toString(),
+                              icon: Assets.imagesCircleComplete,
+                              state: context.translate(LangKeys.completed),
+                            ),
+                          ),
+
+                        ],
+                  ),),),
                   if (state.response.orders.isEmpty)
                     SliverToBoxAdapter(
                       child: GestureDetector(
@@ -134,9 +153,14 @@ class _DriverOrdersViewState extends State<DriverOrdersView> {
 
                         return FadeInUp(
                           duration: const Duration(milliseconds: 1000),
-                          child: StoreCardOrderDetails(
-                            ordersList: state.response.orders[index],
-                            store: state.response.orders[index].store,
+                          child: InkWell(
+                            onTap: () {
+                              context.pushNamed(AppRoutes.driverOrderDetailsView,arguments: state.response.orders[index]);
+                            },
+                            child: DriverCardOrderDetails(
+                              ordersList: state.response.orders[index],
+
+                            ),
                           ),
                         );
                       },

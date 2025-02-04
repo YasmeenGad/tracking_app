@@ -248,4 +248,10 @@ class LangKeys {
   static const vehicleTypeLengthError = 'vehicle_type_length_error';
   static const genderIsRequired = 'gender_is_required';
   static const invalidGender = 'invalid_gender';
+  static const String cancelled = 'cancelled';
+  static const String recentOrders = 'recent_orders';
+  static const String userAddress = 'user_address';
+  static const String orderNumber = 'order_number';
+  static const String orderDetails = 'order_details';
+  static const String inProgress = 'in_progress';
 }

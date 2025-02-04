@@ -239,5 +239,11 @@
     "pickup_address": "Pickup Address",
     "reject": "Reject",
     "accept": "Accept",
-    "flowery_rider": "Flowery Rider"
+    "flowery_rider": "Flowery Rider",
+    "cancelled": "Cancelled",
+    "recent_orders": "Recent orders",
+    "user_address": "User address",
+    "order_number": "Order number",
+    "order_details" : "Order Details",
+    "in_progress": "In Progress"
 }

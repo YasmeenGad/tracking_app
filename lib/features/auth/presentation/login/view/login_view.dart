@@ -119,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                   title: context.translate(LangKeys.error));
               break;
             case LoginViewModelSuccess():
-              context.pushReplacementNamed(AppRoutes.homeScreen);
+              context.pushReplacementNamed(AppRoutes.homeLayout);
               aweSnackBar(
                   msg:  context.translate(LangKeys.success),
                   context: context,

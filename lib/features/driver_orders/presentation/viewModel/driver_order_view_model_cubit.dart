@@ -6,6 +6,7 @@ import 'package:flowery_delivery/core/networking/error/error_model.dart';
 import 'package:flowery_delivery/features/driver_orders/presentation/viewModel/driver_orders_actions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../domain/entities/response/driver_order_entity.dart';
 import '../../domain/use_cases/driver_orders_use_case.dart';
 
@@ -14,16 +15,19 @@ part 'driver_order_view_model_state.dart';
 @injectable
 class DriverOrderViewModelCubit extends Cubit<DriverOrderViewModelState> {
   final DriverOrderUseCase _useCase;
+  DriverOrderEntity? driverOrderEntity;
 
   DriverOrderViewModelCubit(this._useCase)
-      : super(DriverOrderViewModelInitial()){
+      : super(DriverOrderViewModelInitial()) {
     scrollController = ScrollController();
     scrollController.addListener(_onScroll);
   }
-late ScrollController scrollController;
- int limit = 10;
- int totalItems = 0;
+
+  late ScrollController scrollController;
+  int limit = 10;
+  int totalItems = 0;
   bool isLoadingMore = false;
+
   Future<void> onAction(DriverOrdersActions action) async {
     switch (action) {
       case GetMyOrders():
@@ -32,23 +36,28 @@ late ScrollController scrollController;
     }
   }
 
-  Future<void> _getDriverOrders( ) async {
+  Future<void> _getDriverOrders() async {
     emit(DriverOrderViewModelLoading());
-    final result = await _useCase.getDriverOrders( limit: limit);
+    final result = await _useCase.getDriverOrders(limit: limit);
     switch (result) {
       case Success<DriverOrderEntity>():
         totalItems = result.data.metadata.totalItems;
+        driverOrderEntity = result.data;
+        countCompletedOrders();
+        debugPrint(' totalItems: $totalItems');
+        debugPrint('driverOrderEntity = ${driverOrderEntity!.orders}');
         emit(DriverOrderViewModelLoaded(result.data));
         break;
       case Fail<DriverOrderEntity>():
-        emit(
-            DriverOrderViewModelError(ErrorHandler.handle(result.exception!)));
+        emit(DriverOrderViewModelError(ErrorHandler.handle(result.exception!)));
         break;
     }
   }
 
   void _onScroll() {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 100 && !isLoadingMore) {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent - 100 &&
+        !isLoadingMore) {
       loadMore();
     }
   }
@@ -56,24 +65,39 @@ late ScrollController scrollController;
   void loadMore() {
     if (isLoadingMore) return; // Prevent multiple calls
 
-    if ( limit >= totalItems) {
+    if (limit >= totalItems) {
       isLoadingMore = false;
       return;
-
     }
-    if (totalItems > limit&&(totalItems - limit) < 10) {
+    if (totalItems > limit && (totalItems - limit) < 10) {
       limit += 10;
-
     } else {
       limit = totalItems;
-
     }
-
 
     isLoadingMore = true;
     _getDriverOrders().then((_) {
       isLoadingMore = false;
     });
+  }
+
+  int countCanceledOrders() {
+    return driverOrderEntity?.orders
+            .where((order) => order.order.state == 'inProgress')
+            .length ??
+        0;
+  }
+
+  int countCompletedOrders() {
+    int? count ;
+    if (driverOrderEntity != null) {
+      count = driverOrderEntity!.orders
+          .where((order) => order.order.state == 'inProgress')
+          .toList()
+          .length;
+    }
+    debugPrint('countCompletedOrders $count ');
+    return count??0;
   }
 
   @override
@@ -82,5 +106,4 @@ late ScrollController scrollController;
     scrollController.dispose();
     return super.close();
   }
-
 }
