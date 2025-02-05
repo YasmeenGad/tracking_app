@@ -49,6 +49,8 @@ class AppRoutes {
   static const String resetPasswordProfileView = "resetPasswordProfileView";
   static const String orderDetailsView = "orderDetailsView";
   static const String driverOrderDetailsView = "driverOrderDetailsView";
+  static const String trackOrder = 'trackOrder';
+
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
