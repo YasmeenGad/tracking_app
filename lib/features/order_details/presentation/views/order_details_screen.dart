@@ -17,7 +17,7 @@ import 'package:flowery_delivery/features/order_details/presentation/widgets/ste
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:latlong2/latlong.dart';
 import '../../../pick up location/data/models/address_details_model.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
@@ -40,7 +40,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           return Center(child: AppLoader());
         } else {
           final order = orderViewModelCubit.orderDetailsEntity!.orders;
-          final driver = orderViewModelCubit.orderDetailsEntity!.driver;
           final user = orderViewModelCubit.orderDetailsEntity!.orders?.user;
           return Scaffold(
             appBar: customAppBar(
@@ -73,9 +72,22 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       if (order.store != null)
                         GestureDetector(
                           onTap: () {
+                            final storeLatLong =
+                                order.store?.latLong?.split(",") ??
+                                    ["0.0", "0.0"];
+                            final storeLat =
+                                double.tryParse(storeLatLong[0]) ?? 0.0;
+                            final storeLng =
+                                double.tryParse(storeLatLong[1]) ?? 0.0;
+                            debugPrint(
+                                'storeLat: $storeLat, storeLng: $storeLng');
+                            debugPrint(
+                                'userLat: ${user!.location!.latitude}, userLng: ${user.location!.longitude}');
                             Navigator.pushNamed(context, AppRoutes.locationView,
                                 arguments: AddressDetailsModel(
-                                    userId: user?.id ?? "",
+                                    userLocation: user.location!,
+                                    storeLocation: LatLng(storeLat, storeLng),
+                                    userId: user.id ?? "",
                                     orderId: order.id ?? '',
                                     isPickup: true,
                                     userTitle: 'User Address',
@@ -103,9 +115,18 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       if (order.user != null)
                         GestureDetector(
                           onTap: () {
+                            final storeLatLong =
+                                order.store?.latLong?.split(",") ??
+                                    ["0.0", "0.0"];
+                            final storeLat =
+                                double.tryParse(storeLatLong[0]) ?? 0.0;
+                            final storeLng =
+                                double.tryParse(storeLatLong[1]) ?? 0.0;
                             Navigator.pushNamed(context, AppRoutes.locationView,
                                 arguments: AddressDetailsModel(
-                                    userId: user?.id ?? "",
+                                    userLocation: user!.location!,
+                                    storeLocation: LatLng(storeLat, storeLng),
+                                    userId: user.id ?? "",
                                     orderId: order.id ?? '',
                                     isPickup: false,
                                     userTitle: 'User Address',

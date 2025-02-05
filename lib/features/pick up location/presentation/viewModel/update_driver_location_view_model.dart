@@ -6,7 +6,6 @@ import '../../../order_details/presentation/viewModel/order_details_view_model_c
 import '../../data/models/address_details_model.dart';
 
 class UpdateDriverLocationViewModel with ChangeNotifier {
-  // <-- Add ChangeNotifier
   final OrderDetailsViewModelCubit viewModel;
   LocationData? currentLocation;
   final Location location = Location();
@@ -14,17 +13,17 @@ class UpdateDriverLocationViewModel with ChangeNotifier {
   UpdateDriverLocationViewModel(this.viewModel);
 
   Future<void> getCurrentLocation(
-      AddressDetailsModel? addressDetailsModel) async {
+      AddressDetailsModel addressDetailsModel) async {
     try {
       var userLocation = await location.getLocation();
       currentLocation = userLocation;
-      notifyListeners(); // <-- Notify UI to rebuild
+      notifyListeners();
 
       _updateLocation(addressDetailsModel, userLocation);
 
       location.onLocationChanged.listen((LocationData newLocation) {
         currentLocation = newLocation;
-        notifyListeners(); // <-- Notify UI to rebuild on location change
+        notifyListeners();
         _updateLocation(addressDetailsModel, newLocation);
       });
     } catch (e) {
@@ -34,16 +33,14 @@ class UpdateDriverLocationViewModel with ChangeNotifier {
   }
 
   void _updateLocation(
-      AddressDetailsModel? addressDetailsModel, LocationData locationData) {
-    if (addressDetailsModel != null) {
-      viewModel.doAction(UpdateLocation(
-        userId: addressDetailsModel.userId,
-        orderId: addressDetailsModel.orderId,
-        location: LocationModel(
-          latitude: locationData.latitude,
-          longitude: locationData.longitude,
-        ),
-      ));
-    }
+      AddressDetailsModel addressDetailsModel, LocationData locationData) {
+    viewModel.doAction(UpdateLocation(
+      userId: addressDetailsModel.userId,
+      orderId: addressDetailsModel.orderId,
+      location: LocationModel(
+        latitude: locationData.latitude,
+        longitude: locationData.longitude,
+      ),
+    ));
   }
 }

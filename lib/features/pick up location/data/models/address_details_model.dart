@@ -1,3 +1,6 @@
+import 'package:geocoding/geocoding.dart';
+import 'package:latlong2/latlong.dart';
+
 class AddressDetailsModel {
   final String userTitle;
   final String userName;
@@ -15,8 +18,12 @@ class AddressDetailsModel {
 
   final String orderId;
   final String userId;
+  final LatLng storeLocation;
+  final Location userLocation;
 
   AddressDetailsModel({
+    required this.userLocation,
+    required this.storeLocation,
     required this.userId,
     required this.orderId,
     required this.isPickup,

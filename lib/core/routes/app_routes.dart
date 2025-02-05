@@ -142,7 +142,7 @@ class AppRoutes {
         final arguments = settings.arguments as AddressDetailsModel?;
         return BaseRoute(
           page: LocationView(
-            addressDetailsModel: arguments, // Pass the arguments to the screen
+            addressDetailsModel: arguments!, // Pass the arguments to the screen
           ),
         );
       case AppRoutes.orderDetailsView:

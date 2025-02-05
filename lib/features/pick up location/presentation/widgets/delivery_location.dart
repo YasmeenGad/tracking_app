@@ -5,14 +5,27 @@ import '../../../../core/styles/colors/my_colors.dart';
 import '../../../../core/styles/fonts/my_fonts.dart';
 
 class DeliveryLocation extends StatelessWidget {
-  const DeliveryLocation({super.key});
+  const DeliveryLocation(
+      {super.key,
+      required this.title,
+      required this.icon,
+      required this.color,
+      this.isDestination});
+
+  final String title;
+  final Widget icon;
+  final Color color;
+  final bool? isDestination;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: MyColors.baseColor,
+        color: color,
         borderRadius: BorderRadius.circular(48),
+        border: Border.all(
+            color:
+                isDestination ?? false ? MyColors.baseColor : MyColors.white),
       ),
       child: Row(
         children: [
@@ -23,15 +36,13 @@ class DeliveryLocation extends StatelessWidget {
               shape: BoxShape.circle,
               color: MyColors.white,
             ),
-            child: const Icon(
-              Icons.location_on_outlined,
-              color: MyColors.baseColor,
-              size: 20,
-            ),
-          ),
+              child: icon),
           Text(
-            "Your Location",
-            style: MyFonts.styleRegular400_12.copyWith(color: MyColors.white),
+            title,
+            style: MyFonts.styleRegular400_12.copyWith(
+                color: isDestination ?? false
+                    ? MyColors.baseColor
+                    : MyColors.white),
           ),
         ],
       ),
