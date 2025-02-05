@@ -13,6 +13,7 @@ import 'package:flowery_delivery/features/pick%20up%20location/presentation/widg
 import '../../../../core/utils/widgets/base/snack_bar.dart';
 import '../../data/models/address_details_model.dart';
 import '../viewModel/update_driver_location_view_model.dart';
+import '../widgets/arrow_back_button.dart';
 import '../widgets/custom_address_details.dart';
 
 class LocationView extends StatefulWidget {
@@ -48,16 +49,16 @@ class _LocationViewState extends State<LocationView> {
         children: [
           BlocListener<OrderDetailsViewModelCubit, OrderDetailsViewModelState>(
             listener: (context, state) {
-              if (state is UpdateLocationSuccess) {
-                debugPrint("Location updated successfully");
-              } else if (state is UpdateLocationError) {
-                debugPrint(state.errorMessage);
-                aweSnackBar(
-                  context: context,
-                  title: "Error",
-                  msg: state.errorMessage,
-                  type: MessageTypeConst.failure,
-                );
+              switch (state) {
+                case UpdateLocationError():
+                  aweSnackBar(
+                      title: 'Failed',
+                      msg: state.errorMessage,
+                      context: context,
+                      type: MessageTypeConst.failure);
+                  break;
+                default:
+                  null;
               }
             },
             child: Consumer<UpdateDriverLocationViewModel>(
@@ -70,12 +71,10 @@ class _LocationViewState extends State<LocationView> {
                     ),
                   );
                 }
-
                 LatLng currentLatLng = LatLng(
                   state.currentLocation!.latitude!,
                   state.currentLocation!.longitude!,
                 );
-
                 LatLng destinationLatLng = widget.addressDetailsModel.isPickup
                     ? LatLng(widget.addressDetailsModel.storeLocation.latitude,
                         widget.addressDetailsModel.storeLocation.longitude)
@@ -154,29 +153,7 @@ class _LocationViewState extends State<LocationView> {
           Positioned(
             top: 40.h,
             left: 16.w,
-            child: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: MyColors.baseColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    ),
-                  ],
-                ),
-                child: const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: MyColors.white,
-                  size: 20,
-                ),
-              ),
-            ),
+            child: const ArrowBackButton(),
           ),
         ],
       ),
