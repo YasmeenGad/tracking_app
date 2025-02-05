@@ -214,10 +214,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeLoginResponseDto_1(
                 this,
             Invocation.method(#login, [request]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i3.LoginResponseDto>);
+      ) as _i16.Future<_i3.LoginResponseDto>);
 
   @override
   _i16.Future<_i4.SignUpResponseDto> signUp(_i19.SignUpRequestDto? request) =>
@@ -227,10 +226,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeSignUpResponseDto_2(
                 this,
             Invocation.method(#signUp, [request]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i4.SignUpResponseDto>);
+      ) as _i16.Future<_i4.SignUpResponseDto>);
 
   @override
   _i16.Future<_i5.ForgetPasswordResponseDto> forgetPassword(
@@ -242,10 +240,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeForgetPasswordResponseDto_3(
                 this,
             Invocation.method(#forgetPassword, [request]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i5.ForgetPasswordResponseDto>);
+      ) as _i16.Future<_i5.ForgetPasswordResponseDto>);
 
   @override
   _i16.Future<_i6.VerifyResetCodeResponseDto> verifyResetCode(
@@ -257,10 +254,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeVerifyResetCodeResponseDto_4(
                 this,
             Invocation.method(#verifyResetCode, [resetCode]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i6.VerifyResetCodeResponseDto>);
+      ) as _i16.Future<_i6.VerifyResetCodeResponseDto>);
 
   @override
   _i16.Future<_i7.ResetPasswordResponseDto> resetPassword(
@@ -272,10 +268,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeResetPasswordResponseDto_5(
                 this,
             Invocation.method(#resetPassword, [resetPassword]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i7.ResetPasswordResponseDto>);
+      ) as _i16.Future<_i7.ResetPasswordResponseDto>);
 
   @override
   _i16.Future<_i8.GetLoggedDriverDataResponseDto> getLoggedDriverData() =>
@@ -285,10 +280,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeGetLoggedDriverDataResponseDto_6(
                 this,
             Invocation.method(#getLoggedDriverData, []),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i8.GetLoggedDriverDataResponseDto>);
+      ) as _i16.Future<_i8.GetLoggedDriverDataResponseDto>);
 
   @override
   _i16.Future<_i9.EditProfileResponseDto> editProfile(
@@ -300,10 +294,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeEditProfileResponseDto_7(
                 this,
             Invocation.method(#editProfile, [body]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i9.EditProfileResponseDto>);
+      ) as _i16.Future<_i9.EditProfileResponseDto>);
 
   @override
   _i16.Future<_i10.UploadPhotoResponseDto> uploadPhoto(_i17.File? photo) =>
@@ -313,23 +306,21 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeUploadPhotoResponseDto_8(
                 this,
             Invocation.method(#uploadPhoto, [photo]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i10.UploadPhotoResponseDto>);
+      ) as _i16.Future<_i10.UploadPhotoResponseDto>);
 
   @override
   _i16.Future<_i11.GetAllVehiclesDto> getAllVehicles() =>
       (super.noSuchMethod(
         Invocation.method(#getAllVehicles, []),
-            returnValue: _i16.Future<_i11.GetAllVehiclesDto>.value(
+        returnValue: _i16.Future<_i11.GetAllVehiclesDto>.value(
               _FakeGetAllVehiclesDto_9(
                 this,
             Invocation.method(#getAllVehicles, []),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i11.GetAllVehiclesDto>);
+      ) as _i16.Future<_i11.GetAllVehiclesDto>);
 
   @override
   _i16.Future<_i12.ChangePasswordResponseDto> changePassword(
@@ -341,10 +332,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakeChangePasswordResponseDto_10(
                 this,
             Invocation.method(#changePassword, [request]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i12.ChangePasswordResponseDto>);
+      ) as _i16.Future<_i12.ChangePasswordResponseDto>);
 
   @override
   _i16.Future<_i13.PendingOrderResponseDto> getPendingOrders(int? limit) =>
@@ -354,10 +344,9 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
               _FakePendingOrderResponseDto_11(
                 this,
             Invocation.method(#getPendingOrders, [limit]),
-              ),
+          ),
             ),
-      )
-          as _i16.Future<_i13.PendingOrderResponseDto>);
+      ) as _i16.Future<_i13.PendingOrderResponseDto>);
 
   @override
   _i16.Future<_i14.DriverOrderResponseDto> getDriverOrders(int? limit) =>
@@ -376,7 +365,7 @@ class MockApiManager extends _i1.Mock implements _i15.ApiManager {
   _i16.Future<void> startOrder(String? id) =>
       (super.noSuchMethod(
         Invocation.method(#startOrder, [id]),
-            returnValue: _i16.Future<void>.value(),
+        returnValue: _i16.Future<void>.value(),
             returnValueForMissingStub: _i16.Future<void>.value(),
           )
           as _i16.Future<void>);

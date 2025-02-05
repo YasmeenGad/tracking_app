@@ -13,7 +13,12 @@ class AddressDetailsModel {
 
   final bool isPickup;
 
+  final String orderId;
+  final String userId;
+
   AddressDetailsModel({
+    required this.userId,
+    required this.orderId,
     required this.isPickup,
     required this.userTitle,
     required this.userName,

@@ -14,10 +14,11 @@ import 'package:flowery_delivery/features/order_details/presentation/widgets/ord
 import 'package:flowery_delivery/features/order_details/presentation/widgets/order_status_card.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/order_summary.dart';
 import 'package:flowery_delivery/features/order_details/presentation/widgets/stepper_indicator.dart';
-import 'package:flowery_delivery/features/pick%20up%20location/presentation/models/address_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../pick up location/data/models/address_details_model.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   const OrderDetailsScreen({
@@ -39,6 +40,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           return Center(child: AppLoader());
         } else {
           final order = orderViewModelCubit.orderDetailsEntity!.orders;
+          final driver = orderViewModelCubit.orderDetailsEntity!.driver;
+          final user = orderViewModelCubit.orderDetailsEntity!.orders?.user;
           return Scaffold(
             appBar: customAppBar(
               appBarTxt: 'Order details',
@@ -72,6 +75,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           onTap: () {
                             Navigator.pushNamed(context, AppRoutes.locationView,
                                 arguments: AddressDetailsModel(
+                                    userId: user?.id ?? "",
+                                    orderId: order.id ?? '',
                                     isPickup: true,
                                     userTitle: 'User Address',
                                     userName:
@@ -100,6 +105,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           onTap: () {
                             Navigator.pushNamed(context, AppRoutes.locationView,
                                 arguments: AddressDetailsModel(
+                                    userId: user?.id ?? "",
+                                    orderId: order.id ?? '',
                                     isPickup: false,
                                     userTitle: 'User Address',
                                     userName:

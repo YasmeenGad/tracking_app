@@ -15,5 +15,6 @@ class UpdateDriverLocationUseCase {
           {required String orderId,
           required String userId,
           required LocationModel location}) =>
-      _repo.updateLocation(orderId: orderId, useId: userId, location: location);
+      _repo.updateLocation(
+          orderId: orderId, userId: userId, location: location);
 }

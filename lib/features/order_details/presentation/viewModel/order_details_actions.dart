@@ -46,12 +46,12 @@ class ChangeOrderStatus extends OrderDetailsActions {
 
 class UpdateLocation extends OrderDetailsActions {
   final String orderId;
-  final String userId;
   final LocationModel location;
+  final String userId;
 
   UpdateLocation({
     required this.orderId,
-    required this.userId,
     required this.location,
+    required this.userId,
   });
 }

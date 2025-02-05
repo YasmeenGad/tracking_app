@@ -21,6 +21,13 @@ DriverOrderResponseDto _$DriverOrderResponseDtoFromJson(
           .toList(),
     );
 
+Map<String, dynamic> _$DriverOrderResponseDtoToJson(
+        DriverOrderResponseDto instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'metadata': instance.metadata,
+      'orders': instance.orders,
+    };
 
 DriverOrderMetadataDto _$DriverOrderMetadataDtoFromJson(
         Map<String, dynamic> json) =>
@@ -31,6 +38,14 @@ DriverOrderMetadataDto _$DriverOrderMetadataDtoFromJson(
       (json['limit'] as num?)?.toInt(),
     );
 
+Map<String, dynamic> _$DriverOrderMetadataDtoToJson(
+        DriverOrderMetadataDto instance) =>
+    <String, dynamic>{
+      'currentPage': instance.currentPage,
+      'totalPages': instance.totalPages,
+      'totalItems': instance.totalItems,
+      'limit': instance.limit,
+    };
 
 DriverOrdersListDto _$DriverOrdersListDtoFromJson(Map<String, dynamic> json) =>
     DriverOrdersListDto(
@@ -47,6 +62,17 @@ DriverOrdersListDto _$DriverOrdersListDtoFromJson(Map<String, dynamic> json) =>
           : DriverStoreDto.fromJson(json['store'] as Map<String, dynamic>),
     );
 
+Map<String, dynamic> _$DriverOrdersListDtoToJson(
+        DriverOrdersListDto instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'driver': instance.driver,
+      'order': instance.order,
+      '__v': instance.v,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'store': instance.store,
+    };
 
 DriverOrderDto _$DriverOrderDtoFromJson(Map<String, dynamic> json) =>
     DriverOrderDto(
@@ -70,6 +96,21 @@ DriverOrderDto _$DriverOrderDtoFromJson(Map<String, dynamic> json) =>
       (json['__v'] as num?)?.toInt(),
     );
 
+Map<String, dynamic> _$DriverOrderDtoToJson(DriverOrderDto instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'user': instance.user,
+      'orderItems': instance.orderItems,
+      'totalPrice': instance.totalPrice,
+      'paymentType': instance.paymentType,
+      'isPaid': instance.isPaid,
+      'isDelivered': instance.isDelivered,
+      'state': instance.state,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+      'orderNumber': instance.orderNumber,
+      '__v': instance.v,
+    };
 
 DriverUserDto _$DriverUserDtoFromJson(Map<String, dynamic> json) =>
     DriverUserDto(
@@ -82,6 +123,16 @@ DriverUserDto _$DriverUserDtoFromJson(Map<String, dynamic> json) =>
       json['photo'] as String?,
     );
 
+Map<String, dynamic> _$DriverUserDtoToJson(DriverUserDto instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'email': instance.email,
+      'gender': instance.gender,
+      'phone': instance.phone,
+      'photo': instance.photo,
+    };
 
 DriverOrderItemsDto _$DriverOrderItemsDtoFromJson(Map<String, dynamic> json) =>
     DriverOrderItemsDto(
@@ -94,6 +145,14 @@ DriverOrderItemsDto _$DriverOrderItemsDtoFromJson(Map<String, dynamic> json) =>
       json['_id'] as String?,
     );
 
+Map<String, dynamic> _$DriverOrderItemsDtoToJson(
+        DriverOrderItemsDto instance) =>
+    <String, dynamic>{
+      'product': instance.product,
+      'price': instance.price,
+      'quantity': instance.quantity,
+      '_id': instance.id,
+    };
 
 DriverOrderItemsProductDto _$DriverOrderItemsProductDtoFromJson(
         Map<String, dynamic> json) =>
@@ -102,6 +161,12 @@ DriverOrderItemsProductDto _$DriverOrderItemsProductDtoFromJson(
       (json['price'] as num?)?.toInt(),
     );
 
+Map<String, dynamic> _$DriverOrderItemsProductDtoToJson(
+        DriverOrderItemsProductDto instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'price': instance.price,
+    };
 
 DriverStoreDto _$DriverStoreDtoFromJson(Map<String, dynamic> json) =>
     DriverStoreDto(
@@ -112,3 +177,11 @@ DriverStoreDto _$DriverStoreDtoFromJson(Map<String, dynamic> json) =>
       json['latLong'] as String?,
     );
 
+Map<String, dynamic> _$DriverStoreDtoToJson(DriverStoreDto instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'image': instance.image,
+      'address': instance.address,
+      'phoneNumber': instance.phoneNumber,
+      'latLong': instance.latLong,
+    };

@@ -176,7 +176,8 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
     final result = await updateDriverLocationUseCase.execute(
         orderId: action.orderId,
         userId: action.userId,
-        location: action.location);
+      location: action.location,
+    );
     switch (result) {
       case Success<void>():
         emit(UpdateLocationSuccess());

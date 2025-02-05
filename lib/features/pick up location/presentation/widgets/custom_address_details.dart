@@ -1,9 +1,9 @@
 import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
-import 'package:flowery_delivery/features/pick%20up%20location/presentation/models/address_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../order_details/presentation/widgets/address_section.dart';
+import '../../data/models/address_details_model.dart';
 
 class CustomAddressDetails extends StatelessWidget {
   const CustomAddressDetails({super.key, required this.addressDetailsModel});

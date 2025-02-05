@@ -12,6 +12,6 @@ abstract class OrderDetailsRepo {
 
   Future<DataResult<void>> updateLocation(
       {required String orderId,
-      required String useId,
+      required String userId,
       required LocationModel location});
 }

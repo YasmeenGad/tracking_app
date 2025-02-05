@@ -40,9 +40,9 @@ class OrderDetailsRepoImpl implements OrderDetailsRepo {
   @override
   Future<DataResult<void>> updateLocation(
       {required String orderId,
-      required String useId,
+      required String userId,
       required LocationModel location}) async {
     return await _dataSource.updateLocation(
-        orderId: orderId, useId: useId, location: location);
+        orderId: orderId, useId: userId, location: location);
   }
 }

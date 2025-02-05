@@ -82,9 +82,9 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   // }
 
   @override
-  Future<DataResult<void>> updateOrderStatus(
-      {required String userId,
-      required String orderId,
+  Future<DataResult<void>> updateOrderStatus({
+    required String userId,
+    required String orderId,
     required String status,
   }) {
     return executeApi(() async {
@@ -107,8 +107,10 @@ class OrderDetailsOnlineDataSourceImpl implements OrderDetailsOnlineDataSource {
   }
 
   @override
-  Future<DataResult<void>> changeOrderStatus({required String orderId, required String state}) {
-    return executeApi(() => _apiManager.changeOrderStatus(orderId, OrderDetailsMapper.toChangeOrderDto(state)));
+  Future<DataResult<void>> changeOrderStatus(
+      {required String orderId, required String state}) {
+    return executeApi(() => _apiManager.changeOrderStatus(
+        orderId, OrderDetailsMapper.toChangeOrderDto(state)));
   }
 
   @override
