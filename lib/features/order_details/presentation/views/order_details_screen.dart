@@ -175,15 +175,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       userId: order.user!.id!,
                       orderId: order.id!,
                       status: orderViewModelCubit.orderStatus.action));
-                  await NotificationHelper().sendTopicNotification(
-                      title: orderViewModelCubit.orderStatus.notificationTitle,
-                      body: orderViewModelCubit.orderStatus.notificationBody,
-                      topic: order.id,
-                      userId: order.user!.id!,
-                      orderId: order.id);
-                  if (order.state == FireStoreRefKey.delivered) {
-                    await getIt
-                        .get<OrderDetailsViewModelCubit>()
+                  
+                  await NotificationHelper().sendNotification(
+                    title: orderViewModelCubit.orderStatus.notificationTitle,
+                    body: orderViewModelCubit.orderStatus.notificationBody,
+                    topic: order.id,
+                      data: {"route": AppRoutes.trackOrder, "orderId":order.id!, "userId": order.user!.id!},
+                  );
+                  if(order.state==FireStoreRefKey.delivered){
+                    await getIt.get<OrderDetailsViewModelCubit>()
+
                         .doAction(ChangeOrderStatus(
                           orderId: order.id!,
                           state: FireStoreRefKey.completed,

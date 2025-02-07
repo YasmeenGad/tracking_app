@@ -52,6 +52,8 @@ class AppRoutes {
   static const String orderDetailsView = "orderDetailsView";
   static const String locationView = "locationView";
   static const String driverOrderDetailsView = "driverOrderDetailsView";
+  static const String trackOrder = 'trackOrder';
+
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;

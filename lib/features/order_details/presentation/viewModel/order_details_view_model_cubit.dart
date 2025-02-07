@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flowery_delivery/core/networking/common/api_result.dart';
 import 'package:flowery_delivery/core/networking/error/error_handler.dart';
 import 'package:flowery_delivery/core/networking/error/error_model.dart';
+import 'package:flowery_delivery/core/routes/app_routes.dart';
 import 'package:flowery_delivery/core/services/firebase_helper/fire_store_ref_key.dart';
 import 'package:flowery_delivery/core/services/firebase_notification/notification_helper.dart';
 import 'package:flowery_delivery/features/order_details/data/mappers/order_details_mapper.dart';
@@ -67,12 +68,13 @@ class OrderDetailsViewModelCubit extends Cubit<OrderDetailsViewModelState> {
             orders: OrderDetailsMapper.toOrderData(action.order)));
     switch (result) {
       case Success<void>():
-        NotificationHelper().sendTopicNotification(
+        NotificationHelper().sendNotification(
           title: orderStatus.notificationTitle,
           body: orderStatus.notificationBody,
           topic: action.order.id,
-          orderId: action.order.id,
-          userId: action.order.user!.id,
+          data: {"route": AppRoutes.trackOrder, "orderId": action.order.id!, "userId": action.order.user!.id!},
+          // orderId: action.order.id,
+          // userId: action.order.user!.id,
         );
         emit(AddOrderSuccess());
 
