@@ -254,4 +254,5 @@ class LangKeys {
   static const String orderNumber = 'order_number';
   static const String orderDetails = 'order_details';
   static const String inProgress = 'in_progress';
+  static const String done = "done";
 }

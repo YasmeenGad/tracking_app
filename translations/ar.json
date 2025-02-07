@@ -267,5 +267,6 @@
     "accept": "قبول",
     "flowery_rider": "مندوب الزهور",
     "order_details" : "تفاصيل الطلب",
-    "in_progress": "قيد التنفيذ"
+  "in_progress": "قيد التنفيذ",
+  "done": "تم"
 }
