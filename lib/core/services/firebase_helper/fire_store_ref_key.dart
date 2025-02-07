@@ -8,10 +8,10 @@ class FireStoreRefKey {
   static const String outForDelivery = 'Out for delivery';
   static const String arrived = 'Arrived';
   static const String delivered = 'Delivered';
-
   static const String pending = 'pending';
   static const String inProgress = 'inProgress';
   static const String completed = 'completed';
   static const String cancelled = 'canceled';
-
+  static const String driverLatitude = 'driver.location.latitude';
+  static const String driverLongitude = 'driver.location.longitude';
 }

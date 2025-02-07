@@ -89,6 +89,8 @@ import '../features/order_details/domain/use_cases/change_order_status.dart'
     as _i114;
 import '../features/order_details/domain/use_cases/get_order_by_order_id_case.dart'
     as _i341;
+import '../features/order_details/domain/use_cases/update_driver_location.dart'
+    as _i786;
 import '../features/order_details/domain/use_cases/update_order_status.dart'
     as _i182;
 import '../features/order_details/presentation/viewModel/order_details_view_model_cubit.dart'
@@ -165,6 +167,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i182.UpdateOrderStatusCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i43.PendingOrdersRepo>(() =>
         _i454.PendingOrdersRepoImpl(gh<_i969.PendingOrdersOnlineDataSource>()));
+    gh.factory<_i786.UpdateDriverLocationUseCase>(
+        () => _i786.UpdateDriverLocationUseCase(gh<_i439.OrderDetailsRepo>()));
     gh.factory<_i804.ApplyDriverRepo>(() =>
         _i622.ApplyDriverRepoImpl(gh<_i832.ApplyDriverOnlineDataSource>()));
     gh.factory<_i301.ForgotPasswordUseCase>(
@@ -196,6 +200,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i42.OrderDetailsViewModelCubit>(
         () => _i42.OrderDetailsViewModelCubit(
               gh<_i811.AddOrderDetailsCase>(),
+              gh<_i786.UpdateDriverLocationUseCase>(),
               gh<_i341.GetOrderByOrderIdCase>(),
               gh<_i182.UpdateOrderStatusCase>(),
               gh<_i114.ChangeOrderStatusCase>(),

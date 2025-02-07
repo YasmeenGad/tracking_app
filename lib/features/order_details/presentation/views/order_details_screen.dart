@@ -17,6 +17,8 @@ import 'package:flowery_delivery/features/order_details/presentation/widgets/ste
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:latlong2/latlong.dart';
+import '../../../pick up location/data/models/address_details_model.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   const OrderDetailsScreen({
@@ -38,6 +40,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           return Center(child: AppLoader());
         } else {
           final order = orderViewModelCubit.orderDetailsEntity!.orders;
+          final user = orderViewModelCubit.orderDetailsEntity!.orders?.user;
           return Scaffold(
             appBar: customAppBar(
               appBarTxt: 'Order details',
@@ -67,22 +70,86 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           date: 'Wed, 03 Sep 2024, 11:00 AM'),
                       SizedBox(height: 20),
                       if (order.store != null)
-                        AddressSection(
-                          title: 'Pickup address',
-                          name: order.store!.name ?? '',
-                          address: order.store!.address ?? '',
-                          image: order.store!.image ?? '',
-                          phone: order.store!.phoneNumber ?? '',
+                        GestureDetector(
+                          onTap: () {
+                            final storeLatLong =
+                                order.store?.latLong?.split(",") ??
+                                    ["0.0", "0.0"];
+                            final storeLat =
+                                double.tryParse(storeLatLong[0]) ?? 0.0;
+                            final storeLng =
+                                double.tryParse(storeLatLong[1]) ?? 0.0;
+                            debugPrint(
+                                'storeLat: $storeLat, storeLng: $storeLng');
+                            debugPrint(
+                                'userLat: ${user!.location!.latitude}, userLng: ${user.location!.longitude}');
+                            Navigator.pushNamed(context, AppRoutes.locationView,
+                                arguments: AddressDetailsModel(
+                                    userLocation: user.location!,
+                                    storeLocation: LatLng(storeLat, storeLng),
+                                    userId: user.id ?? "",
+                                    orderId: order.id ?? '',
+                                    isPickup: true,
+                                    userTitle: 'User Address',
+                                    userName:
+                                        '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
+                                    userAddress: order.user!.email ?? '',
+                                    userImage: order.user!.photo ?? '',
+                                    userPhone: order.user!.phone ?? '',
+                                    pickupTitle: 'Pickup address',
+                                    pickupName: order.store!.name ?? '',
+                                    pickupAddress: order.store!.address ?? '',
+                                    pickupImage: order.store!.image ?? '',
+                                    pickupPhone:
+                                        order.store!.phoneNumber ?? ''));
+                          },
+                          child: AddressSection(
+                            title: 'Pickup address',
+                            name: order.store!.name ?? '',
+                            address: order.store!.address ?? '',
+                            image: order.store!.image ?? '',
+                            phone: order.store!.phoneNumber ?? '',
+                          ),
                         ),
                       SizedBox(height: 16),
                       if (order.user != null)
-                        AddressSection(
-                          title: 'User address',
-                          name:
-                              '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
-                          address: order.user!.email ?? '',
-                          image: order.user!.photo ?? '',
-                          phone: order.user!.phone ?? '',
+                        GestureDetector(
+                          onTap: () {
+                            final storeLatLong =
+                                order.store?.latLong?.split(",") ??
+                                    ["0.0", "0.0"];
+                            final storeLat =
+                                double.tryParse(storeLatLong[0]) ?? 0.0;
+                            final storeLng =
+                                double.tryParse(storeLatLong[1]) ?? 0.0;
+                            Navigator.pushNamed(context, AppRoutes.locationView,
+                                arguments: AddressDetailsModel(
+                                    userLocation: user!.location!,
+                                    storeLocation: LatLng(storeLat, storeLng),
+                                    userId: user.id ?? "",
+                                    orderId: order.id ?? '',
+                                    isPickup: false,
+                                    userTitle: 'User Address',
+                                    userName:
+                                        '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
+                                    userAddress: order.user!.email ?? '',
+                                    userImage: order.user!.photo ?? '',
+                                    userPhone: order.user!.phone ?? '',
+                                    pickupTitle: 'Pickup address',
+                                    pickupName: order.store!.name ?? '',
+                                    pickupAddress: order.store!.address ?? '',
+                                    pickupImage: order.store!.image ?? '',
+                                    pickupPhone:
+                                        order.store!.phoneNumber ?? ''));
+                          },
+                          child: AddressSection(
+                            title: 'User address',
+                            name:
+                                '${order.user!.firstName ?? ''} ${order.user!.lastName ?? ''}',
+                            address: order.user!.email ?? '',
+                            image: order.user!.photo ?? '',
+                            phone: order.user!.phone ?? '',
+                          ),
                         ),
                       SizedBox(height: 16),
                       if (order.orderItems != null)
@@ -108,23 +175,28 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       userId: order.user!.id!,
                       orderId: order.id!,
                       status: orderViewModelCubit.orderStatus.action));
+                  
                   await NotificationHelper().sendNotification(
                     title: orderViewModelCubit.orderStatus.notificationTitle,
                     body: orderViewModelCubit.orderStatus.notificationBody,
                     topic: order.id,
                       data: {"route": AppRoutes.trackOrder, "orderId":order.id!, "userId": order.user!.id!},
-                    // userId: order.user!.id!,
-                    // orderId: order.id
                   );
                   if(order.state==FireStoreRefKey.delivered){
                     await getIt.get<OrderDetailsViewModelCubit>()
+
                         .doAction(ChangeOrderStatus(
-                      orderId: order.id!,
-                      state:FireStoreRefKey.completed,
-                    )).whenComplete(() {
-                      if(!context.mounted)return;
-                    context.pushNamed(AppRoutes.pendingOrdersView,);
-                    },);
+                          orderId: order.id!,
+                          state: FireStoreRefKey.completed,
+                        ))
+                        .whenComplete(
+                      () {
+                        if (!context.mounted) return;
+                        context.pushNamed(
+                          AppRoutes.pendingOrdersView,
+                        );
+                      },
+                    );
                   }
                 },
               ),
