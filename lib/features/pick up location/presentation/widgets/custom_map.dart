@@ -52,7 +52,7 @@ class CustomMap extends StatelessWidget {
                           color: Colors.red,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.blue.withValues(alpha: 0.6),
+                              color: Colors.blue,
                               blurRadius: 8,
                               spreadRadius: 2,
                             ),
