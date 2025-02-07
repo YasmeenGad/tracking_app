@@ -1,3 +1,4 @@
+import 'package:flowery_delivery/core/styles/colors/my_colors.dart';
 import 'package:flowery_delivery/core/utils/extension/media_query_values.dart';
 import 'package:flowery_delivery/core/utils/extension/navigation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class SuccessView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 50.h,
+        spacing: 20.h,
         children: [
           SvgPicture.asset(
             Assets.imagesSuccessImg,
@@ -29,14 +30,21 @@ class SuccessView extends StatelessWidget {
           SizedBox(
               width: 200.w,
               child: Text(
-                context.translate(LangKeys.done),
+                context.translate(LangKeys.thankYou),
+                style: MyFonts.styleBold700_24.copyWith(color: MyColors.green),
+                textAlign: TextAlign.center,
+              )),
+          SizedBox(
+              width: 300.w,
+              child: Text(
+                context.translate(LangKeys.theOrderDeliveredSuccessfully),
                 style: MyFonts.styleBold700_24,
                 textAlign: TextAlign.center,
               )),
           CurvedButton(
-            title: context.translate(LangKeys.trackOrder),
+            title: context.translate(LangKeys.done),
             onTap: () async {
-              await context.pushNamed(AppRoutes.pendingOrdersView);
+              await context.pushReplacementNamed(AppRoutes.pendingOrdersView);
             },
           )
         ],

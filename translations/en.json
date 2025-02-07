@@ -246,5 +246,7 @@
     "order_number": "Order number",
     "order_details" : "Order Details",
   "in_progress": "In Progress",
-  "done": "Done"
+    "done": "Done",
+    "Thank_you": "Thank you!!",
+    "The_order_delivered_successfully": "The order delivered successfully"
 }
